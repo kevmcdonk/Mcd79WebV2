@@ -706,6 +706,7 @@
 
   .readingHeader nav {
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 12px;
     overflow: visible;
     font-size: 10px;

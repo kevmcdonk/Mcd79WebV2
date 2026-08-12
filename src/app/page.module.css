@@ -56,7 +56,6 @@
 
 .nav a,
 .textAction,
-.socials a,
 .footer a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -391,8 +390,7 @@
   text-transform: uppercase;
 }
 
-.libraryTitle h2,
-.aboutCopy h2 {
+.libraryTitle h2 {
   max-width: 800px;
   font-family: "Mcd79 Condensed", sans-serif;
   font-size: clamp(48px, 6vw, 88px);
@@ -402,8 +400,7 @@
   text-wrap: balance;
 }
 
-.libraryTitle p,
-.aboutCopy > p {
+.libraryTitle p {
   max-width: 62ch;
   font-size: 18px;
   font-weight: 600;
@@ -450,67 +447,6 @@
 
 .libraryRows a > span:nth-of-type(2) {
   font-size: 16px;
-}
-
-.about {
-  display: grid;
-  grid-template-columns: minmax(270px, .6fr) minmax(0, 1.4fr);
-  border-block: 2px solid var(--ink);
-  background: var(--red);
-}
-
-.aboutMark {
-  min-height: 560px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 2px solid var(--ink);
-  position: relative;
-  overflow: hidden;
-}
-
-.aboutMark span {
-  font-family: "Mcd79 Condensed", sans-serif;
-  font-size: clamp(112px, 17vw, 260px);
-  font-weight: 900;
-  line-height: .8;
-  letter-spacing: -0.04em;
-  position: relative;
-  z-index: 1;
-}
-
-.aboutMark div {
-  width: 240px;
-  height: 240px;
-  border: 24px solid var(--yellow);
-  position: absolute;
-  transform: rotate(14deg);
-}
-
-.aboutCopy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(54px, 8vw, 120px);
-}
-
-.aboutCopy h2 {
-  font-size: clamp(44px, 5vw, 74px);
-}
-
-.aboutCopy > p {
-  margin-top: 34px;
-}
-
-.socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 26px;
-  margin-top: 42px;
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: .05em;
-  text-transform: uppercase;
 }
 
 .footer {
@@ -612,15 +548,6 @@
     min-height: 680px;
   }
 
-  .about {
-    grid-template-columns: 1fr;
-  }
-
-  .aboutMark {
-    min-height: 370px;
-    border-right: 0;
-    border-bottom: 2px solid var(--ink);
-  }
 }
 
 @media (max-width: 680px) {
@@ -725,10 +652,6 @@
   .libraryRows .arrow {
     grid-column: 3;
     grid-row: 1;
-  }
-
-  .aboutMark {
-    min-height: 300px;
   }
 
   .footer {

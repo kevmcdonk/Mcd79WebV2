@@ -11,14 +11,9 @@ export function ReadingHeader() {
       <nav aria-label="Reading navigation">
         <Link href="/thoughts">New writing</Link>
         <Link href="/blog">Legacy blog</Link>
+        <Link href="/about">About</Link>
         <Link href="/#framework">Framework</Link>
-        <a
-          href="https://sessionize.com/kevin-mcdonnell"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Sessions
-        </a>
+        <Link href="/speaking">Speaking</Link>
       </nav>
       <Link className={styles.homeLink} href="/">
         Home

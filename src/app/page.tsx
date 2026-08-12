@@ -76,8 +76,9 @@ export default function Home() {
         <nav className={styles.nav} aria-label="Primary navigation">
           <Link href="/thoughts">New writing</Link>
           <Link href="/blog">Legacy blog</Link>
+          <Link href="/speaking">Speaking</Link>
           <Link href="#framework">Framework</Link>
-          <Link href="#about">About</Link>
+          <Link href="/about">About</Link>
         </nav>
         <Link
           className={styles.headerAction}
@@ -206,39 +207,24 @@ export default function Home() {
             <span>The modern workplace archive</span>
             <Arrow />
           </Link>
-          <a href="https://sessionize.com/kevin-mcdonnell" target="_blank" rel="noopener noreferrer">
+          <Link href="/speaking">
             <span className={styles.partCode}>S-24</span>
-            <strong>Sessions</strong>
-            <span>Talks, demonstrations, and conference material</span>
+            <strong>Speaking</strong>
+            <span>Engagements, workshops, and current sessions</span>
             <Arrow />
-          </a>
+          </Link>
           <Link href="#framework">
             <span className={styles.partCode}>F-04</span>
             <strong>AI Productivity Framework</strong>
             <span>Personal to organisation</span>
             <Arrow />
           </Link>
-        </div>
-      </section>
-
-      <section className={styles.about} id="about">
-        <div className={styles.aboutMark}>
-          <span>KM</span>
-          <div />
-        </div>
-        <div className={styles.aboutCopy}>
-          <h2>Kevin McDonnell connects what technology can do with the challenges people actually have.</h2>
-          <p>
-            Mcd79 is his working knowledge hub: a place for lessons from Microsoft
-            services, practical AI adoption, conference sessions, and the ideas
-            that connect them.
-          </p>
-          <div className={styles.socials} aria-label="Kevin McDonnell online">
-            <a href="https://www.linkedin.com/in/kevmcdonnell/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://bsky.app/profile/kevmcdonk.com" target="_blank" rel="noopener noreferrer">Bluesky</a>
-            <a href="https://github.com/kevmcdonk" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.youtube.com/@mcd79/" target="_blank" rel="noopener noreferrer">YouTube</a>
-          </div>
+          <Link href="/about">
+            <span className={styles.partCode}>K-79</span>
+            <strong>About Kevin</strong>
+            <span>Career, community, and current work</span>
+            <Arrow />
+          </Link>
         </div>
       </section>
 

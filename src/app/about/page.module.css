@@ -1,0 +1,451 @@
+.page {
+  --ink: #121212;
+  --paper: #f6f1e5;
+  --blue: #8dd8f8;
+  --action-blue: #1769ff;
+  --yellow: #ffd51f;
+  --red: #f05540;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Mcd79 Sans", sans-serif;
+}
+
+.hero {
+  min-height: calc(100vh - 92px);
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  border-bottom: 2px solid var(--ink);
+  background: var(--blue);
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+  border-right: 2px solid var(--ink);
+}
+
+.heroCopy h1 {
+  max-width: 10ch;
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(62px, 8vw, 96px);
+  font-weight: 900;
+  line-height: .88;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.heroCopy > p {
+  max-width: 57ch;
+  margin-top: 38px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-top: 42px;
+}
+
+.heroActions a,
+.connectionCopy a {
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.heroImage {
+  min-height: 680px;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.heroImage img {
+  object-fit: cover;
+  object-position: 53% center;
+  filter: saturate(.9) contrast(1.06);
+}
+
+.heroImage figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 14px 20px;
+  border-top: 2px solid var(--ink);
+  background: var(--yellow);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.present {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .8fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.presentTitle,
+.presentCopy {
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+}
+
+.presentTitle {
+  border-right: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.presentTitle > span,
+.presentCopy dt {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.presentTitle h2,
+.connectionCopy h2,
+.expertise h2,
+.background h2,
+.recognition h2,
+.connect h2 {
+  max-width: 11ch;
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.presentTitle h2 {
+  margin-top: 28px;
+}
+
+.presentCopy {
+  background: var(--yellow);
+}
+
+.presentCopy > p,
+.connectionCopy p,
+.expertise header > p,
+.backgroundCopy p,
+.recognitionCopy p {
+  max-width: 62ch;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.presentCopy dl {
+  margin-top: 56px;
+  border-top: 2px solid var(--ink);
+}
+
+.presentCopy dl > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.presentCopy dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.connection {
+  display: grid;
+  grid-template-columns: minmax(300px, .65fr) minmax(0, 1.35fr);
+  border-bottom: 2px solid var(--ink);
+  background: var(--red);
+}
+
+.connectionMark {
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-right: 2px solid var(--ink);
+}
+
+.connectionMark span {
+  position: relative;
+  z-index: 1;
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(64px, 16vw, 96px);
+  font-weight: 900;
+  line-height: .8;
+  letter-spacing: -.04em;
+}
+
+.connectionMark div {
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  border: 24px solid var(--yellow);
+  transform: rotate(14deg);
+}
+
+.connectionCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+}
+
+.connectionCopy p {
+  margin-top: 34px;
+}
+
+.connectionCopy a {
+  align-self: flex-start;
+  margin-top: 42px;
+}
+
+.expertise {
+  border-bottom: 2px solid var(--ink);
+}
+
+.expertise > header {
+  display: grid;
+  grid-template-columns: 1fr .8fr;
+  gap: 64px;
+  align-items: end;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.expertiseRows {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.expertiseRows article {
+  min-height: 300px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+  align-content: start;
+  padding: 52px clamp(24px, 5vw, 72px);
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.expertiseRows article:nth-child(2n) {
+  border-right: 0;
+}
+
+.expertiseRows article:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.expertiseRows article > span {
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 900;
+  line-height: .9;
+}
+
+.expertiseRows h3 {
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(32px, 4.6vw, 68px);
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.035em;
+}
+
+.expertiseRows p {
+  grid-column: 2;
+  max-width: 48ch;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.expertiseRows article:nth-child(1) {
+  background: var(--blue);
+}
+
+.expertiseRows article:nth-child(2) {
+  background: var(--yellow);
+}
+
+.expertiseRows article:nth-child(3) {
+  background: white;
+}
+
+.expertiseRows article:nth-child(4) {
+  background: var(--action-blue);
+  color: white;
+}
+
+.background {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  border-bottom: 2px solid var(--ink);
+}
+
+.background > div {
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+}
+
+.background > div:first-child {
+  border-right: 2px solid var(--ink);
+  background: var(--yellow);
+}
+
+.backgroundCopy p + p {
+  margin-top: 30px;
+}
+
+.recognition {
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+  background: var(--blue);
+}
+
+.recognitionCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+  border-right: 2px solid var(--ink);
+}
+
+.recognitionCopy p {
+  margin-top: 34px;
+}
+
+.recognition figure {
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.recognition img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.connect {
+  display: grid;
+  grid-template-columns: 1fr .8fr;
+  gap: 72px;
+  align-items: end;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+  background: var(--red);
+}
+
+.connect > div {
+  display: grid;
+  border-top: 2px solid var(--ink);
+}
+
+.connect a {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .connect a:hover,
+  .heroActions a:hover,
+  .connectionCopy a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .present,
+  .connection,
+  .expertise > header,
+  .background,
+  .recognition,
+  .connect {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCopy,
+  .presentTitle,
+  .connectionMark,
+  .background > div:first-child,
+  .recognitionCopy {
+    border-right: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .heroCopy {
+    min-height: 650px;
+  }
+
+  .heroImage {
+    min-height: 620px;
+  }
+
+  .connectionMark {
+    min-height: 390px;
+  }
+
+  .connect {
+    gap: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroCopy {
+    min-height: 600px;
+    padding-block: 72px 54px;
+  }
+
+  .heroImage {
+    min-height: 500px;
+  }
+
+  .presentCopy dl > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .expertiseRows {
+    grid-template-columns: 1fr;
+  }
+
+  .expertiseRows article,
+  .expertiseRows article:nth-child(2n),
+  .expertiseRows article:nth-last-child(-n + 2) {
+    min-height: 280px;
+    border-right: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .expertiseRows article:last-child {
+    border-bottom: 0;
+  }
+
+  .recognition {
+    min-height: auto;
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T08:11:44.449+01:00",
+  "title": "Design System: Mcd79",
+  "extensions": {
+    "colorMeta": {
+      "working-sky": {
+        "role": "primary",
+        "displayName": "Working Sky",
+        "canonical": "#8dd8f8",
+        "tonalRamp": [
+          "oklch(15% 0.08 230)",
+          "oklch(27% 0.08 230)",
+          "oklch(39% 0.08 230)",
+          "oklch(51% 0.08 230)",
+          "oklch(63% 0.08 230)",
+          "oklch(75% 0.08 230)",
+          "oklch(87% 0.08 230)",
+          "oklch(95% 0.08 230)"
+        ]
+      },
+      "action-blue": {
+        "role": "primary",
+        "displayName": "Action Blue",
+        "canonical": "#1769ff",
+        "tonalRamp": [
+          "oklch(15% 0.24 260)",
+          "oklch(27% 0.24 260)",
+          "oklch(39% 0.24 260)",
+          "oklch(51% 0.24 260)",
+          "oklch(63% 0.24 260)",
+          "oklch(75% 0.20 260)",
+          "oklch(87% 0.12 260)",
+          "oklch(95% 0.05 260)"
+        ]
+      },
+      "build-yellow": {
+        "role": "secondary",
+        "displayName": "Build Yellow",
+        "canonical": "#ffd51f",
+        "tonalRamp": [
+          "oklch(15% 0.16 95)",
+          "oklch(27% 0.16 95)",
+          "oklch(39% 0.16 95)",
+          "oklch(51% 0.16 95)",
+          "oklch(63% 0.16 95)",
+          "oklch(75% 0.16 95)",
+          "oklch(87% 0.16 95)",
+          "oklch(95% 0.10 95)"
+        ]
+      },
+      "build-red": {
+        "role": "secondary",
+        "displayName": "Build Red",
+        "canonical": "#f05540",
+        "tonalRamp": [
+          "oklch(15% 0.18 30)",
+          "oklch(27% 0.18 30)",
+          "oklch(39% 0.18 30)",
+          "oklch(51% 0.18 30)",
+          "oklch(63% 0.18 30)",
+          "oklch(75% 0.16 30)",
+          "oklch(87% 0.10 30)",
+          "oklch(95% 0.04 30)"
+        ]
+      },
+      "build-green": {
+        "role": "secondary",
+        "displayName": "Build Green",
+        "canonical": "#33a86b",
+        "tonalRamp": [
+          "oklch(15% 0.13 150)",
+          "oklch(27% 0.13 150)",
+          "oklch(39% 0.13 150)",
+          "oklch(51% 0.13 150)",
+          "oklch(63% 0.13 150)",
+          "oklch(75% 0.12 150)",
+          "oklch(87% 0.08 150)",
+          "oklch(95% 0.03 150)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper Stock",
+        "canonical": "#f6f1e5",
+        "tonalRamp": [
+          "oklch(15% 0.02 85)",
+          "oklch(27% 0.02 85)",
+          "oklch(39% 0.02 85)",
+          "oklch(51% 0.02 85)",
+          "oklch(63% 0.02 85)",
+          "oklch(75% 0.02 85)",
+          "oklch(87% 0.02 85)",
+          "oklch(95% 0.02 85)"
+        ]
+      },
+      "stock-white": {
+        "role": "neutral",
+        "displayName": "Stock White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Construction Ink",
+        "canonical": "#121212",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Compressed Manifesto",
+        "purpose": "First-order statements and the largest meaningful step numbers."
+      },
+      "headline": {
+        "displayName": "Section Argument",
+        "purpose": "Large section-level ideas."
+      },
+      "title": {
+        "displayName": "Primary Dispatch Title",
+        "purpose": "Lead dispatch-board titles."
+      },
+      "body": {
+        "displayName": "Practical Explanation",
+        "purpose": "Readable explanatory copy."
+      },
+      "label": {
+        "displayName": "Provenance Annotation",
+        "purpose": "Dates, provenance, article status, and diagram notation."
+      },
+      "index-display": {
+        "displayName": "Index Declaration",
+        "purpose": "Current-writing and legacy-index declarations."
+      },
+      "article-display": {
+        "displayName": "Article Declaration",
+        "purpose": "Current and preserved long-form hero titles."
+      },
+      "compact-title": {
+        "displayName": "Compact Ruled Title",
+        "purpose": "Secondary dispatch cells and chronological ledger titles."
+      },
+      "reading-body": {
+        "displayName": "Long-form Reading",
+        "purpose": "Article copy in the instruction-sheet reading field."
+      },
+      "label-micro": {
+        "displayName": "Micro Annotation",
+        "purpose": "Dense dispatch metadata, axes, and compact annotations."
+      },
+      "label-nav": {
+        "displayName": "Navigation Instruction",
+        "purpose": "Uppercase navigation and instruction-sheet actions."
+      },
+      "homepage-dispatch-title": {
+        "displayName": "Homepage Dispatch Title",
+        "purpose": "Dominant dispatch on the home working board."
+      },
+      "continuation": {
+        "displayName": "Continuation Statement",
+        "purpose": "Cross-index bridge statements on continuation fields."
+      },
+      "label-axis": {
+        "displayName": "Axis Annotation",
+        "purpose": "Diagram axes and compact working annotations."
+      },
+      "label-action": {
+        "displayName": "Action Instruction",
+        "purpose": "Primary actions, return routes, and article continuation links."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-quick",
+        "value": "160ms ease-out",
+        "purpose": "Inventory-row color and position response."
+      },
+      {
+        "name": "state-standard",
+        "value": "180ms ease-out",
+        "purpose": "Action color transitions."
+      },
+      {
+        "name": "piece-separate",
+        "value": "300ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Illustrated build-piece separation on fine-pointer hover."
+      },
+      {
+        "name": "assemble",
+        "value": "780ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Downward assembly of exploded-model blocks, staggered by 90ms."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "980px"
+      },
+      {
+        "name": "reading-stack",
+        "value": "900px"
+      },
+      {
+        "name": "compact",
+        "value": "680px"
+      },
+      {
+        "name": "reading-compact",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Reading Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The dominant route into published writing.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">READ THE LATEST NOTE <svg aria-hidden=\"true\" viewBox=\"0 0 28 28\"><path d=\"M4 14h18M16 7l7 7-7 7\" /></svg></a>",
+      "css": ".ds-btn-primary { min-height: 54px; display: inline-flex; align-items: center; gap: 18px; padding: 0 18px; border: 2px solid #121212; background: #121212; color: #fff; font-family: \"Mcd79 Sans\", sans-serif; font-size: 13px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; transition: background-color 180ms ease-out, color 180ms ease-out; } .ds-btn-primary svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; } .ds-btn-primary:focus-visible { outline: 4px solid #1769ff; outline-offset: 4px; } @media (hover: hover) and (pointer: fine) { .ds-btn-primary:hover { background: #ffd51f; color: #121212; } }"
+    },
+    {
+      "name": "Yellow Reading Action",
+      "kind": "button",
+      "refersTo": "button-action",
+      "description": "A compact high-visibility reading action for ruled navigation strips.",
+      "html": "<a class=\"ds-btn-action\" href=\"#\">START READING <svg aria-hidden=\"true\" viewBox=\"0 0 28 28\"><path d=\"M4 14h18M16 7l7 7-7 7\" /></svg></a>",
+      "css": ".ds-btn-action { min-height: 44px; display: inline-flex; align-items: center; gap: 18px; padding: 0 18px; border: 2px solid #121212; background: #ffd51f; color: #121212; font-family: \"Mcd79 Sans\", sans-serif; font-size: 13px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; transition: background-color 180ms ease-out; } .ds-btn-action svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; } .ds-btn-action:focus-visible { outline: 4px solid #1769ff; outline-offset: 4px; } @media (hover: hover) and (pointer: fine) { .ds-btn-action:hover { background: #fff; } }"
+    },
+    {
+      "name": "Inventory Row",
+      "kind": "nav",
+      "description": "A ruled parts-library link with code, title, description, and direction.",
+      "html": "<a class=\"ds-inventory\" href=\"#\"><span class=\"ds-inventory-code\">W-01</span><strong>CURRENT WRITING</strong><span>Published notes and developing AI ideas</span><svg aria-hidden=\"true\" viewBox=\"0 0 28 28\"><path d=\"M4 14h18M16 7l7 7-7 7\" /></svg></a>",
+      "css": ".ds-inventory { min-height: 112px; display: grid; grid-template-columns: 90px minmax(230px,.7fr) 1fr 32px; align-items: center; gap: 28px; border-top: 2px solid #121212; border-bottom: 2px solid #121212; color: #121212; font-family: \"Mcd79 Sans\", sans-serif; text-decoration: none; transition: background-color 160ms ease-out, transform 160ms ease-out; } .ds-inventory-code { font-family: \"Courier New\", monospace; font-size: 12px; font-weight: 700; } .ds-inventory strong { font-size: 22px; font-weight: 900; } .ds-inventory svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; } .ds-inventory:focus-visible { outline: 4px solid #1769ff; outline-offset: 4px; } @media (hover: hover) and (pointer: fine) { .ds-inventory:hover { background: #8dd8f8; transform: translateX(8px); } }"
+    },
+    {
+      "name": "Exploded Model Level",
+      "kind": "custom",
+      "description": "A numbered construction step for the four-level productivity model.",
+      "html": "<article class=\"ds-level\"><header><b>2</b><strong>TEAM</strong></header><svg aria-hidden=\"true\" viewBox=\"0 0 160 112\"><g><rect x=\"35\" y=\"62\" width=\"38\" height=\"25\" rx=\"2\" fill=\"#ffd51f\"/><circle cx=\"46\" cy=\"62\" r=\"4\" fill=\"#ffd51f\" stroke=\"#121212\" stroke-width=\"2\"/></g><g><rect x=\"77\" y=\"62\" width=\"38\" height=\"25\" rx=\"2\" fill=\"#ffd51f\"/><circle cx=\"88\" cy=\"62\" r=\"4\" fill=\"#ffd51f\" stroke=\"#121212\" stroke-width=\"2\"/></g></svg></article>",
+      "css": ".ds-level { padding: 24px; border: 2px solid #121212; background-color: rgba(255,255,255,.4); background-image: linear-gradient(rgba(18,18,18,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(18,18,18,.12) 1px,transparent 1px); background-size: 24px 24px; color: #121212; font-family: \"Mcd79 Sans\", sans-serif; } .ds-level header { display: flex; align-items: baseline; gap: 14px; } .ds-level b { font-family: \"Mcd79 Condensed\", sans-serif; font-size: 64px; font-weight: 900; line-height: .85; } .ds-level strong { font-size: 13px; font-weight: 900; letter-spacing: .05em; } .ds-level svg { display: block; width: 100%; max-height: 150px; }"
+    },
+    {
+      "name": "Two-row Reading Header",
+      "kind": "nav",
+      "description": "Instruction-sheet navigation that preserves all reading routes in a ruled second row on narrow screens.",
+      "html": "<header class=\"ds-reading-header\"><a class=\"ds-reading-brand\" href=\"#\">Mcd<strong>79</strong></a><nav><a href=\"#\">New writing</a><a href=\"#\">Legacy archive</a><a href=\"#\">Framework</a></nav><a class=\"ds-home\" href=\"#\">Mcd79 home →</a></header>",
+      "css": ".ds-reading-header { min-height:74px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:28px; padding:12px clamp(20px,4vw,64px); border-bottom:2px solid #121212; background:#f6f1e5; color:#121212; font-family:\"Mcd79 Sans\",sans-serif; } .ds-reading-brand { font-family:\"Mcd79 Condensed\",sans-serif; font-size:27px; font-weight:700; letter-spacing:-.04em; text-decoration:none; } .ds-reading-brand strong { margin-left:3px; padding:2px 6px; background:#121212; color:#fff; font-size:20px; } .ds-reading-header nav { display:flex; gap:clamp(20px,3vw,42px); font-size:12px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; } .ds-reading-header nav a,.ds-home { color:inherit; text-decoration:underline; text-underline-offset:5px; } .ds-home { justify-self:end; font-size:12px; font-weight:900; letter-spacing:.07em; text-transform:uppercase; } @media(max-width:900px){.ds-reading-header{grid-template-columns:1fr auto;padding-bottom:16px}.ds-reading-header nav{grid-column:1/3;grid-row:2;justify-content:space-between;padding-top:14px;border-top:1px solid #121212}} @media(max-width:640px){.ds-reading-header nav{justify-content:flex-start;gap:12px;font-size:10px;letter-spacing:.04em}}"
+    },
+    {
+      "name": "Current-writing Dispatch Board",
+      "kind": "card",
+      "description": "An asymmetric ruled index with one dominant current dispatch and three colored secondary cells.",
+      "html": "<section class=\"ds-dispatch\"><a class=\"ds-dispatch-lead\" href=\"#\"><b>A</b><h2>WELCOME TO THE NEW MCD79</h2><small>AUG 2026 · LATEST WRITING</small><i>→</i></a><div class=\"ds-dispatch-stack\"><a href=\"#\"><b>B</b><h3>THE VALUE OF COPILOT IS IN THE WORK</h3><small>COPILOT · VALUE</small><i>→</i></a><a class=\"ds-red\" href=\"#\"><b>C</b><h3>A PRACTICAL MAP OF AGENTS</h3><small>COPILOT · AGENTS</small><i>→</i></a><a class=\"ds-yellow\" href=\"#\"><b>D</b><h3>WHY AI PRODUCTIVITY NEEDS A FRAMEWORK</h3><small>ADOPTION · FRAMEWORK</small><i>→</i></a></div></section>",
+      "css": ".ds-dispatch { display:grid; grid-template-columns:1.15fr .85fr; border:2px solid #121212; color:#121212; font-family:\"Mcd79 Sans\",sans-serif; } .ds-dispatch a { position:relative; display:grid; gap:18px; padding:32px; color:inherit; text-decoration:none; } .ds-dispatch-lead { min-height:520px; grid-template-rows:auto 1fr auto; background:#fff; border-right:2px solid #121212; } .ds-dispatch-stack { display:grid; grid-template-rows:repeat(3,1fr); } .ds-dispatch-stack a { background:#8dd8f8; border-bottom:2px solid #121212; } .ds-dispatch-stack a:last-child { border-bottom:0; } .ds-dispatch .ds-red { background:#f05540; } .ds-dispatch .ds-yellow { background:#ffd51f; } .ds-dispatch b,.ds-dispatch h2,.ds-dispatch h3 { font-family:\"Mcd79 Condensed\",sans-serif; margin:0; font-weight:900; } .ds-dispatch b { font-size:58px; line-height:.8; } .ds-dispatch h2 { font-size:clamp(32px,4.6vw,68px); line-height:.92; } .ds-dispatch h3 { font-size:clamp(28px,3vw,46px); line-height:.95; } .ds-dispatch small { font-family:\"Courier New\",monospace; font-size:9px; font-weight:700; letter-spacing:.1em; } .ds-dispatch i { position:absolute; right:22px; bottom:18px; font-size:24px; font-style:normal; } @media(max-width:900px){.ds-dispatch{grid-template-columns:1fr}.ds-dispatch-lead{border-right:0;border-bottom:2px solid #121212}}"
+    },
+    {
+      "name": "Legacy Chronological Ledger Row",
+      "kind": "nav",
+      "description": "A full-width preservation row exposing sequence, date, title, excerpt, and direction.",
+      "html": "<a class=\"ds-ledger\" href=\"#\"><b>01</b><time>25 JAN 2023</time><span><strong>SETTING UP MICROSOFT SYNTEX PAYG</strong><small>The preserved article excerpt remains visible for context.</small></span><i>→</i></a>",
+      "css": ".ds-ledger { min-height:210px; display:grid; grid-template-columns:76px 130px minmax(0,1fr) 32px; align-items:start; gap:34px; padding:34px clamp(20px,6vw,96px); border-block:2px solid #121212; background:rgba(141,216,248,.32); color:#121212; font-family:\"Mcd79 Sans\",sans-serif; text-decoration:none; transition:background-color 160ms ease-out,transform 160ms ease-out; } .ds-ledger b,.ds-ledger strong { font-family:\"Mcd79 Condensed\",sans-serif; font-weight:900; } .ds-ledger b { font-size:52px; line-height:.8; } .ds-ledger time { font-family:\"Courier New\",monospace; font-size:11px; font-weight:700; letter-spacing:.1em; } .ds-ledger strong { display:block; max-width:26ch; font-size:clamp(28px,3.4vw,48px); line-height:.95; } .ds-ledger small { display:block; max-width:72ch; margin-top:14px; font-size:15px; line-height:1.5; } .ds-ledger i { font-size:24px; font-style:normal; } .ds-ledger:focus-visible { outline:4px solid #1769ff; outline-offset:4px; } @media(hover:hover) and (pointer:fine){.ds-ledger:hover{background:#8dd8f8;transform:translateX(8px)}} @media(max-width:640px){.ds-ledger{grid-template-columns:48px 1fr 24px;gap:16px;padding-block:28px}.ds-ledger time{grid-column:2/4;grid-row:2}.ds-ledger span{grid-column:2/4;grid-row:1}}"
+    },
+    {
+      "name": "Article Hero Variants",
+      "kind": "custom",
+      "description": "Shared instruction-sheet hero with sky current and paper preserved variants; both expose complete provenance in the first viewport.",
+      "html": "<header class=\"ds-article-hero ds-current\"><a href=\"#\">← NEW WRITING</a><h1>THE VALUE IS IN THE WORK</h1><p>A practical article excerpt that establishes the argument.</p><div><span>AUG 2026</span><span>KEVIN MCDONNELL</span><span>CURRENT WRITING</span></div></header>",
+      "css": ".ds-article-hero { min-height:650px; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(72px,10vw,150px) clamp(20px,8vw,130px); border-bottom:2px solid #121212; background:#f6f1e5; color:#121212; font-family:\"Mcd79 Sans\",sans-serif; } .ds-article-hero.ds-current { background:#8dd8f8; } .ds-article-hero>a { width:fit-content; margin-bottom:auto; color:inherit; font-size:13px; font-weight:900; text-decoration:underline; text-underline-offset:5px; } .ds-article-hero h1 { max-width:15ch; margin:0; font-family:\"Mcd79 Condensed\",sans-serif; font-size:clamp(62px,8vw,96px); font-weight:900; line-height:.88; letter-spacing:-.04em; } .ds-article-hero p { max-width:62ch; margin:32px 0 0; font-size:20px; font-weight:600; line-height:1.5; } .ds-article-hero div { display:flex; flex-wrap:wrap; gap:16px 30px; margin-top:38px; font-family:\"Courier New\",monospace; font-size:11px; font-weight:700; letter-spacing:.1em; } @media(max-width:640px){.ds-article-hero{min-height:620px;padding-block:54px}}"
+    },
+    {
+      "name": "Yellow Provenance Rail",
+      "kind": "custom",
+      "description": "A structural article rail identifying current status or preserved source year before the reading body.",
+      "html": "<aside class=\"ds-provenance\"><b>2023</b><p>Migrated from the original Mcd79 modern workplace blog.</p><a href=\"#\">VIEW ORIGINAL ↗</a></aside>",
+      "css": ".ds-provenance { padding:70px clamp(24px,5vw,70px); border-right:2px solid #121212; background:#ffd51f; color:#121212; font-family:\"Mcd79 Sans\",sans-serif; } .ds-provenance b { display:block; font-family:\"Mcd79 Condensed\",sans-serif; font-size:72px; font-weight:900; line-height:.8; } .ds-provenance p { max-width:24ch; margin:28px 0 0; font-size:15px; line-height:1.5; } .ds-provenance a { display:inline-block; margin-top:28px; color:inherit; font-size:12px; font-weight:900; text-decoration:underline; text-underline-offset:5px; } @media(max-width:900px){.ds-provenance{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:30px;border-right:0;border-bottom:2px solid #121212}.ds-provenance p,.ds-provenance a{margin-top:0}}"
+    },
+    {
+      "name": "Continuation Strip",
+      "kind": "nav",
+      "description": "A ruled close that directs readers into connected current, preserved, and framework knowledge.",
+      "html": "<nav class=\"ds-continuation\"><strong>CONTINUE EXPLORING</strong><a href=\"#\">NEW WRITING →</a><a href=\"#\">LEGACY ARCHIVE →</a><a href=\"#\">AI PRODUCTIVITY FRAMEWORK →</a></nav>",
+      "css": ".ds-continuation { display:grid; grid-template-columns:1fr repeat(3,auto); align-items:center; gap:32px; padding:36px clamp(20px,6vw,96px); border-block:2px solid #121212; background:#8dd8f8; color:#121212; font-family:\"Mcd79 Sans\",sans-serif; } .ds-continuation a { color:inherit; font-size:13px; font-weight:900; text-decoration:underline; text-underline-offset:5px; } @media(max-width:900px){.ds-continuation{grid-template-columns:1fr 1fr}} @media(max-width:640px){.ds-continuation{grid-template-columns:1fr}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Instruction Manual",
+    "overview": "Mcd79 presents practical knowledge as something assembled rather than merely read. The visual world combines sky-blue work fields, warm paper stock, black construction keylines, bright build pieces, step diagrams, dispatch boards, preservation ledgers, and instruction-sheet articles. It is editorial in hierarchy and instructional in structure: bold, exact, tactile, and useful rather than polished into anonymous software chrome.\n\nThe system deliberately refuses the generic author portrait paired with a post grid. Current writing is arranged as an asymmetric dispatch board, legacy history as a chronological preservation ledger, and long-form pages as instruction sheets with explicit provenance. Condensed headlines carry the authorial argument while numbered parts, metadata, arrows, and ruled rows make ideas feel inspectable and connected. The working-canvas grid remains a specialist material confined to exploded model canvases.",
+    "keyCharacteristics": [
+      "Warm paper and sky-blue working fields separated by black keylines.",
+      "Oversized condensed statements paired with compact technical labels.",
+      "Square, flat components with bright functional color assignments.",
+      "Asymmetric dispatch boards, chronological ledger rows, and yellow provenance rails.",
+      "Long-form instruction sheets with clear hero status and continuation strips.",
+      "Brief, purposeful assembly and hover motion with reduced-motion support."
+    ],
+    "rules": [
+      {
+        "name": "The Color Has a Job Rule",
+        "body": "Saturated colors identify working fields, actions, or build parts; they are not ambient decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Canvas Boundary Rule",
+        "body": "The working-canvas grid belongs only inside an exploded model canvas; the surrounding page remains solid paper or solid color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Provenance Is Structural Rule",
+        "body": "Yellow marks provenance as a ruled rail or continuation field; it is never a detached badge.",
+        "section": "colors"
+      },
+      {
+        "name": "The Compression With Air Rule",
+        "body": "Display type is tightly set, but it sits inside generous section spacing and never competes with dense body copy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Annotation Is Functional Rule",
+        "body": "Monospace uppercase text labels parts, metadata, or instructions; it is not a decorative eyebrow.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ruled Field Rule",
+        "body": "Layout edges are expressed through shared keylines and color fields, not isolated floating cards.",
+        "section": "layout"
+      },
+      {
+        "name": "The Stack Without Softening Rule",
+        "body": "Responsive layouts change axis and column count while retaining square geometry, strong type, and structural rules.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Assembly Rule",
+        "body": "Establish hierarchy with plane, rule, overlap, and diagram shading; never introduce ambient card shadows.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Object, Not Chrome Rule",
+        "body": "Rounded detail belongs to depicted build pieces; interface chrome remains square.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do use warm paper and solid working fields as the default material vocabulary.",
+      "Do use 2px ink keylines for major boundaries and 1px ink rules for internal diagram structure.",
+      "Do pair compressed statements with generous surrounding space and readable body measures.",
+      "Do expose provenance in index metadata, article hero status, and the yellow article rail.",
+      "Do preserve the asymmetric lead choice for current writing and chronological scan order for legacy writing.",
+      "Do keep article media full-width within the reading measure and frame it with a 2px ink keyline.",
+      "Do make writing actions visibly primary and preserve a 44px minimum action height.",
+      "Do gate hover movement to fine pointers and remove assembly motion for reduced-motion preference."
+    ],
+    "donts": [
+      "Don't spread the working-canvas grid beyond an exploded model canvas.",
+      "Don't add shadows, soft card radii, gradients, or glass effects to create hierarchy.",
+      "Don't use bright colors without a structural, action, or build-part role.",
+      "Don't turn functional monospace annotation into decorative eyebrow copy.",
+      "Don't flatten dispatch boards into equal cards or legacy ledgers into an undated post grid.",
+      "Don't hide the reading routes on mobile; preserve the ruled second header row.",
+      "Don't collapse responsive layouts by scaling everything down; preserve sequence, keylines, and reading order."
+    ]
+  }
+}

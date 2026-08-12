@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Mcd79 Sans";
+  src: url("/fonts/barlow-600.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500 700;
+}
+
+@font-face {
+  font-family: "Mcd79 Condensed";
+  src: url("/fonts/barlow-condensed-800.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700 900;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: #f6f1e5;
+  color: #121212;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 4px solid #1769ff;
+  outline-offset: 4px;
+}
+
+::selection {
+  background: #1769ff;
+  color: white;
+}

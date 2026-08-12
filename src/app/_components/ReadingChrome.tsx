@@ -1,7 +1,9 @@
 import Link from "next/link";
 import styles from "../reading.module.css";
 
-export function ReadingHeader() {
+type ReadingSection = "thoughts" | "blog" | "about" | "framework" | "speaking";
+
+export function ReadingHeader({ current }: { current?: ReadingSection }) {
   return (
     <header className={styles.readingHeader}>
       <Link className={styles.readingBrand} href="/">
@@ -9,11 +11,21 @@ export function ReadingHeader() {
         <strong>79</strong>
       </Link>
       <nav aria-label="Reading navigation">
-        <Link href="/thoughts">New writing</Link>
-        <Link href="/blog">Legacy blog</Link>
-        <Link href="/about">About</Link>
-        <Link href="/#framework">Framework</Link>
-        <Link href="/speaking">Speaking</Link>
+        <Link href="/thoughts" aria-current={current === "thoughts" ? "page" : undefined}>
+          New writing
+        </Link>
+        <Link href="/blog" aria-current={current === "blog" ? "page" : undefined}>
+          Legacy blog
+        </Link>
+        <Link href="/about" aria-current={current === "about" ? "page" : undefined}>
+          About
+        </Link>
+        <Link href="/#framework" aria-current={current === "framework" ? "page" : undefined}>
+          Framework
+        </Link>
+        <Link href="/speaking" aria-current={current === "speaking" ? "page" : undefined}>
+          Speaking
+        </Link>
       </nav>
       <Link className={styles.homeLink} href="/">
         Home

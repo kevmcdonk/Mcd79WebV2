@@ -84,7 +84,7 @@ const currentSessions = [
 export default function SpeakingPage() {
   return (
     <div className={styles.page}>
-      <ReadingHeader />
+      <ReadingHeader current="speaking" />
       <main>
         <section className={styles.hero}>
           <div className={styles.heroStatement}>
@@ -113,7 +113,7 @@ export default function SpeakingPage() {
 
         <section className={styles.recurring}>
           <div className={styles.recurringMark}>
-            <span>LIVE</span>
+            <span aria-hidden="true" />
           </div>
           <div className={styles.recurringCopy}>
             <h2>Copilot Fireside Chat.</h2>
@@ -125,7 +125,7 @@ export default function SpeakingPage() {
             </p>
             <div className={styles.recurringDetails}>
               <span>Monthly</span>
-              <span>16:00 UK</span>
+              <span>16:00 GMT</span>
               <span>Online</span>
             </div>
             <a
@@ -180,14 +180,13 @@ export default function SpeakingPage() {
             </p>
           </header>
           <div className={styles.catalogueRows}>
-            {currentSessions.map((session, index) => (
+            {currentSessions.map((session) => (
               <a
                 href={session.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 key={session.title}
               >
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <h3>{session.title}</h3>
                   <p>{session.description}</p>

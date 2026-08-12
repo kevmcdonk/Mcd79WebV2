@@ -56,6 +56,11 @@
   text-underline-offset: 5px;
 }
 
+.readingHeader nav a[aria-current="page"] {
+  text-decoration-thickness: 3px;
+  text-underline-offset: 7px;
+}
+
 .homeLink {
   justify-self: end;
   font-size: 12px;

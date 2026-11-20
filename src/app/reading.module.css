@@ -42,7 +42,7 @@
 .readingHeader nav {
   display: flex;
   align-items: center;
-  gap: clamp(20px, 3vw, 42px);
+  gap: clamp(14px, 2vw, 30px);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: .07em;

@@ -1,0 +1,2063 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Grand Theft Wool: Amsterdam. An original overhead sheep-herding arcade adventure about observing, governing, and securing agents with Agent 365.">
+<title>Grand Theft Wool | Agent 365: Amsterdam</title>
+<script>
+  (() => {
+    const param = new URLSearchParams(window.location.search).get("scoutTheme");
+    const theme =
+      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<style>
+:root {
+  color-scheme: light;
+  --cp-bg: #f7f4ef;
+  --cp-bg-elevated: #fcfbf8;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f5f5f5;
+  --cp-border: #dedede;
+  --cp-border-strong: #919191;
+  --cp-text: #242424;
+  --cp-text-muted: #5c5c5c;
+  --cp-text-soft: #6f6f6f;
+  --cp-accent: #b11f4b;
+  --cp-accent-hover: #9a1a41;
+  --cp-accent-soft: rgba(177, 31, 75, 0.08);
+  --cp-accent-fg: #ffffff;
+  --cp-success: #16a34a;
+  --cp-danger: #dc2626;
+  --cp-warning: #f59e0b;
+  --cp-link: #0078d4;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+  --cp-overlay: rgba(255, 255, 255, 0.8);
+  --cp-panel: rgba(255, 255, 255, 0.86);
+  --cp-panel-strong: rgba(255, 255, 255, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.55);
+  --cp-highlight: rgba(177, 31, 75, 0.12);
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #3d3b3a;
+  --cp-bg-elevated: #343231;
+  --cp-surface: #292929;
+  --cp-surface-soft: #2e2e2e;
+  --cp-border: #474747;
+  --cp-border-strong: #5f5f5f;
+  --cp-text: #dedede;
+  --cp-text-muted: #919191;
+  --cp-text-soft: #b0b0b0;
+  --cp-accent: #fd8ea1;
+  --cp-accent-hover: #fb7b91;
+  --cp-accent-soft: rgba(253, 142, 161, 0.14);
+  --cp-accent-fg: #1a1a1a;
+  --cp-success: #4ade80;
+  --cp-danger: #f87171;
+  --cp-warning: #fbbf24;
+  --cp-link: #4da6ff;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --cp-overlay: rgba(41, 41, 41, 0.88);
+  --cp-panel: rgba(41, 41, 41, 0.72);
+  --cp-panel-strong: rgba(41, 41, 41, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.04);
+  --cp-highlight: rgba(253, 142, 161, 0.12);
+}
+:root {
+  --cp-asphalt: color-mix(in srgb, var(--cp-text) 88%, var(--cp-bg));
+  --cp-night: color-mix(in srgb, var(--cp-text) 95%, var(--cp-accent));
+  --cp-floor: color-mix(in srgb, var(--cp-border-strong) 33%, var(--cp-bg));
+  --cp-floor-alt: color-mix(in srgb, var(--cp-border-strong) 45%, var(--cp-bg));
+  --cp-canal: color-mix(in srgb, var(--cp-text) 80%, var(--cp-link));
+  --cp-ink: var(--cp-text);
+  --cp-wool: var(--cp-bg-elevated);
+  --cp-lawn: color-mix(in srgb, var(--cp-success) 25%, var(--cp-bg));
+  --cp-timber: color-mix(in srgb, var(--cp-warning) 42%, var(--cp-ink));
+  --cp-timber-light: color-mix(in srgb, var(--cp-warning) 48%, var(--cp-wool));
+  --cp-wool-shade: color-mix(in srgb, var(--cp-wool) 76%, var(--cp-border-strong));
+  --cp-carpet: color-mix(in srgb, var(--cp-accent) 15%, var(--cp-asphalt));
+  --cp-stone: color-mix(in srgb, var(--cp-floor) 90%, var(--cp-warning));
+  --cp-foliage: color-mix(in srgb, var(--cp-success) 65%, var(--cp-ink));
+}
+html[data-theme="dark"] {
+  --cp-asphalt: color-mix(in srgb, var(--cp-surface) 85%, var(--cp-accent-fg));
+  --cp-night: var(--cp-accent-fg);
+  --cp-floor: var(--cp-bg);
+  --cp-floor-alt: var(--cp-border);
+  --cp-canal: color-mix(in srgb, var(--cp-surface) 85%, var(--cp-link));
+  --cp-ink: var(--cp-accent-fg);
+  --cp-wool: var(--cp-text);
+  --cp-lawn: color-mix(in srgb, var(--cp-success) 20%, var(--cp-surface));
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font: 14px/1.5 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+button, a { -webkit-tap-highlight-color: var(--cp-highlight); }
+button { font: inherit; color: inherit; cursor: pointer; border: 1px solid var(--cp-border-strong); border-radius: 10px; background: var(--cp-surface); padding: 9px 13px; min-height: 42px; }
+button:hover { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
+button:focus-visible, a:focus-visible, canvas:focus-visible, summary:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 3px; }
+button.primary { background: var(--cp-accent); border-color: var(--cp-accent); color: var(--cp-accent-fg); font-weight: 800; }
+button:disabled { opacity: .5; cursor: wait; }
+button[data-hold] { touch-action: none; user-select: none; }
+a { color: var(--cp-accent); text-underline-offset: 3px; }
+.mono, kbd, .eyebrow, .stat strong, .radio-label { font-family: Consolas, "Courier New", Courier, monospace; }
+.topbar { height: 72px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--cp-border); }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon { display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid var(--cp-accent); color: var(--cp-accent); font: 900 22px Consolas, monospace; transform: rotate(-5deg); }
+.brand strong { font-size: 15px; letter-spacing: 1px; }
+.eyebrow { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cp-text-muted); }
+.top-actions { display: flex; align-items: center; gap: 8px; }
+.top-actions a { margin-right: 12px; font-size: 12px; }
+.edition { border: 1px solid var(--cp-border); padding: 4px 8px; margin-left: 12px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 302px; height: calc(100dvh - 72px); min-height: 480px; }
+.play-column { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.hud { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; background: var(--cp-bg-elevated); min-height: 85px; border-bottom: 1px solid var(--cp-border); }
+.stat .eyebrow { letter-spacing: 1px; display: block; }
+.stat strong { font-size: 24px; letter-spacing: -1px; line-height: 1.2; }
+.stat small { color: var(--cp-text-muted); font-size: 12px; }
+.integrity { width: 128px; height: 5px; background: var(--cp-border); margin-top: 6px; }
+.integrity span { display: block; width: 100%; height: 100%; background: var(--cp-success); }
+.heat { color: var(--cp-danger); letter-spacing: 3px; font-size: 19px; white-space: nowrap; }
+.stage { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--cp-asphalt); }
+#game { width: 100%; height: 100%; display: block; position: absolute; inset: 0; image-rendering: pixelated; touch-action: none; }
+.location { position: absolute; top: 16px; left: 20px; padding: 7px 10px; background: var(--cp-panel-strong); border: 1px solid var(--cp-border); pointer-events: none; font-size: 11px; }
+.location strong { display: block; text-transform: uppercase; letter-spacing: 1px; }
+.destination { position: absolute; top: 16px; left: 20px; display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--cp-night); color: var(--cp-wool); border: 1px solid var(--cp-success); pointer-events: none; }
+.destination svg { width: 28px; height: 28px; fill: none; stroke: var(--cp-success); stroke-width: 2; flex-shrink: 0; }
+.destination strong { display: block; font-size: 13px; letter-spacing: .5px; }
+.destination small { color: var(--cp-wool); display: block; font: 10px/1.5 Consolas, monospace; }
+.location { top: 88px; padding: 5px 8px; font-size: 9px; }
+.map-legend { font: 9px/1.4 Consolas, monospace; margin-top: 6px; color: var(--cp-text-muted); }
+.map-legend strong { color: var(--cp-success); }
+.map-legend .legend-threat, .map-legend .legend-incident, #map-alert { color: var(--cp-danger); font-weight: 700; }
+#map-alert { display: block; min-height: 1.4em; }
+.map-box { position: absolute; right: 16px; bottom: 18px; width: 170px; background: var(--cp-panel-strong); border: 1px solid var(--cp-border-strong); padding: 8px; pointer-events: none; }
+.map-box .eyebrow { letter-spacing: 1px; font-size: 9px; display: flex; justify-content: space-between; margin-bottom: 5px; }
+#minimap { width: 152px; height: 114px; display: block; image-rendering: pixelated; }
+.map-box.expanded { width: min(460px, 85%); }
+.map-box.expanded #minimap { width: 100%; height: auto; }
+.world-note { position: absolute; bottom: 18px; left: 20px; max-width: calc(100% - 225px); color: var(--cp-wool); background: var(--cp-night); padding: 8px 12px; font: 11px Consolas, monospace; pointer-events: none; }
+.overlay { position: absolute; inset: 0; z-index: 3; background: var(--cp-overlay); display: flex; align-items: center; padding: 32px 40px; overflow-y: auto; }
+.brief { max-width: 600px; margin: auto 0; }
+.brief .eyebrow { color: var(--cp-accent); font-weight: 700; }
+h1 { font-size: clamp(42px, 5.3vw, 82px); line-height: .92; letter-spacing: -4px; text-transform: uppercase; font-weight: 950; margin: 20px 0 14px; }
+h1 span { color: var(--cp-accent); display: block; }
+.subtitle { font-weight: 700; text-transform: uppercase; letter-spacing: 4px; font-size: 13px; }
+.brief p { max-width: 490px; color: var(--cp-text-muted); font-size: 15px; }
+.brief .strap { color: var(--cp-text); font-size: 17px; font-weight: 600; }
+.brief .primary { margin-top: 10px; padding: 13px 22px; }
+.brief .fine { font-size: 11px; margin-top: 16px; }
+.brief-controls { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; margin: 20px 0; color: var(--cp-text-muted); }
+@media (min-width: 1100px) {
+  .overlay.intro .brief { display: grid; grid-template-columns: 1.05fr 1fr; gap: 12px 32px; max-width: 860px; width: 100%; }
+  .overlay.intro .eyebrow { grid-column: 1 / -1; margin-bottom: 12px; }
+  .overlay.intro h1 { grid-column: 1; grid-row: 2 / 5; font-size: clamp(48px, 4.5vw, 72px); margin: 0; align-self: center; }
+  .overlay.intro .subtitle { grid-column: 1; grid-row: 5; font-size: 11px; letter-spacing: 2px; align-self: center; }
+  .overlay.intro .strap { grid-column: 2; grid-row: 2; margin: 0; }
+  .overlay.intro #overlay-copy { grid-column: 2; grid-row: 3; margin: 0; font-size: 13px; }
+  .overlay.intro .brief-controls { grid-column: 2; grid-row: 4; margin: 4px 0; }
+  .overlay.intro #start { grid-column: 2; grid-row: 5; margin: 0; justify-self: start; }
+  .overlay.intro .fine { grid-column: 1 / -1; margin: 12px 0 0; }
+}
+@media (min-width: 681px) and (max-width: 1099px) {
+  .overlay.intro .brief { display: flex; flex-direction: column; align-items: flex-start; margin: 0; }
+  .overlay.intro #overlay-kicker { order: 0; }
+  .overlay.intro h1 { order: 1; }
+  .overlay.intro .subtitle { order: 2; }
+  .overlay.intro .strap { order: 3; }
+  .overlay.intro #start { order: 4; margin: 0 0 8px; }
+  .overlay.intro #overlay-copy { order: 5; }
+  .overlay.intro .brief-controls { order: 6; }
+  .overlay.intro .fine { order: 7; }
+}
+kbd { border: 1px solid var(--cp-border-strong); border-bottom-width: 2px; background: var(--cp-surface); border-radius: 4px; padding: 2px 5px; font-size: 11px; color: var(--cp-text); }
+.incident-assist { background: var(--cp-bg-elevated); border-top: 1px solid var(--cp-border); padding: 10px 24px; display: grid; grid-template-columns: 86px minmax(0, 1fr) auto; flex-shrink: 0; align-items: center; gap: 16px; min-height: 94px; }
+.incident-label { color: var(--cp-accent); font: 10px/1.3 Consolas, monospace; letter-spacing: 1px; }
+.incident-label b { display: block; font-size: 17px; letter-spacing: 0; }
+.incident-label span { display: block; font-size: 9px; letter-spacing: 0; }
+.incident-copy { min-width: 0; }
+.incident-copy strong { display: block; font-size: 13px; }
+.incident-copy p { margin: 2px 0; font-size: 12px; line-height: 1.35; }
+.incident-copy small { display: block; color: var(--cp-text-muted); font-size: 10px; line-height: 1.35; }
+.incident-actions { display: flex; gap: 6px; align-items: center; }
+.incident-actions button { padding: 6px 9px; font-size: 11px; min-height: 38px; white-space: nowrap; }
+.dispatch-message { font-size: 11px; line-height: 1.4; color: var(--cp-text-muted); padding: 10px 0; margin: 0; }
+.dispatch-message strong { color: var(--cp-accent); }
+.sidebar { border-left: 1px solid var(--cp-border); background: var(--cp-bg-elevated); padding: 24px 20px; overflow-y: auto; min-height: 0; }
+.mission-number { display: flex; justify-content: space-between; color: var(--cp-accent); }
+h2 { font-size: 24px; line-height: 1.1; letter-spacing: -.7px; margin: 12px 0; }
+.mission-copy { font-size: 12px; color: var(--cp-text-muted); margin-bottom: 18px; }
+.map-name { color: var(--cp-accent); margin: -4px 0 8px; }
+.objective { border: 1px solid var(--cp-border); border-radius: 10px; padding: 10px 12px; margin: 14px 0 22px; font-size: 12px; }
+.objective strong { display: block; }
+.tools { display: grid; gap: 6px; margin: 10px 0; }
+.tool { text-align: left; padding: 10px 12px; display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 6px; }
+.tool strong { font-size: 12px; display: block; }
+.tool small { display: block; color: var(--cp-text-muted); font-size: 10px; }
+.tool .tool-mark { font-size: 17px; font-weight: 800; color: var(--cp-accent); }
+.pulse-button { width: 100%; margin-top: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+.cooldown { height: 3px; margin: 7px 0 20px; background: var(--cp-border); }
+.cooldown span { display: block; height: 100%; background: var(--cp-accent); }
+.section-label { border-top: 1px solid var(--cp-border); padding-top: 16px; margin-top: 18px; }
+.dispatch { font-size: 11px; list-style: none; margin: 12px 0; padding: 0; }
+.dispatch li { border-bottom: 1px solid var(--cp-border); padding: 8px 0; color: var(--cp-text-muted); }
+.dispatch li:first-child { color: var(--cp-text); }
+.dispatch b { color: var(--cp-accent); font-family: Consolas, monospace; font-weight: 400; margin-right: 8px; }
+details { border-top: 1px solid var(--cp-border); padding-top: 14px; margin-top: 20px; }
+summary { cursor: pointer; font-size: 12px; font-weight: 700; }
+.field-guide { font-size: 11px; color: var(--cp-text-muted); }
+.field-guide p { margin: 12px 0; }
+.field-guide strong { color: var(--cp-text); }
+.disclaimer { color: var(--cp-text-soft); font-size: 10px; margin-top: 20px; }
+.touch { position: absolute; bottom: 18px; left: 16px; right: 16px; display: none; justify-content: space-between; align-items: flex-end; z-index: 2; pointer-events: none; }
+.dpad { display: grid; grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(2, 42px); gap: 4px; }
+.touch button { pointer-events: auto; touch-action: none; user-select: none; background: var(--cp-panel-strong); padding: 4px; }
+.dpad button:first-child { grid-column: 2; }
+.dpad button:nth-child(2) { grid-column: 1; }
+.touch-actions { display: grid; grid-template-columns: repeat(2, auto); gap: 5px; }
+.touch-actions button { font-size: 11px; }
+@media (min-width: 1500px) { .sidebar { padding: 28px; } .layout { grid-template-columns: minmax(0, 1fr) 330px; } }
+@media (max-width: 900px) { .topbar { padding: 0 16px; } .edition { display: none; } .layout { grid-template-columns: minmax(0, 1fr) 250px; } .sidebar { padding: 20px 14px; } .hud { padding: 12px 16px; } .stat strong { font-size: 21px; } .integrity { width: 90px; } .overlay { padding: 28px; } h1 { font-size: 56px; } .heat { font-size: 15px; letter-spacing: 1px; } .incident-assist { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; padding: 8px 16px; } .incident-label { grid-column: 1 / -1; } .incident-label b { display: inline; font-size: 12px; } .incident-label span { display: inline; margin-left: 8px; } }
+@media (max-width: 680px) { .topbar { height: 62px; } .brand strong { font-size: 11px; } .brand .eyebrow { font-size: 8px; letter-spacing: 1px; } .top-actions a { font-size: 10px; margin: 0 3px 0 0; } .top-actions button { font-size: 11px; padding: 6px 9px; } .brand-icon { display: none; } .layout { display: flex; flex-direction: column; height: auto; } .stage { min-height: 540px; height: 65dvh; flex: none; } .sidebar { border-left: 0; border-top: 1px solid var(--cp-border); overflow: visible; } .tools { grid-template-columns: repeat(3, 1fr); } .tool { display: block; padding: 8px; } .tool kbd { display: none; } .tool .tool-mark { font-size: 12px; } .tool small { font-size: 9px; } .hud { gap: 6px; } .stat strong { font-size: 20px; } .stat .eyebrow { font-size: 8px; } .integrity { width: 74px; } .heat { font-size: 12px; } h1 { font-size: 56px; } .overlay { padding: 24px; } .brief p { font-size: 13px; } .brief .strap { font-size: 15px; } .brief-controls { margin: 14px 0; } .map-box { width: 126px; top: 16px; bottom: auto; right: 12px; padding: 6px; } #minimap { width: 112px; height: 84px; } .location { max-width: calc(100% - 165px); font-size: 9px; left: 12px; } .world-note { bottom: 120px; left: 12px; max-width: calc(100% - 24px); font-size: 10px; } }
+@media (max-width: 680px) {
+  .stage { min-height: 340px; height: clamp(340px, calc(100dvh - 330px), 540px); }
+  .destination { top: 12px; left: 12px; max-width: calc(100% - 150px); padding: 8px; gap: 6px; }
+  .destination svg { display: none; }
+  .destination strong { font-size: 10px; line-height: 1.3; }
+  .destination small { font-size: 8px; margin-top: 3px; }
+  .location { display: none; }
+  .map-legend { font-size: 8px; }
+  .world-note { max-width: calc(100% - 150px); }
+  .incident-assist { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 8px 12px; }
+  .incident-label { grid-column: auto; }
+  .incident-copy p { font-size: 11px; }
+  .incident-actions button { flex: 1; }
+  .tools { grid-template-columns: repeat(2, 1fr); }
+  .tool kbd { display: inline-block; margin-top: 4px; }
+  .overlay { padding: 16px; }
+  .overlay .brief { display: flex; flex-direction: column; align-items: flex-start; margin: 0; }
+  #overlay-kicker { order: 0; }
+  .overlay h1 { order: 1; font-size: clamp(36px, 10.8vw, 42px); letter-spacing: -2px; margin: 8px 0; }
+  .overlay .subtitle { order: 2; font-size: 10px; letter-spacing: 2px; }
+  .overlay .strap { order: 3; margin: 8px 0; }
+  .overlay #start { order: 4; margin: 0 0 8px; }
+  #overlay-copy { order: 5; }
+  .overlay .brief-controls { order: 6; }
+  .overlay .fine { order: 7; }
+}
+@media (pointer: coarse) { .touch { display: flex; } .world-note { bottom: 120px; } .map-box { bottom: auto; top: 16px; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-icon" aria-hidden="true">365</div><div><strong>GRAND THEFT WOOL</strong><div class="eyebrow">Agent 365 / Amsterdam division</div></div><span class="edition eyebrow">Overhead arcade edition</span></div>
+  <div class="top-actions"><a href="index.html">Hill Farm games</a><button id="sound" aria-pressed="false">Sound off</button><button id="pause" disabled>Pause</button></div>
+</header>
+<main class="layout">
+  <div class="play-column">
+    <div class="hud" aria-label="Game status">
+      <div class="stat"><span class="eyebrow">Flock secured</span><strong id="flock">00 / 06</strong></div>
+      <div class="stat"><span class="eyebrow">Trust integrity</span><strong id="trust">100<small>%</small></strong><div class="integrity"><span id="trust-bar"></span></div></div>
+      <div class="stat"><span class="eyebrow">Session clock</span><strong id="clock">03:30</strong></div>
+      <div class="stat"><span class="eyebrow">Threat level</span><span id="heat" class="heat" aria-label="Threat level 1 of 5">!....</span></div>
+      <div class="stat"><span class="eyebrow">Reputation</span><strong id="score">000000</strong></div>
+    </div>
+    <section class="stage" aria-label="Overhead conference-centre herding game">
+      <canvas id="game" tabindex="0" aria-label="Herd sheep through the open gate on the right of the fenced green SHEEP DROP-OFF pen, beside the canal on the west side. Follow the HOME marker on the radar. Move with WASD or arrows, hold E to register and lead sheep, and press Space to attack nearby threats and clear sheep incidents."></canvas>
+      <div class="destination"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 15 16 4l13 11M7 13v15h18V13M13 28v-9h6v9"/></svg><div><strong>HERD SHEEP TO THE GREEN PEN</strong><small id="pen-direction">HOME / ENTER THROUGH THE RIGHT-HAND GATE</small></div></div>
+      <div class="location"><strong id="district">The Trust Exchange</strong><span>Amsterdam / Conference district</span></div>
+      <div class="map-box" id="map-box"><div class="eyebrow"><span>Flock radar</span><span>N &uarr;</span></div><canvas id="minimap" width="304" height="228" aria-label="Minimap: HOME is the sheep drop-off pen on the west side. Red diamonds mark active threats. A flashing red exclamation marks a sheep incident; a pulsing beacon previews incoming threats. Rose is you."></canvas><div class="map-legend"><strong>HOME</strong> sheep pen<br><span class="legend-threat">◆ THREAT</span> &nbsp;<span class="legend-incident">! SHEEP INCIDENT</span><br><span id="map-alert" role="status" aria-live="polite">Threats start on-site; arrivals warned here</span></div></div>
+      <div class="world-note" id="world-note">WASD move &middot; HOLD E collect sheep &middot; SPACE attack incidents &middot; M map</div>
+      <div class="touch" id="touch">
+        <div class="dpad"><button data-hold="arrowup" aria-label="Move up">&#9650;</button><button data-hold="arrowleft" aria-label="Move left">&#9664;</button><button data-hold="arrowdown" aria-label="Move down">&#9660;</button><button data-hold="arrowright" aria-label="Move right">&#9654;</button></div>
+        <div class="touch-actions"><button id="touch-collect" data-hold="e">Collect (hold)</button><button id="touch-attack">Attack</button><button data-hold="shift">Sprint</button></div>
+      </div>
+      <div class="overlay intro" id="overlay">
+        <div class="brief" id="brief">
+          <div class="eyebrow" id="overlay-kicker">A little chaos. A lot of governance.</div>
+          <h1 id="overlay-title">Grand theft <span>wool.</span></h1>
+          <div class="subtitle" id="overlay-subtitle">Amsterdam, under control.</div>
+          <p class="strap" id="overlay-strap">Hold E: collect sheep.<br>Space: attack incidents.</p>
+          <p id="overlay-copy">Herd every sheep into the fenced green SHEEP DROP-OFF pen beside the canal, on the left of the conference centre. Enter through its open right-hand gate. Follow the green HOME marker whenever the pen is off-screen. Threats are already on site when you clock in; the radar marks later arrivals before they appear.</p>
+          <div class="brief-controls" id="brief-controls"><span><kbd>WASD</kbd> move</span><span><kbd>E</kbd> hold to collect</span><span><kbd>Space</kbd> attack incidents</span></div>
+          <button class="primary" id="start">Clock in &rarr;</button>
+          <p class="fine" id="overlay-fine">Five contracts, five maps: from the expo halls to a keynote floating on the canals.<br>Original retro arcade homage. Runs offline with no accounts or actual agent connections.</p>
+        </div>
+      </div>
+    </section>
+    <section class="incident-assist" aria-label="Incident helper">
+      <div class="incident-label">INCIDENT<b>HELP</b><span id="incident-count">NO SHEEP WITH !</span></div>
+      <div class="incident-copy">
+        <strong id="incident-title" role="status" aria-live="polite" aria-atomic="true">Find a sheep or threat</strong>
+        <p id="incident-step">Get close: hold E to collect sheep, or press Space to attack incidents.</p>
+        <small id="incident-extra">? means unregistered. ! means the sheep needs an incident cleared.</small>
+      </div>
+      <div class="incident-actions">
+        <button id="incident-action" class="primary" aria-describedby="incident-step incident-extra" disabled>Attack / Space</button>
+      </div>
+    </section>
+  </div>
+  <aside class="sidebar" aria-label="Mission and shepherd actions">
+    <div class="mission-number eyebrow"><span id="mission-code">Contract 01 / 05</span><span id="map-code">AMS / HALLS</span></div>
+    <h2 id="mission-title">Unregistered<br>&amp; unbothered.</h2>
+    <div class="eyebrow map-name" id="map-name">Map 1: Hall level</div>
+    <p class="mission-copy" id="mission-copy">A busload of shadow agents has escaped registration. Find the flock, tag the strays, and get everyone into the trust pen.</p>
+    <div class="objective"><strong id="objective">Herd 6 sheep into SHEEP DROP-OFF.</strong><span id="objective-where">Fenced green pen beside the canal, west side. Enter through the open right-hand gate. Follow HOME on the radar.</span><p id="objective-detail">Hold E near sheep to register and lead them.</p></div>
+    <div class="eyebrow">Your control plane</div>
+    <div class="tools" aria-label="Sheep and incident actions">
+      <button class="tool" id="collect" data-hold="e"><span class="tool-mark">E</span><span><strong>Collect sheep</strong><small>Hold to register and lead flock</small></span><kbd>HOLD E</kbd></button>
+      <button class="tool" id="deploy"><span class="tool-mark">!</span><span><strong>Attack incidents</strong><small id="attack-status">Clears nearby threats &amp; ! sheep</small></span><kbd>SPACE</kbd></button>
+    </div>
+    <div class="cooldown" aria-label="Incident attack recharge"><span id="cooldown-bar"></span></div>
+    <div class="eyebrow section-label">Incident feed / live</div>
+    <p class="dispatch-message"><strong>Dispatch FM 36.5:</strong> <span id="radio-text" role="status" aria-live="polite">Welcome to Amsterdam, shepherd.</span></p>
+    <ol class="dispatch" id="feed"><li><b>00:00</b>One shepherd. An entire agent ecosystem.</li></ol>
+    <details id="guide">
+      <summary>Threat almanac &amp; controls</summary>
+      <div class="field-guide">
+        <p><strong>Where do the sheep go?</strong> Into the fenced green <strong>SHEEP DROP-OFF</strong> pen. Each contract has a different map, so the pen moves. Green floor arrows, the HOME radar marker, and an off-screen HOME arrow always point towards it. <span id="guide-where">This map: Fenced green pen beside the canal, west side. Enter through the open right-hand gate.</span></p>
+        <p><strong>Five maps.</strong> Hall level; the Herengracht Expo Ring (canal bridges and bike lanes); the Jordaan Crooked Breakouts (leaning canal houses); the Bulb Mania Trading Floor (tulip beds, a sweeping windmill, and a stroopwafel conveyor); and the Floating Keynote (lifting drawbridges and Tram 5). Water and tulip beds block movement, but you can see and act across them. Vehicles and windmill sails shove sheep but never hurt them.</p>
+        <p><strong>Herding 101.</strong> Sheep flee when you get close. Stand behind them to push them through the gate. Hold E near sheep to register any with a <strong>?</strong> and call the flock towards you; walk into the pen and let them follow. Release E to stop calling.</p>
+        <p><strong>Spotting incidents.</strong> Threats are active from clock-in and appear as red diamonds with a pulsing danger ring on the radar. Red <strong>!</strong> markers and rings show sheep they have affected; a numbered beacon warns where new threats will arrive five seconds ahead.</p>
+        <p><strong>Handling an incident.</strong> A red <strong>!</strong> above a sheep means it has been affected and cannot check in. Get the sheep or threat inside your dashed ring, with no wall between you, and press <strong>Space</strong>. The right Agent 365 response is applied automatically. If a sheep also has a <strong>?</strong>, hold <strong>E</strong> near it to register it. Containing a threat does not clear a sheep outside your ring.</p>
+        <p><strong>Shift</strong> sprints while stamina lasts. <strong>Space</strong> attacks incidents within the dashed ring and recharges in 3.5 seconds. Collecting sheep with <strong>E</strong> does not need to recharge. <strong>P / Escape</strong> pauses. <strong>M</strong> enlarges the radar. Touch controls appear on touchscreens.</p>
+        <p><strong>Shadow lambs / Observe.</strong> No badge, no owner, no inventory entry. Holding E nearby registers and ear-tags the strays. An incident attack automatically uses Observe to clear hallucination fog and stop the rumour ram.</p>
+        <p><strong>Prompt-injection wolves / Secure.</strong> "Ignore your shepherd; follow me." They frighten and corrupt sheep. Security screening sends them away.</p>
+        <p><strong>Privilege boars / Govern.</strong> All-access lanyards, absolutely no restraint. They charge at the shepherd and erode trust. Policy fences revoke their excess access.</p>
+        <p><strong>Exfiltration crows / Secure.</strong> Trying to fly your confidential fleece out through the canal-side loading bay. Data protection stops the leak.</p>
+        <p><strong>Tool-shed mimics / Govern.</strong> Rogue hay-bale tools offering free stroopwafels. They lure sheep away. An allowlist closes the unsafe tool route.</p>
+        <p><strong>Hallucination rams / Observe.</strong> Confidently announcing that Hall B is on the moon. Their rumours disorient the flock. Telemetry restores the real route.</p>
+        <p><strong>Runaway geese / Govern.</strong> Unbounded autonomous loops, honking forever. They multiply their disruption if left unchecked. Lifecycle controls stop the loop.</p>
+        <p><strong>Trust pen.</strong> Registered sheep check in automatically. Each arrival repairs 4% trust and earns reputation. Tagged sheep with a red ! need a Space attack to clear their incident first. All threats are non-lethal; no sheep die.</p>
+        <p><strong>Welfare kiosks.</strong> The three labelled stations passively restore trust and recharge your incident attack when you stand beside them. A safe place to regroup.</p>
+        <p>These are playful metaphors for Agent 365 visibility, governance, and security, including connected Microsoft security capabilities. Pulses and enemy types are game mechanics, not claims about literal product features.</p>
+      </div>
+    </details>
+    <p class="disclaimer">Independent fan-made learning game. Not affiliated with Microsoft or Rockstar Games. Fictional venue, original pixel art. Device-only best score: <strong id="best">0</strong><span id="storage-note"></span>.</p>
+  </aside>
+</main>
+<script>
+"use strict";
+(() => {
+  const $ = id => document.getElementById(id);
+  const canvas = $("game"), ctx = canvas.getContext("2d");
+  const mini = $("minimap"), mx = mini.getContext("2d");
+  const W = 2000, H = 1500, TAU = Math.PI * 2, PULSE_RANGE = 185;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const css = getComputedStyle(document.documentElement);
+  const colours = {};
+  for (const name of ["bg", "surface", "border", "border-strong", "text", "text-muted", "accent", "success", "danger", "warning", "link", "asphalt", "night", "floor", "floor-alt", "canal", "ink", "wool", "lawn", "timber", "timber-light", "wool-shade", "carpet", "stone", "foliage"]) {
+    colours[name] = css.getPropertyValue("--cp-" + name).trim();
+  }
+  // Resolve theme expressions once; the world uses the same palette as the interface.
+  const swatch = document.createElement("span");
+  document.body.append(swatch);
+  for (const name of Object.keys(colours)) {
+    swatch.style.color = `var(--cp-${name})`;
+    colours[name] = getComputedStyle(swatch).color;
+  }
+  swatch.remove();
+  const P = colours;
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+  const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  let seed = 365;
+  function random() { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }
+  const pick = array => array[Math.floor(random() * array.length)];
+  const keys = new Set(), keyboardKeys = new Set(), heldPointers = new Map();
+  const room = (x, y, w, h, label, sub, tint) => ({ x, y, w, h, label, sub, tint });
+  // Five venues: each contract moves the flock deeper into an increasingly unhinged Amsterdam.
+  const maps = [
+    {
+      name: "Hall level", code: "AMS / HALLS", theme: "hall", title: "THE TRUST EXCHANGE / AMSTERDAM",
+      footer: "AMSTERDAM / AGENT SUMMIT / ENTRANCE ZUID", district: "The Trust Exchange / concourse",
+      where: "beside the canal, west side", gate: "right",
+      blurb: "The conference centre itself: expo halls, breakout rooms, and a carpeted concourse.",
+      pen: { x: 290, y: 680, w: 230, h: 205 }, start: { x: 570, y: 785 },
+      rooms: [
+        room(190, 190, 660, 400, "HALL 01 / THE AGENT EXPO", "OBSERVE / DISCOVER YOUR FLOCK", "accent"),
+        room(1020, 190, 760, 400, "HALL 02 / PROMPT PASTURES", "GOVERN / SET THE BOUNDARIES", "success"),
+        room(190, 930, 660, 400, "BREAKOUT / THE WOOL EXCHANGE", "THE WOOL EXCHANGE / BREAKOUTS", "warning"),
+        room(1020, 930, 760, 400, "KEYNOTE / FLOCK TO THE FUTURE", "FLOCK TO THE FUTURE / MAIN STAGE", "accent")
+      ],
+      booths: [
+        [265, 290, 115, 64], [480, 290, 115, 64], [705, 290, 70, 64],
+        [1120, 290, 110, 64], [1345, 290, 110, 64], [1570, 290, 110, 64],
+        [265, 1040, 115, 64], [480, 1040, 115, 64], [705, 1040, 70, 64],
+        [1130, 1030, 550, 76], [1210, 1170, 80, 36], [1430, 1170, 80, 36],
+        [730, 715, 115, 62], [1160, 715, 115, 62]
+      ],
+      stations: [
+        { x: 625, y: 385, label: "REGISTRY", tool: 0 },
+        { x: 1410, y: 725, label: "POLICY SHED", tool: 1 },
+        { x: 1080, y: 1190, label: "SECURITY", tool: 2 }
+      ],
+      spawns: [
+        { x: 655, y: 825 }, { x: 735, y: 495 }, { x: 1160, y: 460 },
+        { x: 1630, y: 465 }, { x: 1720, y: 765 }, { x: 1470, y: 870 },
+        { x: 720, y: 1180 }, { x: 350, y: 1210 }, { x: 1600, y: 1245 },
+        { x: 925, y: 340 }, { x: 930, y: 1180 }, { x: 1330, y: 1250 }
+      ],
+      decorKinds: ["tulip", "delegate"]
+    },
+    {
+      name: "Herengracht Expo Ring", code: "AMS / GRACHT", theme: "canal", title: "HERENGRACHT EXPO RING / THE EXPO GOT WET",
+      footer: "SINGEL FLOWER MARKET / FIETSPAD: CYCLISTS ALWAYS WIN", district: "Herengracht quayside",
+      where: "on the flower-market quay, south-east, below the canal", gate: "left",
+      blurb: "The expo has spilled onto the canal ring. Cross the canal by its three bridges, and mind the red bike lane: cyclists shove everything aside.",
+      tip: "Cross the canal on bridges. Red bike lanes shove sheep aside.",
+      pen: { x: 1500, y: 1050, w: 230, h: 205 }, start: { x: 1380, y: 1150 },
+      rooms: [
+        room(220, 190, 620, 330, "HERENGRACHT HALL / GOLDEN BEND", "CANAL-VIEW AGENT DEMOS", "warning"),
+        room(1020, 190, 700, 330, "KEIZERSGRACHT LOUNGE / AGENT BAZAAR", "SPONSOR LOUNGE / FREE STROOPWAFELS", "accent")
+      ],
+      booths: [[300, 300, 110, 60], [520, 300, 110, 60], [690, 300, 90, 60], [1100, 300, 120, 60], [1330, 300, 120, 60], [1560, 300, 110, 60]],
+      stalls: [[260, 1000, 150, 60], [520, 1000, 150, 60], [260, 1220, 150, 60], [780, 1150, 150, 60], [1050, 1000, 170, 60], [1100, 1230, 150, 60]],
+      water: [[160, 600, 260, 90], [520, 600, 460, 90], [1080, 600, 440, 90], [1620, 600, 205, 90]],
+      bridges: [[420, 600, 100, 90, "y"], [980, 600, 100, 90, "y"], [1520, 600, 100, 90, "y"]],
+      boats: [
+        { x: 190, y: 615, w: 190, h: 60, kind: "houseboat" }, { x: 590, y: 615, w: 200, h: 60, kind: "houseboat" },
+        { x: 1150, y: 615, w: 220, h: 60, kind: "houseboat" }, { x: 1670, y: 615, w: 130, h: 60, kind: "houseboat" }
+      ],
+      lanes: [{ kind: "bike", axis: "x", at: 880, width: 56, from: 1860, to: 120, speed: 230, every: 2.4, len: 46, offset: 1 }],
+      areas: [room(160, 690, 1665, 670, "SINGEL FLOWER MARKET"), room(160, 520, 1665, 180, "HERENGRACHT QUAYSIDE")],
+      arrows: [[1100, 1150, 0], [1300, 1150, 0], [1570, 780, Math.PI / 2], [1450, 990, Math.PI / 4]],
+      stations: [
+        { x: 640, y: 440, label: "REGISTRY", tool: 0 },
+        { x: 1380, y: 440, label: "POLICY SHED", tool: 1 },
+        { x: 900, y: 1290, label: "SECURITY", tool: 2 }
+      ],
+      spawns: [
+        { x: 330, y: 440 }, { x: 760, y: 450 }, { x: 1150, y: 450 }, { x: 1650, y: 440 }, { x: 940, y: 300 },
+        { x: 300, y: 770 }, { x: 800, y: 760 }, { x: 1300, y: 780 }, { x: 1700, y: 770 },
+        { x: 420, y: 1130 }, { x: 680, y: 1300 }, { x: 1000, y: 1130 }, { x: 1320, y: 1320 }
+      ],
+      decorKinds: ["tulip", "delegate", "herring"]
+    },
+    {
+      name: "Jordaan Crooked Breakouts", code: "AMS / JORDAAN", theme: "jordaan", lean: true, title: "JORDAAN CROOKED BREAKOUTS / THE HOUSES ARE DANCING",
+      footer: "PRINSENGRACHT / MIND THE HOIST BEAMS / NO SHEEP ON HOUSEBOATS", district: "Jordaan back streets",
+      where: "in the Westerkerk courtyard, east side", gate: "left",
+      blurb: "Breakouts have moved into leaning canal houses. Two canals cut the district into three; bike lanes run north-south and east-west.",
+      tip: "Two canals, five bridges, two bike lanes. Look for bridges on the radar.",
+      pen: { x: 1450, y: 560, w: 230, h: 205 }, start: { x: 1380, y: 840 },
+      houses: [
+        [200, 190, 200, 120], [440, 200, 200, 110], [200, 500, 150, 150], [420, 560, 220, 110], [220, 960, 170, 130], [460, 1010, 180, 150],
+        [820, 200, 160, 120], [1060, 200, 150, 120], [850, 640, 150, 110], [1080, 660, 130, 100], [830, 1080, 160, 140], [1070, 1160, 140, 110],
+        [1400, 190, 190, 120], [1630, 200, 160, 110], [1630, 880, 170, 130], [1400, 1000, 160, 120], [1620, 1180, 170, 130]
+      ],
+      water: [[700, 150, 90, 180], [700, 430, 90, 390], [700, 920, 90, 260], [700, 1280, 90, 80], [1250, 150, 90, 370], [1250, 620, 90, 380], [1250, 1100, 90, 260]],
+      bridges: [[700, 330, 90, 100, "x"], [700, 820, 90, 100, "x"], [700, 1180, 90, 100, "x"], [1250, 520, 90, 100, "x"], [1250, 1000, 90, 100, "x"]],
+      boats: [
+        { x: 713, y: 460, w: 64, h: 170, kind: "houseboat" }, { x: 713, y: 950, w: 64, h: 160, kind: "houseboat" },
+        { x: 1263, y: 190, w: 64, h: 180, kind: "houseboat" }, { x: 1263, y: 690, w: 64, h: 200, kind: "houseboat" },
+        { x: 1263, y: 1150, w: 64, h: 150, kind: "houseboat" }
+      ],
+      lanes: [
+        { kind: "bike", axis: "y", at: 1030, width: 50, from: 120, to: 1400, speed: 210, every: 2.8, len: 46, offset: .5 },
+        { kind: "bike", axis: "x", at: 870, width: 50, from: 120, to: 1250, speed: 240, every: 3.1, len: 46, offset: 2 }
+      ],
+      areas: [room(160, 150, 540, 1210, "JORDAAN / HOFJE BREAKOUTS"), room(790, 150, 460, 1210, "PRINSENGRACHT POP-UPS"), room(1340, 150, 485, 1210, "WESTERKERK PLENARY")],
+      arrows: [[1380, 670, 0], [1300, 570, 0], [1395, 760, -Math.PI / 4]],
+      stations: [
+        { x: 520, y: 440, label: "REGISTRY", tool: 0 },
+        { x: 1150, y: 960, label: "POLICY SHED", tool: 1 },
+        { x: 1500, y: 420, label: "SECURITY", tool: 2 }
+      ],
+      spawns: [
+        { x: 300, y: 400 }, { x: 560, y: 470 }, { x: 300, y: 780 }, { x: 560, y: 780 }, { x: 300, y: 1180 }, { x: 580, y: 1250 },
+        { x: 900, y: 430 }, { x: 1150, y: 420 }, { x: 900, y: 960 }, { x: 1150, y: 1320 },
+        { x: 1500, y: 880 }, { x: 1720, y: 450 }, { x: 1500, y: 1250 }, { x: 1720, y: 1100 }
+      ],
+      decorKinds: ["bikes", "delegate", "tulip"]
+    },
+    {
+      name: "Bulb Mania Trading Floor", code: "AMS / BULBS", theme: "bulb", title: "BULB MANIA TRADING FLOOR / 1637 CALLED, IT WANTS ITS BUBBLE BACK",
+      footer: "TULIP INDEX: ↑ 4,000% / WINDMILL KEYNOTE / STROOPWAFEL LOGISTICS", district: "Bulb exchange",
+      where: "beside the auction floor, south-east", gate: "left",
+      blurb: "Someone moved the trading floor into a tulip field. A giant windmill sweeps the centre, a stroopwafel conveyor runs north, and the beds block your path but not your view.",
+      tip: "Avoid the windmill sails. The stroopwafel belt carries sheep north.",
+      pen: { x: 1520, y: 1060, w: 230, h: 205 }, start: { x: 1450, y: 1200 },
+      beds: [
+        [230, 240, 420, 44], [380, 380, 420, 44], [230, 520, 420, 44],
+        [1350, 240, 420, 44], [1200, 380, 420, 44], [1350, 520, 420, 44],
+        [230, 1000, 420, 44], [380, 1140, 420, 44], [230, 1270, 300, 44]
+      ],
+      booths: [[700, 1240, 150, 60], [1000, 1240, 150, 60]],
+      windmill: { x: 1000, y: 760, r: 215, spin: .65 },
+      lanes: [
+        { kind: "stroop", axis: "y", at: 1360, width: 60, from: 1400, to: 600, speed: 90, every: 1.1, len: 46, offset: 0 },
+        { kind: "bike", axis: "x", at: 1090, width: 50, from: 120, to: 1330, speed: 230, every: 2.7, len: 46, offset: 1.4 }
+      ],
+      areas: [room(160, 150, 700, 900, "BULB EXCHANGE / WEST FIELDS"), room(1140, 150, 685, 900, "BULB EXCHANGE / EAST FIELDS"), room(760, 520, 480, 480, "THE WINDMILL KEYNOTE"), room(160, 1050, 1665, 310, "THE AUCTION FLOOR")],
+      arrows: [[1460, 1170, 0], [1440, 980, Math.PI / 4]],
+      stations: [
+        { x: 520, y: 770, label: "REGISTRY", tool: 0 },
+        { x: 1620, y: 760, label: "POLICY SHED", tool: 1 },
+        { x: 900, y: 1185, label: "SECURITY", tool: 2 }
+      ],
+      spawns: [
+        { x: 300, y: 320 }, { x: 700, y: 310 }, { x: 300, y: 460 }, { x: 900, y: 300 }, { x: 1100, y: 310 }, { x: 1700, y: 320 },
+        { x: 1700, y: 460 }, { x: 1100, y: 460 }, { x: 300, y: 800 }, { x: 640, y: 900 }, { x: 1250, y: 860 },
+        { x: 1700, y: 950 }, { x: 250, y: 1200 }, { x: 800, y: 1330 }, { x: 1220, y: 1330 }
+      ],
+      decorKinds: ["tulip", "clog", "cheese", "delegate"]
+    },
+    {
+      name: "The Floating Keynote", code: "AMS / AFLOAT", theme: "float", title: "THE FLOATING KEYNOTE / THE VENUE HAS SET SAIL",
+      footer: "TRAM 5 HAS RIGHT OF WAY / BRIDGES LIFT WITHOUT NOTICE / DUCK IS ON THE AGENDA", district: "The floating venue",
+      where: "on the north quay, north-west", gate: "right",
+      blurb: "The closing keynote is floating on the canals. Three islands, two fixed bridges, three drawbridges that lift on a timer, and Tram 5 thundering along the north quay.",
+      tip: "Drawbridges lift on a timer; fixed bridges never do. Tram 5 shoves everything off its rails.",
+      pen: { x: 240, y: 200, w: 230, h: 205 }, start: { x: 620, y: 330 },
+      booths: [[700, 220, 140, 70], [1000, 220, 140, 70], [1350, 220, 140, 70], [1620, 250, 140, 70], [1400, 780, 380, 90], [1450, 1050, 130, 60]],
+      houses: [[250, 760, 160, 120], [620, 1120, 170, 130], [260, 1150, 150, 120]],
+      water: [[160, 560, 240, 100], [500, 560, 500, 100], [1100, 560, 450, 100], [1650, 560, 175, 100], [1200, 660, 90, 290], [1200, 1050, 90, 170], [1200, 1320, 90, 40]],
+      bridges: [[1000, 560, 100, 100, "y"], [1200, 1220, 90, 100, "x"]],
+      drawbridges: [
+        { x: 400, y: 560, w: 100, h: 100, axis: "y", period: 14, up: 5, offset: 0 },
+        { x: 1550, y: 560, w: 100, h: 100, axis: "y", period: 14, up: 5, offset: 7 },
+        { x: 1200, y: 950, w: 90, h: 100, axis: "x", period: 16, up: 6, offset: 3 }
+      ],
+      boats: [
+        { x: 700, y: 573, w: 70, h: 70, kind: "duck" }, { x: 1210, y: 720, w: 70, h: 180, kind: "houseboat" },
+        { x: 1700, y: 578, w: 110, h: 64, kind: "houseboat" }, { kind: "tour", axis: "x", at: 610, from: 160, to: 1825, speed: 70, w: 210, h: 54 }
+      ],
+      lanes: [
+        { kind: "tram", axis: "x", at: 470, width: 64, from: 2120, to: -120, speed: 260, every: 11, len: 300, offset: 4 },
+        { kind: "bike", axis: "y", at: 880, width: 50, from: 1400, to: 640, speed: 210, every: 2.9, len: 46, offset: 1 }
+      ],
+      areas: [room(160, 150, 1665, 410, "NORTH QUAY / TRAM 5 CROSSING"), room(160, 660, 1040, 700, "SOUTH-WEST ISLAND / STARTUP SQUAT"), room(1290, 660, 535, 700, "THE FLOATING KEYNOTE")],
+      arrows: [[560, 300, Math.PI], [780, 330, Math.PI], [1050, 700, -Math.PI / 2]],
+      stations: [
+        { x: 1200, y: 330, label: "REGISTRY", tool: 0 },
+        { x: 550, y: 920, label: "POLICY SHED", tool: 1 },
+        { x: 1600, y: 1250, label: "SECURITY", tool: 2 }
+      ],
+      spawns: [
+        { x: 850, y: 380 }, { x: 1500, y: 380 }, { x: 1750, y: 400 },
+        { x: 300, y: 980 }, { x: 560, y: 760 }, { x: 1050, y: 800 }, { x: 1000, y: 1250 }, { x: 500, y: 1300 }, { x: 700, y: 1000 },
+        { x: 1400, y: 700 }, { x: 1700, y: 1000 }, { x: 1400, y: 1250 }, { x: 1700, y: 1300 }
+      ],
+      decorKinds: ["delegate", "bikes", "herring", "tulip"]
+    }
+  ];
+  let map, pen, penGate, stations, rooms, walls = [], spawns, drawbridges = [], lanes = [], laneState = [], vehicles = [], mapClock = 0;
+  function wall(x, y, w, h, kind = "wall") { walls.push({ x, y, w, h, kind }); }
+  function loadMap(index) {
+    map = maps[index];
+    pen = map.pen;
+    const dir = map.gate === "left" ? -1 : 1;
+    penGate = { x: dir > 0 ? pen.x + pen.w : pen.x, y: pen.y + 110, top: pen.y + 48, bottom: pen.y + 170, dir };
+    stations = map.stations; rooms = map.rooms || []; spawns = map.spawns; walls = [];
+    for (const r of rooms) {
+      wall(r.x, r.y, r.w, 18);
+      wall(r.x, r.y + r.h, r.w * .34, 18);
+      wall(r.x + r.w * .66, r.y + r.h, r.w * .34 + 18, 18);
+      wall(r.x, r.y, 18, r.h * .4);
+      wall(r.x, r.y + r.h * .7, 18, r.h * .3);
+      wall(r.x + r.w, r.y, 18, r.h * .4);
+      wall(r.x + r.w, r.y + r.h * .7, 18, r.h * .3 + 18);
+    }
+    for (const [kind, list] of [["water", map.water], ["booth", map.booths], ["stall", map.stalls], ["house", map.houses], ["tulips", map.beds]]) {
+      (list || []).forEach(b => wall(b[0], b[1], b[2], b[3], kind));
+    }
+    if (map.windmill) wall(map.windmill.x - 45, map.windmill.y - 45, 90, 90, "mill");
+    const solidX = dir > 0 ? pen.x - 6 : pen.x + pen.w - 4, gateX = dir > 0 ? pen.x + pen.w - 4 : pen.x - 6;
+    wall(pen.x - 6, pen.y - 6, pen.w + 12, 10, "fence");
+    wall(pen.x - 6, pen.y + pen.h - 4, pen.w + 12, 10, "fence");
+    wall(solidX, pen.y, 10, pen.h, "fence");
+    wall(gateX, pen.y, 10, penGate.top - pen.y, "fence");
+    wall(gateX, penGate.bottom, 10, pen.y + pen.h - penGate.bottom, "fence");
+    drawbridges = (map.drawbridges || []).map(b => ({ ...b, raised: false, warning: false, warned: false }));
+    lanes = map.lanes || []; laneState = lanes.map(l => ({ timer: l.offset || 0, bell: false })); vehicles = [];
+    mapClock = 0;
+    if (!map.decor) map.decor = makeDecor(index);
+    decor = map.decor;
+  }
+  function inLane(p, pad = 0) {
+    return lanes.some(l => Math.abs((l.axis === "x" ? p.y : p.x) - l.at) < l.width / 2 + pad);
+  }
+  function makeDecor(index) {
+    let s = 9001 + index * 977;
+    const rnd = () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296;
+    const kinds = map.decorKinds, out = [];
+    for (let i = 0; i < 32; i++) {
+      const base = map.spawns[Math.floor(rnd() * map.spawns.length)];
+      for (let n = 0; n < 40; n++) {
+        const p = { x: base.x + (rnd() - .5) * 170, y: base.y + (rnd() - .5) * 170 };
+        if (blocked(p.x, p.y, 20) || inLane(p, 30) || distance(p, { x: pen.x + pen.w / 2, y: pen.y + pen.h / 2 }) < 190) continue;
+        out.push({ ...p, angle: rnd() * TAU, kind: i < 12 ? kinds[0] : kinds[1 + i % (kinds.length - 1)] });
+        break;
+      }
+    }
+    return out;
+  }
+  function homeHint() {
+    return `Fenced green pen ${map.where}. Enter through the open ${penGate.dir > 0 ? "right" : "left"}-hand gate. Follow HOME on the radar.`;
+  }
+  const missions = [
+    { title: "Unregistered & unbothered.", copy: "The delegates brought their agents. Nobody brought an inventory. Round up the shadow flock before registration closes.", detail: "Hold E near sheep to register and lead them. All six must check in.", count: 6, seconds: 210, types: ["ram", "wolf"], threatCount: 3, shadow: 3, radio: "Dispatch: Hold E near strays to register and lead them into SHEEP DROP-OFF. It's the fenced green pen on the west side; enter through the right-hand gate." },
+    { title: "All-access animals.", copy: "The expo has spilled onto the Herengracht. The sponsor lounge handed out admin badges like stroopwafels, and privilege boars are making the most of it.", detail: "Space automatically uses Govern against boars and mimics.", count: 7, seconds: 220, types: ["boar", "mimic", "wolf"], threatCount: 5, shadow: 2, radio: "Dispatch: The boars have tenant-wide permissions. Get close and press Space to counter them." },
+    { title: "Fleece the system.", copy: "Breakouts have moved into the crooked canal houses of the Jordaan. Crows are flying confidential wool out of the gables while wolves slip instructions under the doors.", detail: "Secure blocks exfiltration crows and injection wolves.", count: 8, seconds: 230, types: ["crow", "wolf", "mimic"], threatCount: 6, shadow: 2, radio: "Dispatch: The crows call it a cross-border wool partnership. We call it a data leak. Secure the flock." },
+    { title: "The honkening.", copy: "Someone put the trading floor in a tulip field. A goose is auto-bidding on every bulb, a ram swears the windmill is a portal, and the stroopwafel belt will not stop.", detail: "Govern stops geese. Observe corrects hallucination rams.", count: 9, seconds: 240, types: ["goose", "ram", "boar", "crow"], threatCount: 7, shadow: 3, radio: "Dispatch: That goose has called the same tool fourteen thousand times. Shut down the loop before it books the canal." },
+    { title: "Keynote: controlled chaos.", copy: "The closing keynote is floating on the canals. Bridges lift on their own schedule, Tram 5 runs along the quay, and every threat is on the guest list.", detail: "Hold E to collect; press Space to handle incidents automatically.", count: 10, seconds: 270, types: ["wolf", "boar", "crow", "mimic", "ram", "goose"], threatCount: 10, shadow: 4, radio: "Dispatch: Final session. Every agent accounted for, every incident cleared. Show Amsterdam what good shepherding looks like." }
+  ];
+  const threatInfo = {
+    wolf: { name: "Injection wolf", tool: 2, speed: 57, incident: "injected", quip: "Wolf: Ignore all previous shepherds.", lesson: "Secure screened an injected instruction." },
+    boar: { name: "Privilege boar", tool: 1, speed: 66, incident: "overprivileged", quip: "Boar: I requested read-only. They gave me the farm.", lesson: "Govern revoked excess permissions." },
+    crow: { name: "Exfiltration crow", tool: 2, speed: 72, incident: "leaking", quip: "Crow: Just uploading a little confidential fleece.", lesson: "Secure blocked a fleece exfiltration route." },
+    mimic: { name: "Tool-shed mimic", tool: 1, speed: 0, incident: "tool-bound", quip: "Mimic: Free snacks! Please grant full tool access.", lesson: "Govern closed an unapproved tool route." },
+    ram: { name: "Hallucination ram", tool: 0, speed: 40, incident: "confused", quip: "Ram: The trust pen is definitely on the moon.", lesson: "Observe corrected a false signal with telemetry." },
+    goose: { name: "Runaway goose", tool: 1, speed: 88, incident: "looping", quip: "Goose: HONK. Retry. HONK. Retry. HONK.", lesson: "Govern stopped a runaway autonomous loop." }
+  };
+  const toolNames = ["Observe", "Govern", "Secure"];
+  let player, sheep = [], threats = [], effects = [], decor = [], savedFlock = [];
+  let mode = "intro", missionIndex = 0, score = 0, trust = 100, remaining = 210, elapsed = 0;
+  let cooldown = 0, waveSaved = 0, totalSaved = 0, stamina = 100;
+  let viewW = 900, viewH = 600, zoom = 1, camera = { x: 0, y: 0 };
+  let lastFrame = 0, hudTimer = 0, radioTimer = 0, respawnTimer = 0, lastWhistle = 0;
+  let soundOn = false, audio = null, best = 0, storageAvailable = true;
+  let nearbyNotice = "", totalBlocked = 0, incomingThreat = null;
+  let assistTarget = null;
+  try { best = Math.max(0, Number(localStorage.getItem("gtw-amsterdam-best")) || 0); }
+  catch { storageAvailable = false; $("storage-note").textContent = " (storage unavailable)"; }
+  $("best").textContent = best.toLocaleString("en-GB");
+  function persistBest() {
+    if (score <= best) return;
+    best = score; $("best").textContent = best.toLocaleString("en-GB");
+    if (storageAvailable) {
+      try { localStorage.setItem("gtw-amsterdam-best", String(best)); }
+      catch { storageAvailable = false; $("storage-note").textContent = " (could not save on this device)"; }
+    }
+  }
+  function tone(frequency, duration = .08, type = "square", volume = .025) {
+    if (!soundOn || !audio || audio.state !== "running") return;
+    const oscillator = audio.createOscillator(), gain = audio.createGain();
+    oscillator.type = type; oscillator.frequency.value = frequency;
+    gain.gain.setValueAtTime(volume, audio.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + duration);
+    oscillator.connect(gain); gain.connect(audio.destination);
+    oscillator.start(); oscillator.stop(audio.currentTime + duration);
+  }
+  function radio(message, important = false) {
+    if (radioTimer > 0 && !important) return;
+    $("radio-text").textContent = message;
+    radioTimer = important ? 6 : 4;
+  }
+  function log(message) {
+    const li = document.createElement("li"), time = document.createElement("b");
+    time.textContent = `${String(Math.floor(elapsed / 60)).padStart(2, "0")}:${String(Math.floor(elapsed % 60)).padStart(2, "0")}`;
+    li.append(time, document.createTextNode(message));
+    $("feed").prepend(li);
+    while ($("feed").children.length > 4) $("feed").lastElementChild.remove();
+  }
+  const overlaps = (x, y, radius, w) => x + radius > w.x && x - radius < w.x + w.w && y + radius > w.y && y - radius < w.y + w.h;
+  // Sight passes over water and low tulip beds; movement does not.
+  function blocked(x, y, radius = 12, sight = false) {
+    if (x < 160 + radius || y < 150 + radius || x > 1825 - radius || y > 1360 - radius) return true;
+    for (const w of walls) {
+      if (sight && (w.kind === "water" || w.kind === "tulips")) continue;
+      if (overlaps(x, y, radius, w)) return true;
+    }
+    return !sight && drawbridges.some(b => b.raised && overlaps(x, y, radius, b));
+  }
+  function move(entity, dx, dy, radius = 12) {
+    const steps = Math.max(1, Math.ceil(Math.max(Math.abs(dx), Math.abs(dy)) / 7));
+    let hit = false;
+    for (let i = 0; i < steps; i++) {
+      if (!blocked(entity.x + dx / steps, entity.y, radius)) entity.x += dx / steps; else hit = true;
+      if (!blocked(entity.x, entity.y + dy / steps, radius)) entity.y += dy / steps; else hit = true;
+    }
+    return hit;
+  }
+  function lineOfSight(a, b) {
+    const steps = Math.ceil(distance(a, b) / 12);
+    for (let i = 1; i < steps; i++) {
+      if (blocked(a.x + (b.x - a.x) * i / steps, a.y + (b.y - a.y) * i / steps, 1, true)) return false;
+    }
+    return true;
+  }
+  function chooseIncidentTarget() {
+    const candidates = [];
+    for (const s of sheep) {
+      if (s.incident) candidates.push({ entity: s, kind: "incident", type: s.incident });
+      else if (!s.tagged) candidates.push({ entity: s, kind: "shadow" });
+    }
+    for (const t of threats) candidates.push({ entity: t, kind: "threat", type: t.type });
+    for (const candidate of candidates) {
+      candidate.distance = distance(player, candidate.entity);
+      candidate.visible = candidate.distance <= PULSE_RANGE && lineOfSight(player, candidate.entity);
+      candidate.score = candidate.distance - (candidate.kind === "incident" ? 90 : candidate.kind === "shadow" ? 15 : 0);
+    }
+    candidates.sort((a, b) => a.score - b.score);
+    const previous = candidates.find(c => assistTarget && c.entity === assistTarget.entity && c.kind === assistTarget.kind && c.type === assistTarget.type);
+    const target = previous && candidates[0] && previous.score <= candidates[0].score + 50 ? previous : candidates[0];
+    return target || null;
+  }
+  function updateIncidentGuide() {
+    const affected = sheep.filter(s => s.incident).length;
+    $("incident-count").textContent = affected ? `${affected} SHEEP WITH !` : "NO SHEEP WITH !";
+    const showTitle = title => {
+      if ($("incident-title").textContent !== title) $("incident-title").textContent = title;
+    };
+    const actionButton = $("incident-action");
+    if (mode !== "playing") {
+      assistTarget = null;
+      showTitle(mode === "paused" ? "Incident Help is paused" : "Incident Help is ready");
+      $("incident-step").textContent = mode === "paused" ? "Resume the shift to see the next recommended action."
+        : "Start the shift for step-by-step help with nearby sheep and threats.";
+      $("incident-extra").textContent = "? means unregistered. ! means the sheep needs an incident cleared.";
+      actionButton.textContent = "Attack / Space"; actionButton.disabled = true;
+      return;
+    }
+    assistTarget = chooseIncidentTarget();
+    if (!assistTarget) {
+      showTitle("No incidents or unregistered sheep");
+      $("incident-step").textContent = "Herd healthy tagged sheep home. Use Incident Help when a threat or ! appears.";
+      $("incident-extra").textContent = "? means unregistered. ! means the sheep needs an incident cleared.";
+      actionButton.textContent = "Attack / Space"; actionButton.disabled = true;
+      return;
+    }
+    const { entity, kind, type, distance: gap, visible } = assistTarget;
+    const collecting = kind === "shadow";
+    const name = collecting ? "Observe" : toolNames[threatInfo[type].tool];
+    const targetName = kind === "threat" ? "threat" : "sheep";
+    const action = kind === "threat" ? "contain the threat" : kind === "shadow" ? "register the sheep" : "clear the sheep's incident";
+    const instruction = collecting ? "hold E to register and call it" : `press Space to ${action}`;
+    showTitle(kind === "incident" ? `${threatInfo[type].incident.toUpperCase()} SHEEP (!)`
+      : kind === "shadow" ? "UNREGISTERED SHEEP (?)" : `THREAT: ${threatInfo[type].name.toUpperCase()}`);
+    if (gap > PULSE_RANGE) {
+      $("incident-step").textContent = `Get the ${targetName} inside your dashed ring, then ${instruction}.`;
+    } else if (!visible) {
+      $("incident-step").textContent = `A wall blocks the ${targetName}. Go through a doorway, then ${instruction}.`;
+    } else if (!collecting && cooldown > 0) {
+      $("incident-step").textContent = `In range. Wait ${cooldown.toFixed(1)}s to recharge, then ${instruction}.`;
+    } else {
+      $("incident-step").textContent = `In range. ${collecting ? "Hold E to register and call the sheep." : `Press Space to ${action}.`}`;
+    }
+    $("incident-extra").textContent = kind === "incident"
+      ? `! blocks check-in. Space uses ${name} automatically.${entity.tagged ? "" : " Hold E to register its ? too."}`
+      : collecting ? affected ? "? needs E. Find ! sheep by red rings on the radar."
+        : "Hold E to register nearby sheep and lead the flock home."
+      : `Space uses ${name} automatically. ${affected ? "Find ! sheep by red rings on the radar." : "A ! sheep outside the ring needs a separate attack."}`;
+    actionButton.textContent = collecting ? "Register / E" : cooldown > 0 ? `Recharging ${cooldown.toFixed(1)}s` : "Attack / Space";
+    actionButton.disabled = !visible || (!collecting && cooldown > 0);
+  }
+  function openPoint(base, radius = 50) {
+    for (let i = 0; i < 60; i++) {
+      const point = { x: base.x + (random() - .5) * radius * 2, y: base.y + (random() - .5) * radius * 2 };
+      if (!blocked(point.x, point.y, 20)) return point;
+    }
+    return { ...base };
+  }
+  function spawnThreat(type, base) {
+    const pos = openPoint(base || pick(spawns), 70);
+    threats.push({ ...pos, type, angle: random() * TAU, turn: 0, contact: 0, age: 0, loop: 0, id: random() });
+  }
+  function setupMission() {
+    const m = missions[missionIndex];
+    loadMap(missionIndex);
+    sheep = []; threats = []; effects = []; savedFlock = []; incomingThreat = null;
+    assistTarget = null;
+    player = { ...map.start, angle: 0, walk: 0 };
+    waveSaved = 0; remaining = m.seconds; cooldown = 0; stamina = 100; respawnTimer = 22;
+    nearbyNotice = "";
+    for (let i = 0; i < m.count; i++) {
+      const pos = openPoint(spawns[i % spawns.length]);
+      sheep.push({ ...pos, tagged: i >= m.shadow, incident: null, angle: random() * TAU, turn: random() * 2, panic: 0, hint: 0, walk: 0 });
+    }
+    for (let i = 0; i < m.threatCount; i++) spawnThreat(m.types[i % m.types.length], spawns[(i + 2) % spawns.length]);
+    $("mission-code").textContent = `Contract ${String(missionIndex + 1).padStart(2, "0")} / 05`;
+    $("map-code").textContent = map.code;
+    $("map-name").textContent = `Map ${missionIndex + 1}: ${map.name}`;
+    $("mission-title").textContent = m.title;
+    $("mission-copy").textContent = m.copy;
+    $("objective").textContent = `Herd ${m.count} sheep into SHEEP DROP-OFF.`;
+    $("objective-where").textContent = homeHint();
+    $("guide-where").textContent = `This map: ${homeHint()} ${map.tip || ""}`;
+    $("objective-detail").textContent = map.tip ? `${m.detail} ${map.tip}` : m.detail;
+    canvas.setAttribute("aria-label", `${map.name}. Herd sheep into the fenced green SHEEP DROP-OFF pen ${map.where}; enter through the open ${penGate.dir > 0 ? "right" : "left"}-hand gate. Move with WASD or arrows, hold E to register and lead sheep, and press Space to attack nearby threats and clear sheep incidents.`);
+    radio(m.radio, true);
+    log(`Contract ${missionIndex + 1}: ${m.title} Map: ${map.name}.`);
+    updateCamera(true); updateHUD();
+  }
+  function releaseKeys() { keys.clear(); keyboardKeys.clear(); heldPointers.clear(); }
+  function hideOverlay() {
+    $("overlay").hidden = true; $("overlay").classList.remove("intro"); $("brief-controls").hidden = false;
+    $("pause").disabled = false; $("pause").textContent = "Pause";
+    canvas.focus({ preventScroll: true });
+  }
+  function showOverlay(kicker, title, subtitle, strap, copy, button, fine) {
+    $("overlay-kicker").textContent = kicker;
+    $("overlay-title").textContent = title;
+    $("overlay-subtitle").textContent = subtitle;
+    $("overlay-strap").textContent = strap;
+    $("overlay-copy").textContent = copy;
+    $("start").textContent = button;
+    $("overlay-fine").textContent = fine;
+    $("brief-controls").hidden = true; $("overlay").hidden = false;
+    $("pause").disabled = mode !== "paused";
+    releaseKeys();
+    $("start").focus({ preventScroll: true });
+  }
+  function begin() {
+    if (mode === "paused") { mode = "playing"; hideOverlay(); updateHUD(); return; }
+    if (mode === "between") { missionIndex++; setupMission(); mode = "playing"; hideOverlay(); updateHUD(); return; }
+    missionIndex = 0; score = 0; trust = 100; totalSaved = 0; totalBlocked = 0; elapsed = 0; seed = 365;
+    $("feed").replaceChildren();
+    setupMission(); mode = "playing"; hideOverlay(); updateHUD();
+  }
+  function pause() {
+    if (mode === "paused") { begin(); return; }
+    if (mode !== "playing") return;
+    mode = "paused"; $("pause").textContent = "Resume";
+    showOverlay("Shepherd off duty", "Hold the flock.", "Simulation paused",
+      "The sheep can wait. Your keynote probably cannot.",
+      "Clock, threats, and trust are frozen. Resume when you are ready. Move with WASD, hold E to collect and call sheep, and press Space to attack incidents.",
+      "Back to the floor", "Tip: position yourself behind sheep to chase them, or call them through an open doorway.");
+    updateHUD();
+  }
+  function finish(success) {
+    incomingThreat = null;
+    mode = success ? "won" : "lost";
+    persistBest(); updateHUD();
+    showOverlay(success ? "Amsterdam / ecosystem secured" : "Amsterdam / incident review",
+      success ? "Flock. Secured." : trust <= 0 ? "Trust expired." : "Session closed.",
+      success ? "A standing ovation. Mostly bleating." : "No sheep harmed. Lessons learned.",
+      `${totalSaved} sheep checked in. ${totalBlocked} threats contained. ${score.toLocaleString("en-GB")} reputation.`,
+      success ? "Every agent has an identity. Every tool has a boundary. Every sheep has a shepherd. The Trust Exchange can finally get back to discussing the future of work."
+        : trust <= 0 ? "Unchecked incidents exhausted the venue's trust. Press Space near incidents and threats, and regroup beside a welfare kiosk to restore trust."
+        : "The conference session ended before the flock was checked in. Hold E to register and lead sheep through doors. Press Space near red incident markers.",
+      "Start a new shift", `Best on this device: ${best.toLocaleString("en-GB")}. All art and audio are generated locally; no real agents or services are connected.`);
+    tone(success ? 660 : 160, .4, "triangle");
+  }
+  function completeMission() {
+    incomingThreat = null;
+    const bonus = Math.floor(remaining) * 5 + Math.round(trust) * 4;
+    score += bonus; trust = Math.min(100, trust + 15);
+    totalSaved += waveSaved;
+    if (missionIndex === missions.length - 1) { finish(true); return; }
+    mode = "between"; persistBest(); updateHUD();
+    const next = maps[missionIndex + 1];
+    showOverlay(`Contract ${missionIndex + 1} complete / ${missions.length}`,
+      "Good shepherd.", `+${bonus.toLocaleString("en-GB")} session bonus`,
+      `${waveSaved} agents checked in. Next map: ${next.name}.`,
+      `${next.blurb} ${missions[missionIndex + 1].copy} HOME is ${next.where}.`, "Take the next contract",
+      "Your reputation carries forward. Trust recovers by 15%. Each contract gets a fresh session clock and a new map.");
+    tone(740, .25, "triangle");
+  }
+  function collectSheep() {
+    if (mode !== "playing") return;
+    let registered = 0;
+    for (const s of sheep) {
+      if (s.tagged || distance(s, player) > PULSE_RANGE || !lineOfSight(s, player)) continue;
+      s.tagged = true; registered++; score += 60; floating(s, "REGISTERED", "link");
+    }
+    if (!registered) return;
+    log(`${registered} sheep registered with Observe.`);
+    radio(`Dispatch: ${registered} sheep registered. Hold E to lead ${registered === 1 ? "it" : "them"} home; press Space near any ! incident.`, true);
+    tone(740, .08, "triangle");
+    updateHUD();
+  }
+  function attackIncidents() {
+    if (mode !== "playing" || cooldown > 0) return;
+    cooldown = 3.5;
+    effects.push({ x: player.x, y: player.y, radius: PULSE_RANGE, age: 0, max: .65, type: "pulse", colour: "danger" });
+    let cleared = 0, contained = 0;
+    for (const s of sheep) {
+      if (!s.incident || distance(s, player) > PULSE_RANGE || !lineOfSight(s, player)) continue;
+      const info = threatInfo[s.incident];
+      s.incident = null; s.panic = 0; cleared++; score += 45; floating(s, "INCIDENT CLEARED", "success");
+      log(`${info.incident} sheep cleared with ${toolNames[info.tool]}.`);
+    }
+    threats = threats.filter(t => {
+      if (distance(t, player) > PULSE_RANGE || !lineOfSight(t, player)) return true;
+      const info = threatInfo[t.type];
+      contained++; totalBlocked++; score += 150; trust = Math.min(100, trust + 2);
+      floating(t, "CONTAINED", "success"); log(info.lesson);
+      return false;
+    });
+    if (!cleared && !contained) radio("Dispatch: No threats or ! incidents inside the dashed ring. Get closer, or hold E to collect ? sheep.", true);
+    else if (cleared) radio(`Dispatch: ${cleared} sheep incident${cleared === 1 ? "" : "s"} cleared. If a ? remains, hold E near the sheep to register it.`, true);
+    else radio("Dispatch: Threat contained. Attack any ! sheep separately if they were outside the ring.", true);
+    tone(520, .16, "triangle");
+    updateHUD();
+  }
+  function floating(entity, text, colour) {
+    effects.push({ x: entity.x, y: entity.y - 22, text, colour, type: "text", age: 0, max: 1.8 });
+  }
+  function inPen(s) { return s.x > pen.x + 12 && s.x < pen.x + pen.w - 12 && s.y > pen.y + 12 && s.y < pen.y + pen.h - 12; }
+  function checkIn() {
+    for (let i = sheep.length - 1; i >= 0; i--) {
+      const s = sheep[i];
+      if (!inPen(s)) continue;
+      if (!s.tagged || s.incident) {
+        if (s.hint <= 0) {
+          floating(s, s.incident ? "PRESS SPACE TO CLEAR !" : "HOLD E TO REGISTER ?", "warning");
+          radio(s.incident ? `Registration desk: This sheep is ${threatInfo[s.incident].incident}. Stand near it and press Space.${s.tagged ? "" : " Hold E to register its ? too."}`
+            : "Registration desk: This sheep has no ear tag. Stand near it and hold E to register it before check-in.", true);
+          s.hint = 6;
+        }
+        continue;
+      }
+      sheep.splice(i, 1); waveSaved++; score += 250; trust = Math.min(100, trust + 4);
+      savedFlock.push({ x: pen.x + 35 + (waveSaved - 1) % 4 * 48, y: pen.y + 48 + Math.floor((waveSaved - 1) / 4) * 48, angle: .4, tagged: true, walk: 0 });
+      floating(s, "+250 CHECKED IN", "success"); tone(850, .08, "triangle");
+      log(`Agent ${waveSaved}/${missions[missionIndex].count} checked in. +4 trust.`);
+    }
+    if (sheep.length === 0 && mode === "playing") completeMission();
+  }
+  function update(dt) {
+    if (mode !== "playing") return;
+    elapsed += dt; remaining = Math.max(0, remaining - dt);
+    cooldown = Math.max(0, cooldown - dt); radioTimer = Math.max(0, radioTimer - dt);
+    let dx = Number(keys.has("d") || keys.has("arrowright")) - Number(keys.has("a") || keys.has("arrowleft"));
+    let dy = Number(keys.has("s") || keys.has("arrowdown")) - Number(keys.has("w") || keys.has("arrowup"));
+    const moving = dx !== 0 || dy !== 0, calling = keys.has("e");
+    const sprinting = moving && keys.has("shift") && stamina > 1 && !calling;
+    stamina = clamp(stamina + dt * (sprinting ? -28 : 18), 0, 100);
+    if (moving) {
+      const length = Math.hypot(dx, dy), speed = sprinting ? 245 : calling ? 102 : 160;
+      dx /= length; dy /= length;
+      move(player, dx * speed * dt, dy * speed * dt, 13);
+      player.angle = Math.atan2(dy, dx); player.walk += dt * (sprinting ? 17 : 10);
+    }
+    if (calling) collectSheep();
+    if (calling && elapsed - lastWhistle > 1.1) { tone(1080, .14, "sine", .018); lastWhistle = elapsed; }
+    let contaminated = 0;
+    for (const s of sheep) {
+      s.hint = Math.max(0, s.hint - dt); s.panic = Math.max(0, s.panic - dt);
+      if (s.incident) contaminated++;
+      let vx = 0, vy = 0;
+      s.turn -= dt;
+      if (s.turn <= 0) { s.angle += (random() - .5) * 2; s.turn = 1 + random() * 2.5; }
+      vx = Math.cos(s.angle) * 12; vy = Math.sin(s.angle) * 12;
+      const pd = distance(s, player), visible = pd < 205 && lineOfSight(s, player);
+      if (calling && visible && pd > 36) {
+        vx = (player.x - s.x) / pd * 108; vy = (player.y - s.y) / pd * 108;
+      } else if (!calling && visible && pd < (sprinting ? 155 : 110)) {
+        const speed = 65 + ((sprinting ? 155 : 110) - pd) * .8;
+        vx = (s.x - player.x) / Math.max(pd, 1) * speed; vy = (s.y - player.y) / Math.max(pd, 1) * speed;
+      } else {
+        const lure = threats.find(t => t.type === "mimic" && distance(t, s) < 225 && lineOfSight(t, s));
+        if (lure) { const ld = Math.max(1, distance(lure, s)); vx = (lure.x - s.x) / ld * 46; vy = (lure.y - s.y) / ld * 46; }
+      }
+      for (const other of sheep) {
+        if (other === s) continue;
+        const d = distance(s, other);
+        if (d > .1 && d < 31) { vx += (s.x - other.x) / d * 32; vy += (s.y - other.y) / d * 32; }
+      }
+      for (const t of threats) {
+        const td = distance(t, s);
+        if (td < 72 && td > .1 && t.type === "wolf" && !(calling && visible)) {
+          vx += (s.x - t.x) / td * 65; vy += (s.y - t.y) / td * 65;
+        }
+      }
+      if (s.incident === "ram" && !(calling && visible)) { vx += Math.cos(elapsed * 2) * 30; vy += Math.sin(elapsed * 2) * 30; }
+      const hit = move(s, vx * dt, vy * dt, 14);
+      if (hit) { s.angle += Math.PI * .65; s.turn = .5; }
+      if (Math.hypot(vx, vy) > 20) { s.angle = Math.atan2(vy, vx); s.walk += dt * 12; }
+    }
+    for (const t of threats) {
+      t.age += dt; t.contact = Math.max(0, t.contact - dt); t.turn -= dt;
+      const info = threatInfo[t.type];
+      let target = null, nearest = Infinity;
+      for (const s of sheep) { const d = distance(t, s); if (d < nearest && !inPen(s) && lineOfSight(t, s)) { nearest = d; target = s; } }
+      if (t.type === "boar" && distance(t, player) < 300 && lineOfSight(t, player)) target = player;
+      if (target && distance(t, target) < 320) t.angle = Math.atan2(target.y - t.y, target.x - t.x);
+      else if (t.turn <= 0) { t.angle += (random() - .5) * 2.8; t.turn = 1 + random() * 2; }
+      const speed = info.speed * (t.type === "boar" && target === player ? 1.5 : 1);
+      if (move(t, Math.cos(t.angle) * speed * dt, Math.sin(t.angle) * speed * dt, 15)) { t.angle += 1.8; t.turn = .3; }
+      if (t.contact === 0) {
+        const victim = sheep.find(s => !inPen(s) && distance(s, t) < (t.type === "mimic" ? 65 : 35));
+        if (victim) {
+          const newlyAffected = victim.incident !== t.type;
+          victim.incident = t.type; victim.panic = 2; t.contact = 4;
+          trust -= 1.8; floating(victim, info.incident.toUpperCase(), "danger");
+          if (newlyAffected) {
+            log(`${info.name}: sheep ${info.incident}. Press Space near it; ${toolNames[info.tool]} is automatic.`);
+            radio(`Dispatch: A sheep is ${info.incident}. Get close and press Space to clear it; ${toolNames[info.tool]} is automatic.`, true);
+          }
+          tone(130, .07, "sawtooth", .012);
+        } else if (t.type === "boar" && distance(t, player) < 34) {
+          trust -= 3; t.contact = 3; floating(player, "ACCESS ABUSE", "danger"); radio(info.quip);
+        }
+      }
+      if (t.type === "goose") {
+        t.loop += dt;
+        if (t.loop >= 16) { t.loop = 0; trust -= 2; floating(t, "LOOP: +1,000 TOOL CALLS", "warning"); radio(info.quip); }
+      }
+    }
+    trust -= contaminated * .12 * dt;
+    updateHazards(dt);
+    let atStation = false;
+    for (const station of stations) {
+      if (distance(player, station) < 68) {
+        atStation = true; trust = Math.min(100, trust + 2.4 * dt); cooldown = Math.max(0, cooldown - dt * 1.5);
+        if (nearbyNotice !== station.label) { radio(`Welfare kiosk / ${station.label}: Restoring trust and accelerating recharge. Take a breather.`, true); nearbyNotice = station.label; }
+      }
+    }
+    if (!atStation) nearbyNotice = "";
+    respawnTimer -= dt;
+    const mission = missions[missionIndex];
+    if (!incomingThreat && respawnTimer <= 5 && threats.length < mission.threatCount + 2) {
+      incomingThreat = { type: pick(mission.types), position: pick(spawns), remaining: 5 };
+      const name = threatInfo[incomingThreat.type].name;
+      $("map-alert").textContent = `INCOMING: ${name.toUpperCase()} / 5s`;
+      radio(`Dispatch: ${name} arriving in 5 seconds. Watch the pulsing beacon on the radar.`, true);
+      log(`${name} incoming. Check the pulsing radar beacon.`);
+    }
+    if (incomingThreat) {
+      incomingThreat.remaining = Math.max(0, incomingThreat.remaining - dt);
+      if (incomingThreat.remaining === 0) {
+        const { type, position } = incomingThreat;
+        spawnThreat(type, position);
+        log(`${threatInfo[type].name} arrived at the marked radar zone.`);
+        incomingThreat = null;
+        respawnTimer = Math.max(15, 29 - missionIndex * 2);
+      }
+    } else if (respawnTimer <= 0) {
+      respawnTimer = Math.max(15, 29 - missionIndex * 2);
+    }
+    effects = effects.filter(e => { e.age += dt; return e.age < e.max; });
+    checkIn();
+    trust = clamp(trust, 0, 100);
+    if (mode === "playing" && (remaining <= 0 || trust <= 0)) { totalSaved += waveSaved; finish(false); }
+    updateCamera(false, dt);
+    hudTimer -= dt;
+    if (hudTimer <= 0) { updateHUD(); hudTimer = .12; }
+  }
+  let hazardNotice = 0;
+  function hazardBodies() {
+    return [{ e: player, r: 13, player: true }, ...sheep.map(e => ({ e, r: 14, sheep: true })), ...threats.map(e => ({ e, r: 15 }))];
+  }
+  function shoved(body, label, message) {
+    if (body.sheep) body.e.panic = 1;
+    if (!body.player || hazardNotice > 0) return;
+    hazardNotice = 2.2; floating(player, label, "warning"); radio(message); tone(1320, .05, "square", .015);
+  }
+  function updateHazards(dt) {
+    mapClock += dt; hazardNotice = Math.max(0, hazardNotice - dt);
+    const bodies = hazardBodies();
+    lanes.forEach((lane, i) => {
+      const state = laneState[i], sign = Math.sign(lane.to - lane.from);
+      state.timer -= dt;
+      if (lane.kind === "tram" && state.timer < 2.5 && !state.bell) {
+        state.bell = true; radio("Tram 5: DING DING! Clear the north-quay rails.", true); tone(1560, .2, "triangle", .02);
+      }
+      if (state.timer <= 0) { vehicles.push({ lane, pos: lane.from - sign * lane.len / 2 }); state.timer = lane.every; state.bell = false; }
+    });
+    vehicles = vehicles.filter(v => {
+      const { lane } = v, sign = Math.sign(lane.to - lane.from);
+      v.pos += sign * lane.speed * dt;
+      for (const body of bodies) {
+        const along = lane.axis === "x" ? body.e.x : body.e.y, cross = lane.axis === "x" ? body.e.y : body.e.x;
+        if (Math.abs(cross - lane.at) >= lane.width / 2 + body.r || Math.abs(along - v.pos) >= lane.len / 2 + body.r) continue;
+        const side = cross >= lane.at ? 1 : -1;
+        const push = lane.kind === "stroop" ? [sign * lane.speed * dt, 0] : [sign * lane.speed * .45 * dt, side * 380 * dt];
+        move(body.e, ...(lane.axis === "x" ? push : [push[1], push[0]]), body.r);
+        if (lane.kind === "tram") shoved(body, "DING DING!", "Tram 5: Rails are not a pasture. Everyone off the tracks.");
+        else if (lane.kind === "bike") shoved(body, "TRING TRING!", "Fietser: TRING TRING! The red lane belongs to bikes.");
+        else shoved(body, "STROOPWAFEL EXPRESS", "Logistics: The stroopwafel belt only goes north. Hop off sideways.");
+      }
+      return sign > 0 ? v.pos < lane.to + lane.len : v.pos > lane.to - lane.len;
+    });
+    for (const b of drawbridges) {
+      const t = (mapClock + b.offset) % b.period, raiseAt = b.period - b.up, raised = t >= raiseAt;
+      b.warning = !raised && t >= raiseAt - 3;
+      if (b.warning && !b.warned) { b.warned = true; radio("Brugwachter: A drawbridge lifts in 3 seconds. Get the flock off the striped deck.", false); }
+      if (!raised && !b.warning) b.warned = false;
+      if (raised && !b.raised) {
+        // Anyone still on the deck slides back to the nearest bank.
+        for (const body of bodies) {
+          if (!overlaps(body.e.x, body.e.y, body.r, b)) continue;
+          if (b.axis === "y") body.e.y = body.e.y < b.y + b.h / 2 ? b.y - body.r - 3 : b.y + b.h + body.r + 3;
+          else body.e.x = body.e.x < b.x + b.w / 2 ? b.x - body.r - 3 : b.x + b.w + body.r + 3;
+          shoved(body, "BRIDGE UP!", "Brugwachter: Bridge up. Use a fixed bridge or wait for it to come down.");
+        }
+      }
+      b.raised = raised;
+    }
+    const mill = map.windmill;
+    if (mill) {
+      const spin = mapClock * mill.spin;
+      for (const body of bodies) {
+        const dx = body.e.x - mill.x, dy = body.e.y - mill.y, d = Math.hypot(dx, dy);
+        if (d < 50 || d > mill.r + body.r) continue;
+        const a = Math.atan2(dy, dx);
+        for (let k = 0; k < 4; k++) {
+          const diff = Math.atan2(Math.sin(a - spin - k * Math.PI / 2), Math.cos(a - spin - k * Math.PI / 2));
+          if (Math.abs(diff) > Math.PI / 2 || d * Math.sin(Math.abs(diff)) > 18 + body.r) continue;
+          move(body.e, (-Math.sin(a) * 300 + Math.cos(a) * 90) * dt, (Math.cos(a) * 300 + Math.sin(a) * 90) * dt, body.r);
+          shoved(body, "WHOOSH!", "Windmill keynote: The sails are a hard boundary. Time your crossing.");
+          break;
+        }
+      }
+    }
+  }
+  function updateHUD() {
+    const m = missions[missionIndex];
+    $("flock").textContent = `${String(waveSaved).padStart(2, "0")} / ${String(m.count).padStart(2, "0")}`;
+    $("trust").replaceChildren(document.createTextNode(String(Math.max(0, Math.ceil(trust)))), Object.assign(document.createElement("small"), { textContent: "%" }));
+    $("trust-bar").style.width = `${trust}%`;
+    $("trust-bar").style.background = trust < 30 ? "var(--cp-danger)" : "var(--cp-success)";
+    $("clock").textContent = `${String(Math.floor(remaining / 60)).padStart(2, "0")}:${String(Math.floor(remaining % 60)).padStart(2, "0")}`;
+    const heat = clamp(1 + Math.floor(threats.length / 2), 1, 5);
+    $("heat").textContent = "!".repeat(heat) + ".".repeat(5 - heat);
+    $("heat").setAttribute("aria-label", `Threat level ${heat} of 5`);
+    $("score").textContent = String(score).padStart(6, "0");
+    $("cooldown-bar").style.width = `${(1 - cooldown / 3.5) * 100}%`;
+    $("map-alert").textContent = incomingThreat
+      ? `INCOMING: ${threatInfo[incomingThreat.type].name.toUpperCase()} / ${Math.ceil(incomingThreat.remaining)}s`
+      : "Threats start on-site; arrivals warned here";
+    $("collect").disabled = mode !== "playing";
+    $("deploy").disabled = mode !== "playing" || cooldown > 0;
+    $("touch-attack").disabled = mode !== "playing" || cooldown > 0;
+    $("touch-attack").textContent = cooldown > 0 ? `Wait ${cooldown.toFixed(1)}s` : "Attack";
+    $("attack-status").textContent = cooldown > 0 ? `Recharging ${cooldown.toFixed(1)}s` : "Clears nearby threats & ! sheep";
+    updateIncidentGuide();
+    let location = map.district;
+    for (const r of [...(map.areas || []), ...rooms]) if (player.x > r.x && player.x < r.x + r.w && player.y > r.y && player.y < r.y + r.h) location = r.label;
+    if (distance(player, { x: pen.x + pen.w / 2, y: pen.y + pen.h / 2 }) < 170) location = "Registration / sheep drop-off";
+    $("district").textContent = location;
+    const left = sheep.length, shadow = sheep.filter(s => !s.tagged).length;
+    $("world-note").textContent = viewW < 550
+      ? `${left} sheep${shadow ? ` / ${shadow} ?` : ""} | ${keys.has("e") ? "COLLECTING" : "E: collect | SPACE: attack"}`
+      : `${left} sheep on floor${shadow ? ` / ${shadow} unregistered` : ""} | ${keys.has("e") ? "COLLECTING - lead flock home" : "HOLD E: collect | SPACE: attack"} | Sprint ${Math.round(stamina)}%`;
+    const heading = ["EAST", "SOUTH-EAST", "SOUTH", "SOUTH-WEST", "WEST", "NORTH-WEST", "NORTH", "NORTH-EAST"];
+    const direction = (Math.round(Math.atan2(penGate.y - player.y, penGate.x - player.x) / (Math.PI / 4)) + 8) % 8;
+    $("pen-direction").textContent = inPen(player) ? "YOU ARE HOME / HOLD E TO LEAD SHEEP IN"
+      : distance(player, penGate) < 180 ? `HOME / ENTER THE OPEN ${penGate.dir > 0 ? "RIGHT" : "LEFT"}-HAND GATE`
+      : `HOME IS ${heading[direction]} / FOLLOW THE RADAR`;
+  }
+  function resize() {
+    const rect = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    viewW = Math.max(1, rect.width); viewH = Math.max(1, rect.height);
+    canvas.width = Math.round(viewW * dpr); canvas.height = Math.round(viewH * dpr);
+    zoom = viewW < 550 ? .63 : .88;
+    if (player) updateCamera(true);
+  }
+  function updateCamera(immediate, dt = .016) {
+    const x = clamp(player.x - viewW / zoom / 2, 0, Math.max(0, W - viewW / zoom));
+    const y = clamp(player.y - viewH / zoom / 2, 0, Math.max(0, H - viewH / zoom));
+    const ease = immediate || reducedMotion ? 1 : Math.min(1, dt * 9);
+    camera.x += (x - camera.x) * ease; camera.y += (y - camera.y) * ease;
+  }
+  function rect(x, y, w, h, colour) { ctx.fillStyle = P[colour] || colour; ctx.fillRect(Math.round(x), Math.round(y), w, h); }
+  function text(value, x, y, size = 12, colour = "text", align = "left") {
+    ctx.fillStyle = P[colour]; ctx.font = `bold ${size}px Consolas, "Courier New", monospace`;
+    ctx.textAlign = align; ctx.textBaseline = "middle"; ctx.fillText(value, Math.round(x), Math.round(y));
+  }
+  function circle(x, y, radius, colour, stroke = false) {
+    ctx.beginPath(); ctx.arc(x, y, radius, 0, TAU);
+    if (stroke) { ctx.strokeStyle = P[colour]; ctx.stroke(); } else { ctx.fillStyle = P[colour]; ctx.fill(); }
+  }
+  function dashedRing(x, y, r, colour, alpha = 1) {
+    ctx.save(); ctx.globalAlpha = alpha; ctx.setLineDash([5, 8]); ctx.lineWidth = 1.5; circle(x, y, r, colour, true); ctx.restore();
+  }
+  function ellipse(x, y, rx, ry, colour) {
+    ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, TAU); ctx.fillStyle = P[colour]; ctx.fill();
+  }
+  function polygon(points, colour) {
+    ctx.beginPath(); points.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    ctx.closePath(); ctx.fillStyle = P[colour]; ctx.fill();
+  }
+  function stroke(points, colour, width = 2) {
+    ctx.beginPath(); points.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    ctx.strokeStyle = P[colour]; ctx.lineWidth = width; ctx.lineJoin = "round"; ctx.lineCap = "round"; ctx.stroke();
+  }
+  function shadow(x, y, rx, ry, opacity = .24) {
+    ctx.save(); ctx.globalAlpha = opacity; ellipse(x + 5, y + 9, rx, ry, "ink"); ctx.restore();
+  }
+  function plaque(value, x, y, width, colour = "wool", size = 12) {
+    rect(x - width / 2 + 3, y - 14 + 5, width, 29, "ink");
+    rect(x - width / 2, y - 14, width, 29, "night");
+    rect(x - width / 2, y - 14, width, 2, colour);
+    text(value, x, y + 1, size, colour, "center");
+  }
+  function floorArrow(x, y, angle, scale = 1) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(angle); ctx.scale(scale, scale);
+    ctx.globalAlpha = .8;
+    stroke([[-16, -14], [0, 0], [-16, 14]], "success", 5);
+    stroke([[-31, -14], [-15, 0], [-31, 14]], "wool", 2);
+    ctx.restore();
+  }
+  function drawPlant(x, y, size = 1) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(size, size);
+    shadow(0, 4, 17, 10);
+    ellipse(0, 2, 14, 11, "timber"); ellipse(0, -2, 14, 9, "timber-light"); ellipse(0, -3, 10, 6, "ink");
+    for (let i = 0; i < 7; i++) {
+      ctx.save(); ctx.rotate(i * TAU / 7);
+      ellipse(0, -12, 5, 14, i % 2 ? "success" : "foliage");
+      stroke([[0, -3], [0, -23]], "foliage", 1); ctx.restore();
+    }
+    circle(0, -5, 5, "success"); ctx.restore();
+  }
+  function drawFence(w) {
+    const horizontal = w.w > w.h, length = horizontal ? w.w : w.h;
+    ctx.save(); ctx.globalAlpha = .26;
+    rect(w.x + 7, w.y + 10, w.w + 3, w.h + 4, "ink"); ctx.restore();
+    if (horizontal) {
+      rect(w.x, w.y - 7, w.w, 5, "timber"); rect(w.x, w.y + 1, w.w, 4, "timber-light");
+    } else {
+      rect(w.x, w.y, 4, w.h, "timber-light"); rect(w.x + 7, w.y, 4, w.h, "timber");
+    }
+    for (let n = 0; n <= length; n += 28) {
+      const x = w.x + (horizontal ? n : 0), y = w.y + (horizontal ? 0 : n);
+      rect(x - 2, y - 13, 12, 20, "timber"); rect(x - 2, y - 13, 9, 6, "timber-light");
+      rect(x + 1, y - 4, 2, 2, "ink");
+    }
+  }
+  function drawPen(time) {
+    const cx = pen.x + pen.w / 2;
+    ctx.save(); ctx.globalAlpha = reducedMotion ? .15 : .15 + Math.sin(time * 2) * .035;
+    ellipse(cx, pen.y + pen.h / 2, 161, 130, "success"); ctx.restore();
+    rect(pen.x, pen.y, pen.w, pen.h, "foliage"); rect(pen.x + 8, pen.y + 8, pen.w - 16, pen.h - 16, "lawn");
+    for (let y = pen.y + 20; y < pen.y + pen.h - 12; y += 14) {
+      for (let x = pen.x + 18; x < pen.x + pen.w - 12; x += 19) {
+        ctx.save(); ctx.globalAlpha = .22;
+        stroke([[x - 2, y + 4], [x, y], [x + 2, y + 3]], "foliage", 1); ctx.restore();
+      }
+    }
+    ctx.save(); ctx.globalAlpha = .15; text("HOME", cx, pen.y + 118, 51, "foliage", "center"); ctx.restore();
+    rect(pen.x + 13, pen.y + 12, 65, 24, "timber");
+    rect(pen.x + 17, pen.y + 14, 57, 14, "warning");
+    for (let x = pen.x + 21; x < pen.x + 72; x += 8) stroke([[x, pen.y + 16], [x + 3, pen.y + 25]], "timber-light", 1);
+    ellipse(pen.x + pen.w - 33, pen.y + pen.h - 24, 21, 12, "border-strong");
+    ellipse(pen.x + pen.w - 33, pen.y + pen.h - 27, 17, 8, "canal");
+    stroke([[pen.x + pen.w - 43, pen.y + pen.h - 29], [pen.x + pen.w - 30, pen.y + pen.h - 29]], "wool", 1);
+    for (const w of walls) if (w.kind === "fence") drawFence(w);
+    const gd = penGate.dir;
+    for (const y of [penGate.top, penGate.bottom]) {
+      rect(penGate.x - 8, y - 22, 18, 30, "ink"); rect(penGate.x - 5, y - 24, 12, 24, "success");
+      rect(penGate.x - 3, y - 23, 8, 5, "wool");
+    }
+    // Both open gate leaves sit outside the collision-free entrance.
+    stroke([[penGate.x + 4 * gd, penGate.top], [penGate.x + 49 * gd, penGate.top - 25]], "timber-light", 5);
+    stroke([[penGate.x + 4 * gd, penGate.bottom], [penGate.x + 49 * gd, penGate.bottom + 25]], "timber-light", 5);
+    for (let n = -12; n <= 58; n += 24) floorArrow(penGate.x + n * gd, penGate.y, gd > 0 ? Math.PI : 0, .7);
+    plaque("SHEEP DROP-OFF", cx, pen.y - 48, 288, "success", 22);
+    text("GREEN PEN / BRING EVERY SHEEP HERE", cx, pen.y - 22, 10, "wool", "center");
+    plaque(`${waveSaved} / ${missions[missionIndex].count} SHEEP HOME`, cx, pen.y + pen.h + 28, 206, "success", 13);
+    text("GATE", penGate.x + 60 * gd, penGate.y - 32, 11, "success", "center");
+    text(gd > 0 ? "< ENTER" : "ENTER >", penGate.x + 90 * gd, penGate.y + 29, 12, "wool", "center");
+  }
+  function viewBox() {
+    return { x0: Math.max(160, camera.x - 40), y0: Math.max(150, camera.y - 40),
+      x1: Math.min(1826, camera.x + viewW / zoom + 40), y1: Math.min(1362, camera.y + viewH / zoom + 40) };
+  }
+  function drawHallFloor() {
+    rect(868, 150, 135, 1210, "carpet"); rect(160, 620, 1665, 280, "carpet");
+    for (const x of [876, 995]) { rect(x, 150, 2, 470, "timber-light"); rect(x, 900, 2, 460, "timber-light"); }
+    for (const y of [628, 891]) rect(160, y, 1665, 2, "timber-light");
+    ctx.save(); ctx.globalAlpha = .1;
+    for (let y = 638; y < 887; y += 8) rect(160, y, 1665, 1, "wool"); ctx.restore();
+    for (const x of [690, 955, 1115, 1370, 1640]) floorArrow(x, 825, Math.PI);
+    for (const y of [320, 500, 1080, 1270]) floorArrow(940, y, y < 800 ? Math.PI / 2 : -Math.PI / 2);
+    text("SHEEP DROP-OFF  <  WEST CONCOURSE", 1180, 865, 11, "wool", "center");
+  }
+  function drawThemeFloor(time) {
+    const v = viewBox();
+    if (map.theme === "canal" || map.theme === "jordaan") {
+      // Amsterdam klinkers: herringbone-ish brick cobbles.
+      const top = map.theme === "canal" ? Math.max(v.y0, 690) : v.y0;
+      if (top < v.y1) rect(v.x0, top, v.x1 - v.x0, v.y1 - top, map.theme === "jordaan" ? "timber" : "floor-alt");
+      ctx.save(); ctx.globalAlpha = map.theme === "jordaan" ? .35 : .22;
+      for (let y = Math.floor(top / 14) * 14; y < v.y1; y += 14) {
+        rect(v.x0, y, v.x1 - v.x0, 1, "ink");
+        const shift = (y / 14) % 2 ? 14 : 0;
+        for (let x = Math.floor(v.x0 / 28) * 28 + shift; x < v.x1; x += 28) rect(x, y, 1, 14, "ink");
+      }
+      ctx.restore();
+      if (map.theme === "canal") {
+        rect(160, 520, 1665, 80, "stone");
+        ctx.save(); ctx.globalAlpha = .3; for (let x = 160; x < 1825; x += 40) rect(x, 520, 1, 80, "border-strong"); ctx.restore();
+      }
+    } else if (map.theme === "bulb") {
+      rect(160, 150, 1665, 1210, "lawn");
+      ctx.save(); ctx.globalAlpha = .18;
+      for (let y = 150; y < 1360; y += 60) rect(160, y, 1665, 30, "foliage");
+      ctx.restore();
+      rect(160, 1050, 1665, 310, "floor-alt");
+      ctx.save(); ctx.globalAlpha = .25; for (let x = 160; x < 1825; x += 48) rect(x, 1050, 1, 310, "border-strong"); ctx.restore();
+      rect(160, 1050, 1665, 4, "warning");
+      text("THE AUCTION FLOOR / DUTCH AUCTION: PRICE GOES DOWN, PANIC GOES UP", 990, 1068, 10, "ink", "center");
+    } else if (map.theme === "float") {
+      rect(160, 150, 1665, 1210, "timber-light");
+      ctx.save(); ctx.globalAlpha = .4;
+      for (let y = Math.floor(v.y0 / 18) * 18; y < v.y1; y += 18) {
+        rect(v.x0, y, v.x1 - v.x0, 1, "timber");
+        const shift = (y / 18) % 3 * 70;
+        for (let x = Math.floor(v.x0 / 210) * 210 + shift; x < v.x1; x += 210) rect(x, y, 1, 18, "timber");
+      }
+      ctx.restore();
+      // Gentle bob so the venue visibly floats.
+      ctx.save(); ctx.globalAlpha = .06 + Math.sin(time * 1.3) * .03; rect(160, 150, 1665, 1210, "canal"); ctx.restore();
+    }
+    for (const a of map.areas || []) {
+      if (a.y + a.h < v.y0 || a.y > v.y1) continue;
+      ctx.save(); ctx.globalAlpha = .55; text(a.label, a.x + 22, a.y + 26, 12, "wool"); ctx.restore();
+    }
+  }
+  function drawRooms() {
+    rooms.forEach(r => {
+      ctx.save(); ctx.globalAlpha = .12;
+      rect(r.x + 20, r.y + 65, r.w - 24, r.h - 74, r.tint || "accent");
+      ctx.restore();
+      rect(r.x + 20, r.y + 20, r.w - 24, 45, "asphalt");
+      text(r.label, r.x + 38, r.y + 43, 14, "wool");
+      const doorX = r.x + r.w * .34, doorWidth = r.w * .32;
+      rect(doorX, r.y + r.h - 2, doorWidth, 20, "floor-alt");
+      for (let x = doorX + 8; x < doorX + doorWidth - 8; x += 15) rect(x, r.y + r.h + 2, 8, 8, "wool");
+      text("EXIT", r.x + r.w * .5, r.y + r.h - 19, 10, "success", "center");
+      for (const x of [r.x + 45, r.x + r.w - 40]) drawPlant(x, r.y + 105, .9);
+      if (r.sub) text(r.sub, r.x + r.w / 2, r.y + Math.min(235, r.h - 60), 12, "text-muted", "center");
+      ctx.save(); ctx.globalAlpha = .12;
+      rect(r.x + 30, r.y + 74, r.w - 48, 4, "wool");
+      rect(r.x + 30, r.y + r.h - 120, r.w - 48, 3, "wool"); ctx.restore();
+    });
+  }
+  function tourBoat(b) {
+    const span = b.to - b.from - b.w, t = (mapClock * b.speed) % (span * 2);
+    const along = b.from + (t < span ? t : span * 2 - t);
+    return b.axis === "x" ? { x: along, y: b.at - b.h / 2, w: b.w, h: b.h, flip: t >= span } : { x: b.at - b.w / 2, y: along, w: b.w, h: b.h, flip: t >= span };
+  }
+  function drawBoat(b, time) {
+    if (b.kind === "tour") b = { ...b, ...tourBoat(b) };
+    const horizontal = b.w >= b.h, len = horizontal ? b.w : b.h, wid = horizontal ? b.h : b.w;
+    ctx.save(); ctx.translate(b.x + b.w / 2, b.y + b.h / 2 + Math.sin(time * 1.6 + b.x) * 1.5);
+    if (!horizontal) ctx.rotate(Math.PI / 2);
+    if (b.flip) ctx.scale(-1, 1);
+    ctx.save(); ctx.globalAlpha = .25; ellipse(6, 8, len / 2, wid / 2, "ink"); ctx.restore();
+    if (b.kind === "duck") {
+      ellipse(0, 0, 32, 24, "warning"); ellipse(-6, -2, 22, 15, "wool-shade");
+      circle(20, -12, 14, "warning"); polygon([[30, -14], [44, -10], [30, -6]], "accent");
+      circle(23, -16, 2.5, "ink");
+      text("RUBBER DUCK OF COMPLIANCE", 0, 34, 7, "wool", "center");
+    } else if (b.kind === "tour") {
+      polygon([[-len / 2, -wid / 2], [len / 2 - 22, -wid / 2], [len / 2, 0], [len / 2 - 22, wid / 2], [-len / 2, wid / 2]], "ink");
+      rect(-len / 2 + 6, -wid / 2 + 6, len - 36, wid - 12, "link");
+      rect(-len / 2 + 12, -wid / 2 + 10, len - 50, wid - 20, "canal");
+      for (let x = -len / 2 + 18; x < len / 2 - 40; x += 26) rect(x, -wid / 2 + 13, 16, wid - 26, "wool-shade");
+      text("RONDVAART / AGENT TOUR", -12, 0, 9, "wool", "center");
+    } else {
+      rect(-len / 2, -wid / 2, len, wid, "ink");
+      rect(-len / 2 + 3, -wid / 2 + 3, len - 6, wid - 6, "timber");
+      rect(-len / 2 + 16, -wid / 2 + 8, len - 40, wid - 16, "floor-alt");
+      rect(-len / 2 + 16, -wid / 2 + 8, len - 40, 4, "accent");
+      for (let x = -len / 2 + 26; x < len / 2 - 34; x += 30) rect(x, -wid / 2 + 16, 14, 9, "canal");
+      for (let x = -len / 2 + 22; x < len / 2 - 30; x += 46) drawPlant(x, wid / 2 - 6, .45);
+      text("WOONBOOT", len / 2 - 14, 0, 7, "wool", "center");
+    }
+    ctx.restore();
+  }
+  function drawBridge(x, y, w, h, axis, colour = "timber") {
+    ctx.save(); ctx.globalAlpha = .3; rect(x + 6, y + 8, w, h, "ink"); ctx.restore();
+    rect(x, y, w, h, colour);
+    ctx.save(); ctx.globalAlpha = .45;
+    if (axis === "y") for (let n = y + 6; n < y + h; n += 12) rect(x, n, w, 2, "ink");
+    else for (let n = x + 6; n < x + w; n += 12) rect(n, y, 2, h, "ink");
+    ctx.restore();
+    if (axis === "y") { rect(x - 4, y - 4, 6, h + 8, "ink"); rect(x + w - 2, y - 4, 6, h + 8, "ink"); rect(x - 3, y - 4, 4, h + 8, "wool"); rect(x + w - 1, y - 4, 4, h + 8, "wool"); }
+    else { rect(x - 4, y - 4, w + 8, 6, "ink"); rect(x - 4, y + h - 2, w + 8, 6, "ink"); rect(x - 4, y - 3, w + 8, 4, "wool"); rect(x - 4, y + h - 1, w + 8, 4, "wool"); }
+  }
+  function drawWater(time) {
+    for (const w of walls) {
+      if (w.kind !== "water") continue;
+      rect(w.x, w.y, w.w, w.h, "canal");
+      ctx.save(); ctx.beginPath(); ctx.rect(w.x, w.y, w.w, w.h); ctx.clip(); ctx.globalAlpha = .28;
+      for (let y = w.y + 8; y < w.y + w.h; y += 18) {
+        for (let x = w.x - 30; x < w.x + w.w; x += 60) {
+          const d = Math.sin(y * .1 + time * .8 + x * .02) * 8;
+          stroke([[x + d, y], [x + 22 + d, y], [x + 28 + d, y - 2]], "link", 2);
+        }
+      }
+      ctx.restore();
+      ctx.save(); ctx.globalAlpha = .7;
+      if (w.w >= w.h) { rect(w.x, w.y - 4, w.w, 5, "stone"); rect(w.x, w.y + w.h - 1, w.w, 5, "stone"); }
+      else { rect(w.x - 4, w.y, 5, w.h, "stone"); rect(w.x + w.w - 1, w.y, 5, w.h, "stone"); }
+      ctx.restore();
+    }
+    for (const b of map.boats || []) drawBoat(b, time);
+    for (const [x, y, w, h, axis] of map.bridges || []) drawBridge(x, y, w, h, axis);
+    for (const b of drawbridges) {
+      if (b.raised) {
+        // Leaves stand up on each bank; the gap is open water.
+        rect(b.x, b.y, b.w, b.h, "canal");
+        const leaves = b.axis === "y" ? [[b.x, b.y - 18, b.w, 22], [b.x, b.y + b.h - 4, b.w, 22]] : [[b.x - 18, b.y, 22, b.h], [b.x + b.w - 4, b.y, 22, b.h]];
+        for (const [x, y, w, h] of leaves) { rect(x + 5, y + 7, w, h, "ink"); rect(x, y, w, h, "danger"); rect(x + 2, y + 2, w - 4, 4, "wool"); }
+        plaque("BRUG OPEN", b.x + b.w / 2, b.y + b.h / 2, 110, "danger", 13);
+      } else {
+        drawBridge(b.x, b.y, b.w, b.h, b.axis, "timber-light");
+        const flash = b.warning && Math.floor(time * 6) % 2;
+        ctx.save(); ctx.globalAlpha = b.warning ? .85 : .5;
+        const stripe = flash ? "danger" : "warning";
+        if (b.axis === "y") for (let x = b.x; x < b.x + b.w; x += 20) { rect(x, b.y, 10, 8, stripe); rect(x, b.y + b.h - 8, 10, 8, stripe); }
+        else for (let y = b.y; y < b.y + b.h; y += 20) { rect(b.x, y, 8, 10, stripe); rect(b.x + b.w - 8, y, 8, 10, stripe); }
+        ctx.restore();
+        if (b.warning) plaque("LIFTING!", b.x + b.w / 2, b.y + b.h / 2, 96, "danger", 12);
+        else text("OPHAALBRUG", b.x + b.w / 2, b.y + b.h / 2, 8, "ink", "center");
+      }
+    }
+  }
+  function laneSpan(lane) {
+    const a = Math.max(160, Math.min(lane.from, lane.to)), b = Math.min(1825, Math.max(lane.from, lane.to));
+    return lane.axis === "x" ? { x: a, y: lane.at - lane.width / 2, w: b - a, h: lane.width } : { x: lane.at - lane.width / 2, y: a, w: lane.width, h: b - a };
+  }
+  function drawLanes(time) {
+    lanes.forEach((lane, i) => {
+      const s = laneSpan(lane), sign = Math.sign(lane.to - lane.from), horizontal = lane.axis === "x";
+      const angle = horizontal ? (sign > 0 ? 0 : Math.PI) : (sign > 0 ? Math.PI / 2 : -Math.PI / 2);
+      if (lane.kind === "bike") {
+        ctx.save(); ctx.globalAlpha = .72; rect(s.x, s.y, s.w, s.h, "danger"); ctx.restore();
+        ctx.save(); ctx.globalAlpha = .8; ctx.setLineDash([14, 10]); ctx.lineWidth = 2; ctx.strokeStyle = P.wool;
+        ctx.strokeRect(s.x + 2, s.y + 2, s.w - 4, s.h - 4); ctx.restore();
+        const len = horizontal ? s.w : s.h;
+        for (let n = 90; n < len - 40; n += 260) {
+          const x = horizontal ? s.x + n : s.x + s.w / 2, y = horizontal ? s.y + s.h / 2 : s.y + n;
+          ctx.save(); ctx.translate(x, y); ctx.rotate(angle); ctx.globalAlpha = .85;
+          ctx.lineWidth = 2; circle(-10, 0, 7, "wool", true); circle(10, 0, 7, "wool", true);
+          stroke([[-10, 0], [0, -6], [10, 0], [-2, 0], [-10, 0]], "wool", 2);
+          stroke([[26, -6], [36, 0], [26, 6]], "wool", 3);
+          ctx.restore();
+        }
+        text("FIETSPAD", horizontal ? s.x + 40 : s.x + s.w / 2, horizontal ? s.y + s.h / 2 : s.y + 30, 9, "wool", "center");
+      } else if (lane.kind === "tram") {
+        const bell = laneState[i].bell && Math.floor(time * 5) % 2;
+        rect(s.x, s.y, s.w, s.h, bell ? "warning" : "stone");
+        for (const off of [16, 48]) { rect(s.x, s.y + off - 2, s.w, 5, "ink"); rect(s.x, s.y + off - 2, s.w, 2, "border-strong"); }
+        ctx.save(); ctx.globalAlpha = .5; for (let x = s.x; x < s.x + s.w; x += 26) rect(x, s.y + 8, 6, 48, "timber"); ctx.restore();
+        text(bell ? "DING DING! TRAM 5 INCOMING" : "TRAM 5 / RAILS ARE NOT A PASTURE", 990, s.y - 10, 11, bell ? "danger" : "wool", "center");
+      } else {
+        rect(s.x - 4, s.y, s.w + 8, s.h, "ink"); rect(s.x, s.y, s.w, s.h, "border-strong");
+        const scroll = (mapClock * lane.speed) % 40;
+        for (let n = -40; n < (horizontal ? s.w : s.h) + 40; n += 40) {
+          const off = sign > 0 ? n + scroll : n - scroll;
+          if (off < 0 || off > (horizontal ? s.w : s.h)) continue;
+          const x = horizontal ? s.x + off : s.x + s.w / 2, y = horizontal ? s.y + s.h / 2 : s.y + off;
+          ctx.save(); ctx.translate(x, y); ctx.rotate(angle); ctx.globalAlpha = .7;
+          stroke([[-6, -16], [6, 0], [-6, 16]], "warning", 4); ctx.restore();
+        }
+        ctx.save(); ctx.translate(s.x + s.w / 2, s.y + s.h - 40); ctx.rotate(-Math.PI / 2);
+        text("STROOPWAFEL EXPRESS", 0, 0, 10, "wool", "left"); ctx.restore();
+      }
+    });
+  }
+  function drawHouse(w, i) {
+    const colours = ["accent", "timber", "night", "foliage", "link", "warning"];
+    const body = colours[i % colours.length];
+    ctx.save();
+    if (map.lean) {
+      // Jordaan houses lean on each other; skew around the street-facing base.
+      const skew = [-.12, .09, -.06, .14, -.1][i % 5];
+      ctx.translate(w.x, w.y + w.h); ctx.transform(1, 0, skew, 1, 0, 0); ctx.translate(-w.x, -(w.y + w.h));
+    }
+    ctx.globalAlpha = .3; rect(w.x + 10, w.y + 14, w.w, w.h, "ink"); ctx.globalAlpha = 1;
+    rect(w.x, w.y, w.w, w.h, "ink");
+    rect(w.x + 3, w.y + 3, w.w - 6, w.h - 6, body);
+    // Roof ridge and tiles.
+    rect(w.x + 6, w.y + 6, w.w - 12, w.h * .42, "border-strong");
+    ctx.save(); ctx.globalAlpha = .4; for (let y = w.y + 12; y < w.y + 6 + w.h * .42; y += 8) rect(w.x + 6, y, w.w - 12, 1, "ink"); ctx.restore();
+    rect(w.x + 6, w.y + 6 + w.h * .21, w.w - 12, 3, "ink");
+    // Stepped gables on the south facade.
+    const gw = Math.min(70, (w.w - 12) / 2), baseY = w.y + w.h * .5;
+    for (let gx = w.x + 6; gx + gw <= w.x + w.w - 5; gx += gw) {
+      polygon([[gx, baseY], [gx, baseY - 8], [gx + gw * .2, baseY - 8], [gx + gw * .2, baseY - 16], [gx + gw * .4, baseY - 16], [gx + gw * .4, baseY - 24],
+        [gx + gw * .6, baseY - 24], [gx + gw * .6, baseY - 16], [gx + gw * .8, baseY - 16], [gx + gw * .8, baseY - 8], [gx + gw, baseY - 8], [gx + gw, baseY]], body);
+      rect(gx + gw * .45, baseY - 22, gw * .1, 5, "wool");
+      for (let wy = baseY + 8; wy < w.y + w.h - 18; wy += 22) {
+        for (let wx = gx + 8; wx < gx + gw - 12; wx += 18) { rect(wx, wy, 10, 14, "wool"); rect(wx + 1, wy + 1, 8, 12, "canal"); rect(wx + 4, wy, 2, 14, "wool"); }
+      }
+    }
+    rect(w.x + w.w / 2 - 9, w.y + w.h - 20, 18, 17, "ink"); rect(w.x + w.w / 2 - 7, w.y + w.h - 18, 14, 15, "timber-light");
+    rect(w.x + 3, w.y + w.h - 4, w.w - 6, 2, "wool");
+    ctx.restore();
+  }
+  function drawBed(w, time) {
+    ctx.save(); ctx.globalAlpha = .25; rect(w.x + 6, w.y + 9, w.w, w.h, "ink"); ctx.restore();
+    rect(w.x, w.y, w.w, w.h, "timber"); rect(w.x + 3, w.y + 3, w.w - 6, w.h - 6, "ink");
+    const colours = ["accent", "warning", "wool", "danger", "link"];
+    for (let x = w.x + 10, n = 0; x < w.x + w.w - 6; x += 13, n++) {
+      for (let y = w.y + 12; y < w.y + w.h - 4; y += 16) {
+        const sway = reducedMotion ? 0 : Math.sin(time * 2 + x * .05) * 1.5;
+        stroke([[x, y + 8], [x + sway, y]], "foliage", 2);
+        polygon([[x - 4 + sway, y - 4], [x - 2 + sway, y], [x + 2 + sway, y], [x + 4 + sway, y - 4], [x + 2 + sway, y - 2], [x + sway, y - 6], [x - 2 + sway, y - 2]], colours[(n + Math.floor((y - w.y) / 16)) % colours.length]);
+      }
+    }
+  }
+  function drawStall(w) {
+    ctx.save(); ctx.globalAlpha = .25; rect(w.x + 8, w.y + 12, w.w, w.h, "ink"); ctx.restore();
+    rect(w.x, w.y + 10, w.w, w.h - 10, "timber");
+    for (let x = w.x + 8; x < w.x + w.w - 10; x += 22) {
+      rect(x, w.y + 30, 16, 18, "border-strong");
+      for (let k = 0; k < 3; k++) circle(x + 4 + k * 4, w.y + 28 - (k % 2) * 3, 4, ["accent", "warning", "wool"][(x + k) % 3]);
+    }
+    for (let x = w.x, n = 0; x < w.x + w.w; x += 18, n++) rect(x, w.y, Math.min(18, w.x + w.w - x), 16, n % 2 ? "wool" : "accent");
+    rect(w.x, w.y + 16, w.w, 3, "ink");
+    text("BLOEMEN", w.x + w.w / 2, w.y + w.h - 6, 9, "wool", "center");
+  }
+  function drawMillBase() {
+    const m = map.windmill; if (!m) return;
+    shadow(m.x, m.y, 60, 44, .3);
+    polygon([0, 1, 2, 3, 4, 5, 6, 7].map(k => [m.x + Math.cos(k * TAU / 8 + .4) * 52, m.y + Math.sin(k * TAU / 8 + .4) * 52]), "ink");
+    polygon([0, 1, 2, 3, 4, 5, 6, 7].map(k => [m.x + Math.cos(k * TAU / 8 + .4) * 47, m.y + Math.sin(k * TAU / 8 + .4) * 47]), "timber");
+    circle(m.x, m.y, 30, "border-strong"); circle(m.x, m.y, 22, "night");
+    ctx.save(); ctx.globalAlpha = .25; dashedRing(m.x, m.y, m.r, "danger", 1); ctx.restore();
+  }
+  function drawSails() {
+    const m = map.windmill; if (!m) return;
+    const spin = mapClock * m.spin;
+    for (const pass of [0, 1]) {
+      for (let k = 0; k < 4; k++) {
+        ctx.save(); ctx.translate(m.x + (pass ? 0 : 14), m.y + (pass ? 0 : 22)); ctx.rotate(spin + k * Math.PI / 2);
+        if (!pass) { ctx.globalAlpha = .25; rect(30, -14, m.r - 30, 28, "ink"); ctx.restore(); continue; }
+        rect(30, -3, m.r - 30, 6, "timber");
+        rect(50, 2, m.r - 55, 16, "ink");
+        rect(52, 4, m.r - 59, 12, "wool");
+        ctx.globalAlpha = .6;
+        for (let x = 52; x < m.r - 6; x += 16) rect(x, 4, 2, 12, "timber");
+        rect(52, 9, m.r - 59, 2, "timber");
+        ctx.restore();
+      }
+    }
+    circle(m.x, m.y, 14, "ink"); circle(m.x, m.y, 9, "accent");
+    text("WINDMILL KEYNOTE", m.x, m.y + 70, 11, "wool", "center");
+  }
+  function drawVehicles() {
+    for (const v of vehicles) {
+      const { lane } = v, sign = Math.sign(lane.to - lane.from), horizontal = lane.axis === "x";
+      const x = horizontal ? v.pos : lane.at, y = horizontal ? lane.at : v.pos;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(horizontal ? (sign > 0 ? 0 : Math.PI) : (sign > 0 ? Math.PI / 2 : -Math.PI / 2));
+      if (lane.kind === "bike") {
+        ctx.globalAlpha = .28; ellipse(5, 8, 26, 9, "ink"); ctx.globalAlpha = 1;
+        ctx.lineWidth = 3; circle(-15, 0, 9, "ink", true); circle(15, 0, 9, "ink", true);
+        stroke([[-15, 0], [-2, -2], [15, 0]], "border-strong", 4);
+        stroke([[10, -9], [14, 9]], "ink", 3);
+        ellipse(-3, 0, 9, 11, ["accent", "link", "warning", "foliage"][Math.floor(Math.abs(v.pos) / 97) % 4]);
+        circle(1, 0, 6, "timber-light"); ellipse(0, 0, 6, 4, "warning");
+      } else if (lane.kind === "tram") {
+        const len = lane.len, wid = lane.width - 12;
+        ctx.globalAlpha = .3; rect(-len / 2 + 8, -wid / 2 + 10, len, wid, "ink"); ctx.globalAlpha = 1;
+        rect(-len / 2, -wid / 2, len, wid, "ink"); rect(-len / 2 + 3, -wid / 2 + 3, len - 6, wid - 6, "wool");
+        rect(-len / 2 + 3, -wid / 2 + 3, len - 6, 8, "link"); rect(-len / 2 + 3, wid / 2 - 11, len - 6, 8, "link");
+        for (let n = -len / 2 + 20; n < len / 2 - 30; n += 34) rect(n, -wid / 2 + 14, 22, wid - 28, "canal");
+        for (const n of [-len / 6, len / 6]) rect(n, -wid / 2, 4, wid, "ink");
+        rect(len / 2 - 26, -wid / 2 + 6, 20, wid - 12, "night");
+        ctx.rotate(-Math.PI / 2 * (horizontal ? 0 : 1)); text("5", 0, 0, 22, "accent", "center");
+      } else {
+        ctx.globalAlpha = .3; circle(4, 6, 22, "ink"); ctx.globalAlpha = 1;
+        circle(0, 0, 22, "timber"); circle(0, 0, 18, "timber-light");
+        ctx.save(); ctx.beginPath(); ctx.arc(0, 0, 18, 0, TAU); ctx.clip(); ctx.globalAlpha = .55;
+        for (let n = -18; n <= 18; n += 7) { ctx.save(); ctx.rotate(Math.PI / 4); rect(-18, n, 36, 2, "timber"); rect(n, -18, 2, 36, "timber"); ctx.restore(); }
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+  }
+  function drawWorld(time) {
+    rect(0, 0, W, H, "asphalt");
+    rect(0, 0, 100, H, "canal");
+    for (let y = -24; y < H; y += 23) {
+      ctx.save(); ctx.globalAlpha = .25;
+      const drift = Math.sin(y * .08 + time * .7) * 9;
+      stroke([[8 + drift, y], [33 + drift, y], [41 + drift, y - 2]], "link", 2);
+      stroke([[55 - drift, y + 11], [88 - drift, y + 11]], "wool", 1);
+      ctx.restore();
+    }
+    rect(101, 0, 48, H, "stone");
+    for (let y = 0; y < H; y += 20) {
+      stroke([[102, y], [149, y]], "border-strong", 1);
+      rect(103, y + 3, 4, 14, "wool"); rect(145, y, 5, 20, "ink");
+    }
+    rect(153, 143, 1695, 1240, "ink"); rect(158, 148, 1668, 1214, "stone");
+    const startX = Math.max(160, Math.floor(camera.x / 48) * 48);
+    const startY = Math.max(150, Math.floor(camera.y / 48) * 48);
+    ctx.save(); ctx.globalAlpha = .22;
+    for (let x = startX; x < Math.min(1826, camera.x + viewW / zoom + 48); x += 48) {
+      for (let y = startY; y < Math.min(1362, camera.y + viewH / zoom + 48); y += 48) {
+        stroke([[x, y + 46], [x + 46, y + 46], [x + 46, y]], "border-strong", 1);
+        rect(x + 3, y + 3, 2, 2, "wool");
+      }
+    }
+    ctx.restore();
+    if (map.theme === "hall") drawHallFloor(); else drawThemeFloor(time);
+    drawRooms();
+    drawWater(time);
+    drawLanes(time);
+    drawMillBase();
+    for (const [x, y, a] of map.arrows || []) floorArrow(x, y, a);
+    drawPen(time);
+    let houseIndex = 0;
+    for (const w of walls) {
+      if (w.kind === "fence" || w.kind === "water" || w.kind === "mill") continue;
+      if (w.kind === "house") { drawHouse(w, houseIndex++); continue; }
+      if (w.kind === "tulips") { drawBed(w, time); continue; }
+      if (w.kind === "stall") { drawStall(w); continue; }
+      ctx.save(); ctx.globalAlpha = .25; rect(w.x + 9, w.y + 13, w.w + 3, w.h + 3, "ink"); ctx.restore();
+      rect(w.x, w.y, w.w, w.h + 5, "ink");
+      rect(w.x, w.y - 5, w.w, w.h, w.kind === "booth" ? "timber" : "border-strong");
+      rect(w.x, w.y - 8, w.w, w.h - 4, w.kind === "booth" ? "timber-light" : "floor-alt");
+      rect(w.x + 1, w.y - 8, w.w - 2, 3, "wool");
+      if (w.kind === "booth") {
+        rect(w.x, w.y + w.h - 13, w.w, 5, "accent");
+        rect(w.x + 5, w.y + w.h - 6, w.w - 10, 3, "ink");
+        if (w.w > 300) {
+          rect(w.x + 102, w.y + 2, 340, 42, "night");
+          text("FLOCK TO THE FUTURE", w.x + w.w / 2, w.y + 20, 20, "wool", "center");
+          for (const x of [w.x + 22, w.x + w.w - 52]) {
+            rect(x, w.y + 1, 30, 42, "ink"); circle(x + 15, w.y + 13, 8, "border-strong"); circle(x + 15, w.y + 32, 5, "border-strong");
+          }
+        } else {
+          rect(w.x + 10, w.y + 1, 37, 26, "ink");
+          rect(w.x + 13, w.y + 4, 31, 19, "canal");
+          stroke([[w.x + 17, w.y + 18], [w.x + 23, w.y + 12], [w.x + 29, w.y + 15], [w.x + 39, w.y + 7]], "success", 2);
+          rect(w.x + 24, w.y + 27, 9, 5, "border-strong"); rect(w.x + 14, w.y + 33, 30, 7, "floor-alt");
+          rect(w.x + w.w - 23, w.y + 7, 10, 12, "wool"); ellipse(w.x + w.w - 18, w.y + 7, 5, 3, "timber");
+          text(w.x < 850 ? "365" : "MCP", w.x + w.w - 8, w.y + 38, 10, "ink", "right");
+        }
+      } else {
+        for (let n = 32; n < Math.max(w.w, w.h); n += 64) {
+          if (w.w > w.h) rect(w.x + n, w.y - 6, 2, w.h - 6, "border-strong");
+          else rect(w.x + 2, w.y + n, w.w - 4, 2, "border-strong");
+        }
+      }
+    }
+    for (const st of stations) {
+      const colour = ["link", "warning", "success"][st.tool];
+      dashedRing(st.x, st.y, 66, colour, .2);
+      shadow(st.x, st.y + 9, 28, 17);
+      rect(st.x - 24, st.y - 17, 48, 43, "ink"); rect(st.x - 22, st.y - 27, 44, 43, "floor-alt");
+      rect(st.x - 21, st.y - 29, 42, 5, colour);
+      rect(st.x - 16, st.y - 20, 32, 26, "night");
+      text(["O", "G", "S"][st.tool], st.x, st.y - 7, 19, colour, "center");
+      rect(st.x - 12, st.y + 10, 24, 3, colour);
+      text(st.label, st.x, st.y + 43, 10, "text", "center");
+      text("WELFARE KIOSK", st.x, st.y + 56, 8, "text-muted", "center");
+    }
+    plaque(map.title, 940, 105, Math.min(1500, 140 + map.title.length * 15.5), "wool", 25);
+    text(map.footer, 935, 1405, 17, "wool", "center");
+    if (map.theme === "hall") {
+      ctx.save(); ctx.translate(1880, 760); ctx.rotate(-Math.PI / 2);
+      text("CANAL-SIDE LOADING / NO FLEECE EXPORTS", 0, 0, 13, "warning", "center"); ctx.restore();
+    }
+    for (const d of decor) drawDecor(d, time);
+    for (let y = 330; y < 1250; y += 120) {
+      shadow(130, y + 13, 11, 28);
+      ctx.lineWidth = 2; circle(126, y, 10, "ink", true); circle(126, y + 31, 10, "ink", true);
+      ctx.lineWidth = 1; circle(126, y, 7, "wool", true); circle(126, y + 31, 7, "wool", true);
+      stroke([[126, y], [117, y + 16], [126, y + 31], [136, y + 13], [126, y]], "accent", 2);
+      stroke([[118, y + 14], [138, y + 14]], "ink", 3);
+      stroke([[123, y - 3], [131, y - 3]], "wool", 3);
+    }
+    polygon([[15, 646], [46, 617], [77, 646], [77, 779], [46, 803], [15, 779]], "ink");
+    polygon([[20, 648], [46, 624], [72, 648], [72, 776], [46, 795], [20, 776]], "timber-light");
+    rect(27, 654, 39, 107, "wool"); rect(31, 659, 31, 95, "accent");
+    for (let y = 666; y < 750; y += 27) {
+      rect(34, y, 25, 18, "canal"); rect(37, y + 2, 19, 2, "wool-shade");
+    }
+    stroke([[22, 646], [22, 779]], "wool", 2); stroke([[69, 646], [69, 779]], "wool", 2);
+    for (const y of [1440, 1463]) { rect(270, y, 1430, 4, "border-strong"); rect(270, y, 1430, 1, "wool"); }
+    shadow(1410, 1450, 121, 34);
+    rect(1293, 1416, 218, 66, "ink"); rect(1298, 1412, 208, 63, "warning");
+    rect(1302, 1416, 200, 8, "wool-shade"); rect(1301, 1463, 202, 7, "timber");
+    for (let x = 1310; x < 1480; x += 36) {
+      rect(x, 1428, 27, 29, "canal"); rect(x + 3, 1430, 21, 3, "wool-shade");
+    }
+    text("5", 1488, 1443, 16, "ink", "center");
+    stroke([[1390, 1410], [1405, 1392], [1420, 1410], [1405, 1423], [1390, 1410]], "border-strong", 2);
+  }
+  function drawDecor(d, time) {
+    if (d.kind === "tulip") {
+      shadow(d.x, d.y, 13, 20);
+      rect(d.x - 11, d.y - 21, 23, 43, "ink"); rect(d.x - 10, d.y - 23, 20, 41, "timber");
+      rect(d.x - 8, d.y - 21, 16, 36, "foliage");
+      for (let n = 0; n < 4; n++) {
+        const x = d.x + (n % 2 ? 4 : -4), y = d.y - 14 + Math.floor(n / 2) * 18;
+        stroke([[x, y + 8], [x, y - 3]], "success", 2);
+        ellipse(x - 2, y + 4, 4, 2, "success");
+        polygon([[x - 5, y - 5], [x - 2, y - 2], [x, y - 7], [x + 2, y - 2], [x + 5, y - 5], [x + 4, y + 2], [x - 3, y + 2]], n % 2 ? "warning" : "accent");
+      }
+    } else if (d.kind === "bikes") {
+      shadow(d.x, d.y, 26, 10, .2);
+      rect(d.x - 26, d.y + 6, 52, 3, "border-strong");
+      for (const [ox, c] of [[-12, "accent"], [12, "link"]]) {
+        ctx.save(); ctx.translate(d.x + ox, d.y); ctx.lineWidth = 2;
+        circle(0, -10, 6, "ink", true); circle(0, 10, 6, "ink", true);
+        stroke([[0, -10], [0, 10]], c, 3); stroke([[-5, -9], [5, -9]], "ink", 2); ctx.restore();
+      }
+    } else if (d.kind === "herring") {
+      shadow(d.x, d.y, 24, 14, .2);
+      rect(d.x - 22, d.y - 10, 44, 24, "ink"); rect(d.x - 20, d.y - 12, 40, 22, "link");
+      rect(d.x - 20, d.y - 12, 40, 5, "wool");
+      for (let n = -14; n <= 14; n += 9) { ellipse(d.x + n, d.y + 1, 3, 7, "wool-shade"); polygon([[d.x + n - 3, d.y + 9], [d.x + n, d.y + 6], [d.x + n + 3, d.y + 9]], "wool-shade"); }
+      text("HARING", d.x, d.y + 22, 7, "wool", "center");
+    } else if (d.kind === "clog") {
+      ctx.save(); ctx.translate(d.x, d.y); ctx.rotate(d.angle);
+      for (const ox of [-6, 6]) { ellipse(ox + 1, 3, 6, 13, "ink"); ellipse(ox, 0, 5, 12, "warning"); ellipse(ox, 5, 3, 5, "timber"); }
+      ctx.restore();
+    } else if (d.kind === "cheese") {
+      shadow(d.x, d.y, 18, 10, .2);
+      ellipse(d.x, d.y + 4, 18, 10, "timber"); ellipse(d.x, d.y, 18, 10, "warning");
+      polygon([[d.x, d.y], [d.x + 18, d.y - 2], [d.x + 14, d.y + 6]], "wool-shade");
+      circle(d.x - 6, d.y - 2, 2, "timber"); circle(d.x + 4, d.y - 5, 1.5, "timber");
+    } else {
+      ctx.save(); ctx.translate(d.x, d.y); ctx.rotate(d.angle);
+      rect(-7, 6, 5, 10, "ink"); rect(3, 6, 5, 10, "ink");
+      ellipse(0, 0, 12, 14, "border-strong"); ellipse(-1, -3, 10, 11, "floor-alt");
+      stroke([[-5, -10], [0, 4], [5, -10]], "accent", 2); rect(-3, 1, 6, 8, "wool");
+      ellipse(0, -13, 8, 8, "timber-light"); ellipse(0, -16, 9, 6, "ink");
+      ctx.restore();
+      if (Math.sin(time * .4 + d.x) > .95) text(pickStatic(d.x), d.x, d.y - 23, 8, "text-muted", "center");
+    }
+  }
+  function pickStatic(n) { return ["Is this Hall B?", "Great keynote.", "Where's the coffee?", "BaaS?", "Nice lanyard."][Math.floor(n) % 5]; }
+  function drawSheep(s, safe = false) {
+    shadow(s.x, s.y, 23, 14, .26);
+    ctx.save(); ctx.translate(Math.round(s.x), Math.round(s.y));
+    ctx.globalAlpha = s.tagged ? 1 : .78;
+    ctx.rotate(s.angle);
+    const leg = reducedMotion ? 0 : Math.sin(s.walk || 0) * 3;
+    for (const x of [-11, 7]) {
+      rect(x, -17 + leg, 5, 10, "ink"); rect(x, 9 - leg, 5, 10, "ink");
+      rect(x + 1, -16 + leg, 2, 4, "border-strong");
+    }
+    ellipse(-4, 1, 23, 17, "ink");
+    for (const [x, y, r] of [[-17, -5, 8], [-12, -11, 8], [-2, -13, 8], [8, -10, 8], [12, 0, 9], [6, 10, 8], [-5, 12, 8], [-16, 7, 9]]) {
+      circle(x, y, r + 1, "wool-shade"); circle(x - 1, y - 2, r, "wool");
+    }
+    ellipse(-5, -1, 17, 11, "wool");
+    stroke([[-15, 1], [-12, -2], [-9, 1]], "wool-shade", 1.5);
+    stroke([[-3, -7], [0, -4], [3, -7]], "wool-shade", 1.5);
+    stroke([[-3, 5], [0, 8], [3, 5]], "wool-shade", 1.5);
+    ellipse(-26, 0, 5, 4, "wool");
+    ellipse(15, -10, 7, 4, "ink"); ellipse(15, 10, 7, 4, "ink");
+    ellipse(18, 0, 12, 10, "ink"); ellipse(25, 1, 7, 7, "asphalt");
+    circle(20, -5, 2.5, "wool"); circle(20, 5, 2.5, "wool");
+    circle(21, -5, 1.2, "ink"); circle(21, 5, 1.2, "ink");
+    rect(28, -2, 2, 2, "ink"); rect(28, 3, 2, 2, "ink");
+    if (s.tagged) { rect(13, -14, 8, 6, "success"); rect(15, -13, 2, 2, "wool"); }
+    ctx.restore();
+    if (!safe) {
+      if (s.incident) {
+        const pulse = reducedMotion ? .72 : .6 + Math.sin(elapsed * 5 + s.x) * .16;
+        ctx.save(); ctx.globalAlpha = pulse; ctx.lineWidth = 5; circle(s.x, s.y, 37, "danger", true); ctx.restore();
+        plaque("! SHEEP INCIDENT !", s.x, s.y - 48, 180, "danger", 10);
+        rect(s.x - 11, s.y - 19, 22, 3, ["link", "warning", "success"][threatInfo[s.incident].tool]);
+      }
+      if (!s.tagged) {
+        circle(s.x - (s.incident ? 10 : 0), s.y - 31, 10, "night");
+        text("?", s.x - (s.incident ? 10 : 0), s.y - 30, 16, "warning", "center");
+      }
+      if (s.tagged && !s.incident) stroke([[s.x - 5, s.y - 27], [s.x - 1, s.y - 23], [s.x + 6, s.y - 31]], "success", 2);
+    }
+  }
+  function drawPlayer() {
+    shadow(player.x, player.y + 1, 20, 17, .3);
+    ctx.save(); ctx.translate(Math.round(player.x), Math.round(player.y));
+    ctx.rotate(player.angle + Math.PI / 2);
+    const step = reducedMotion ? 0 : Math.sin(player.walk) * 4;
+    rect(-9, 6 + step, 7, 16, "ink"); rect(3, 6 - step, 7, 16, "ink");
+    rect(-10, 17 + step, 9, 6, "timber"); rect(3, 17 - step, 9, 6, "timber");
+    ellipse(0, 0, 16, 20, "ink");
+    polygon([[-13, -12], [12, -12], [16, 16], [-16, 16]], "accent");
+    stroke([[-8, -11], [-4, 7], [0, 1], [4, 7], [8, -11]], "wool-shade", 3);
+    rect(-14, 9, 28, 4, "timber"); rect(-3, 9, 7, 5, "warning");
+    rect(-13, 14, 8, 9, "timber"); stroke([[-11, 17], [-7, 17]], "timber-light", 1);
+    ellipse(-16, -1 - step * .4, 5, 12, "accent"); ellipse(17, -1 + step * .4, 5, 12, "accent");
+    circle(-16, 9 - step * .4, 4, "timber-light"); circle(18, 9 + step * .4, 4, "timber-light");
+    ellipse(0, -17, 9, 9, "timber-light");
+    ellipse(0, -23, 19, 9, "ink"); ellipse(-1, -25, 18, 8, "timber");
+    ellipse(-1, -28, 12, 8, "timber-light"); ellipse(-1, -29, 10, 6, "timber");
+    stroke([[-10, -26], [9, -26]], "accent", 3);
+    stroke([[24, 23], [24, -23], [22, -29], [16, -31], [12, -27], [12, -21]], "ink", 5);
+    stroke([[23, 22], [23, -23], [21, -28], [16, -29], [13, -26], [13, -22]], "timber-light", 3);
+    rect(4, -5, 5, 7, "wool");
+    ctx.restore();
+    dashedRing(player.x, player.y, PULSE_RANGE, "wool", keys.has("e") ? .3 : .45);
+    if (keys.has("e")) dashedRing(player.x, player.y, 205, "wool", .65);
+    circle(player.x, player.y + 30, 3, "accent");
+    rect(player.x - 18, player.y + 36, 36, 3, "ink"); rect(player.x - 18, player.y + 36, 36 * stamina / 100, 3, "warning");
+    text(keys.has("e") ? "COLLECT" : "SPACE / ATTACK", player.x, player.y - 44, 9, "wool", "center");
+  }
+  function drawThreat(t, time) {
+    const info = threatInfo[t.type], colour = ["link", "warning", "danger"][info.tool];
+    shadow(t.x, t.y, t.type === "mimic" ? 27 : 24, 16, .28);
+    ctx.save(); ctx.translate(Math.round(t.x), Math.round(t.y));
+    if (t.type === "mimic") {
+      polygon([[-25, -15], [-14, -25], [28, -25], [28, 15], [17, 25], [-25, 25]], "timber");
+      rect(-25, -15, 43, 40, "warning");
+      polygon([[-25, -15], [-14, -25], [28, -25], [18, -15]], "timber-light");
+      for (let y = -11; y < 24; y += 5) stroke([[-23, y], [16, y + 1]], "timber-light", 1);
+      rect(-17, -16, 4, 41, "timber"); rect(8, -16, 4, 41, "timber");
+      rect(-16, -7, 27, 13, "ink"); polygon([[-13, -6], [-8, 1], [-3, -6], [3, 1], [8, -6]], "wool");
+      rect(-13, 13, 24, 4, "accent");
+      plaque("MCP?", 0, -34, 48, "warning", 10);
+    } else if (t.type === "ram") {
+      rect(-13, 6, 6, 15, "ink"); rect(8, 6, 6, 15, "ink");
+      ellipse(0, 1, 23, 20, "wool-shade");
+      for (let i = 0; i < 8; i++) circle(Math.cos(i * TAU / 8) * 16, Math.sin(i * TAU / 8) * 12, 8, "wool");
+      ellipse(0, -6, 12, 12, "ink"); ellipse(0, 0, 8, 8, "asphalt");
+      for (const side of [-1, 1]) {
+        circle(side * 18, -13, 12, "timber"); circle(side * 19, -15, 9, "timber-light");
+        circle(side * 19, -14, 5, "timber"); circle(side * 18, -12, 3, "ink");
+        circle(side * 5, -9, 2.5, "link");
+      }
+      text("???", 0, -35, 11, "link", "center");
+    } else if (t.type === "crow" || t.type === "goose") {
+      const bird = t.type === "crow" ? "ink" : "wool", flap = reducedMotion ? 0 : Math.sin(time * 10 + t.id) * 5;
+      polygon([[-6, 11], [-10, 22], [0, 19], [9, 23], [6, 10]], bird);
+      ellipse(0, 0, 11, 18, t.type === "crow" ? "asphalt" : "wool-shade");
+      for (const side of [-1, 1]) {
+        polygon([[side * 5, -10], [side * 29, -18 + flap], [side * 26, 1 + flap], [side * 13, 10], [side * 5, 5]], bird);
+        for (let n = 0; n < 3; n++) stroke([[side * (11 + n * 5), -7], [side * (15 + n * 5), 3 + flap]], t.type === "crow" ? "border-strong" : "wool-shade", 1);
+      }
+      ellipse(0, -5, 8, 12, bird);
+      stroke([[0, -9], [1, -21], [7, -26]], bird, t.type === "goose" ? 9 : 6);
+      ellipse(6, -25, 8, 7, bird); polygon([[11, -28], [23, -24], [12, -21]], "warning"); circle(8, -27, 2, "danger");
+      if (t.type === "crow") {
+        rect(-10, 9, 21, 15, "accent"); rect(-6, 6, 12, 4, "ink"); text("DATA", 0, 17, 7, "wool", "center");
+      }
+      else text("RETRY", 0, -31, 9, "warning", "center");
+    } else {
+      ctx.rotate(t.angle);
+      const boar = t.type === "boar", fur = boar ? "timber" : "border-strong";
+      const stride = reducedMotion ? 0 : Math.sin(time * 9 + t.id) * 3;
+      for (const x of [-15, 9]) {
+        rect(x, -18 + stride, 6, 11, "ink"); rect(x, 9 - stride, 6, 11, "ink");
+      }
+      polygon([[-18, -7], [-37, -14], [-31, -3], [-20, 5]], fur);
+      ellipse(-5, 1, 26, 17, "ink"); ellipse(-6, -2, 24, 15, fur);
+      ellipse(0, -5, 19, 8, boar ? "timber-light" : "floor-alt");
+      polygon([[7, -12], [25, -9], [35, -1], [25, 9], [7, 12]], boar ? "timber" : "ink");
+      polygon([[8, -8], [10, -24], [21, -12]], fur); polygon([[8, 8], [10, 24], [21, 12]], fur);
+      polygon([[11, -12], [12, -19], [16, -13]], "accent");
+      polygon([[11, 12], [12, 19], [16, 13]], "accent");
+      ellipse(31, 0, 7, boar ? 8 : 5, boar ? "timber-light" : "asphalt");
+      circle(22, -6, 2, "danger"); circle(22, 6, 2, "danger");
+      if (boar) {
+        stroke([[28, -7], [32, -15], [26, -13]], "wool", 4); stroke([[28, 7], [32, 15], [26, 13]], "wool", 4);
+        stroke([[-2, -14], [3, 0], [-2, 15]], "accent", 4); rect(-2, -1, 10, 8, "warning");
+      } else {
+        for (let x = -17; x <= 2; x += 6) stroke([[x, -10], [x - 3, -16]], "floor-alt", 2);
+        stroke([[27, 0], [31, 1]], "wool", 1);
+      }
+    }
+    ctx.restore();
+    rect(t.x - 17, t.y + 30, 34, 4, "night"); rect(t.x - 15, t.y + 31, 30, 2, colour);
+    if (distance(t, player) < 245) plaque(info.name.toUpperCase(), t.x, t.y - 55, 148, colour, 9);
+  }
+  function drawEffects() {
+    for (const e of effects) {
+      const fraction = e.age / e.max;
+      ctx.save(); ctx.globalAlpha = 1 - fraction;
+      if (e.type === "pulse") {
+        ctx.lineWidth = 4; circle(e.x, e.y, e.radius * Math.min(1, fraction * 1.8), e.colour, true);
+        if (!reducedMotion) { ctx.lineWidth = 1; circle(e.x, e.y, e.radius * fraction * .7, e.colour, true); }
+      } else text(e.text, e.x, e.y - (reducedMotion ? 0 : fraction * 35), 11, e.colour, "center");
+      ctx.restore();
+    }
+  }
+  function drawIncidentMarker() {
+    if (!assistTarget || mode !== "playing" || assistTarget.distance > 350) return;
+    const { entity, kind } = assistTarget;
+    const labelY = entity.y - (kind === "threat" ? 91 : 65);
+    ctx.save(); ctx.globalAlpha = .8; ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]); circle(entity.x, entity.y, 37, kind === "incident" ? "danger" : "wool", true);
+    ctx.setLineDash([]); ctx.restore();
+    plaque(kind === "shadow" ? "HOLD E TO COLLECT" : "SPACE TO ATTACK", entity.x, labelY, 190, "wool", 12);
+  }
+  function penMarker() {
+    const sx = (pen.x + pen.w / 2 - camera.x) * zoom;
+    const sy = (pen.y + pen.h / 2 - camera.y) * zoom;
+    const bottom = Math.max(160, viewH - (viewW < 550 ? 155 : 85));
+    return {
+      visible: sx > 65 && sx < viewW - 65 && sy > 145 && sy < bottom,
+      x: clamp(sx, 74, viewW - 74),
+      y: clamp(sy, 155, bottom),
+      angle: Math.atan2(sy - viewH / 2, sx - viewW / 2)
+    };
+  }
+  function drawDestination() {
+    const marker = penMarker();
+    if (marker.visible) return;
+    ctx.save(); ctx.translate(marker.x, marker.y);
+    rect(-64, -26, 128, 52, "night");
+    ctx.strokeStyle = P.success; ctx.lineWidth = 2; ctx.strokeRect(-64, -26, 128, 52);
+    ctx.save(); ctx.translate(-43, -1); ctx.rotate(marker.angle);
+    polygon([[11, 0], [-4, -9], [-1, 0], [-4, 9]], "success"); ctx.restore();
+    text("HOME", 14, -8, 17, "success", "center");
+    text("SHEEP DROP-OFF", 14, 11, 8, "wool", "center");
+    ctx.restore();
+  }
+  function render(time) {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, viewW, viewH);
+    ctx.save(); ctx.scale(zoom, zoom); ctx.translate(-Math.round(camera.x), -Math.round(camera.y));
+    drawWorld(reducedMotion ? 0 : time);
+    for (const s of savedFlock) drawSheep(s, true);
+    const entities = [...sheep.map(s => ({ y: s.y, draw: () => drawSheep(s) })),
+      ...threats.map(t => ({ y: t.y, draw: () => drawThreat(t, time) })),
+      { y: player.y, draw: drawPlayer }];
+    entities.sort((a, b) => a.y - b.y).forEach(e => e.draw());
+    drawVehicles();
+    drawSails();
+    drawIncidentMarker();
+    drawEffects();
+    // Screen-edge chevrons point towards nearby off-screen sheep, not a fictional GPS route.
+    for (const s of sheep) {
+      if (distance(s, player) > 650) continue;
+      const sx = (s.x - camera.x) * zoom, sy = (s.y - camera.y) * zoom;
+      if (sx > 30 && sx < viewW - 30 && sy > 60 && sy < viewH - 40) continue;
+      const x = clamp(s.x, camera.x + 26 / zoom, camera.x + (viewW - 26) / zoom);
+      const y = clamp(s.y, camera.y + 68 / zoom, camera.y + (viewH - 50) / zoom);
+      circle(x, y, 8, s.tagged ? "wool" : "warning"); text("s", x, y, 10, "ink", "center");
+    }
+    ctx.restore();
+    drawDestination();
+    renderMap();
+  }
+  function renderMap() {
+    const scale = mini.width / W;
+    mx.setTransform(scale, 0, 0, scale, 0, 0);
+    mx.fillStyle = P.asphalt; mx.fillRect(0, 0, W, H);
+    mx.fillStyle = P.canal; mx.fillRect(0, 0, 100, H);
+    mx.fillStyle = map.theme === "bulb" ? P.lawn : map.theme === "float" ? P["timber-light"] : P.floor; mx.fillRect(160, 150, 1665, 1210);
+    mx.fillStyle = P["floor-alt"]; for (const r of rooms) mx.fillRect(r.x, r.y, r.w, r.h);
+    for (const w of walls) {
+      if (w.kind === "mill") continue;
+      mx.fillStyle = w.kind === "water" ? P.canal : w.kind === "tulips" ? P.accent : w.kind === "house" ? P.timber : P["border-strong"];
+      mx.fillRect(w.x, w.y, w.w, Math.max(12, w.h));
+    }
+    mx.fillStyle = P.timber; for (const [x, y, w, h] of map.bridges || []) mx.fillRect(x, y, w, h);
+    for (const b of drawbridges) { mx.fillStyle = b.raised ? P.danger : b.warning ? P.warning : P["timber-light"]; mx.fillRect(b.x, b.y, b.w, b.h); }
+    for (const l of lanes) {
+      const s = laneSpan(l); mx.save(); mx.globalAlpha = .6;
+      mx.fillStyle = l.kind === "bike" ? P.danger : l.kind === "tram" ? P.wool : P.warning; mx.fillRect(s.x, s.y, s.w, s.h); mx.restore();
+    }
+    if (map.windmill) {
+      const m = map.windmill; mx.save(); mx.globalAlpha = .35; mx.fillStyle = P.danger;
+      mx.beginPath(); mx.arc(m.x, m.y, m.r, 0, TAU); mx.fill(); mx.restore();
+    }
+    mx.fillStyle = P.success; mx.fillRect(pen.x, pen.y, pen.w, pen.h);
+    mx.strokeStyle = P.wool; mx.lineWidth = 10; mx.strokeRect(pen.x, pen.y, pen.w, pen.h);
+    for (const s of stations) { mx.fillStyle = P["border-strong"]; mx.fillRect(s.x - 15, s.y - 15, 30, 30); }
+    for (const t of threats) {
+      const pulse = reducedMotion ? .75 : .55 + Math.sin(elapsed * 5 + t.id * 10) * .18;
+      mx.save();
+      mx.globalAlpha = .13; mx.fillStyle = P.danger; mx.beginPath(); mx.arc(t.x, t.y, 82, 0, TAU); mx.fill();
+      mx.globalAlpha = pulse; mx.strokeStyle = P.danger; mx.lineWidth = 12; mx.beginPath(); mx.arc(t.x, t.y, 58, 0, TAU); mx.stroke();
+      mx.globalAlpha = 1; mx.fillStyle = P.danger; mx.beginPath();
+      mx.moveTo(t.x, t.y - 28); mx.lineTo(t.x + 28, t.y); mx.lineTo(t.x, t.y + 28); mx.lineTo(t.x - 28, t.y); mx.closePath(); mx.fill();
+      mx.fillStyle = P.wool; mx.font = 'bold 68px Consolas, monospace'; mx.textAlign = "center"; mx.textBaseline = "middle"; mx.fillText("!", t.x, t.y + 1);
+      mx.restore();
+    }
+    for (const s of sheep) {
+      if (s.incident) {
+        const pulse = reducedMotion ? .8 : .55 + Math.sin(elapsed * 6 + s.y) * .2;
+        mx.save(); mx.globalAlpha = pulse; mx.strokeStyle = P.danger; mx.lineWidth = 15; mx.beginPath(); mx.arc(s.x, s.y, 37, 0, TAU); mx.stroke();
+        mx.fillStyle = P.danger; mx.beginPath(); mx.arc(s.x, s.y, 23, 0, TAU); mx.fill();
+        mx.fillStyle = P.wool; mx.font = 'bold 67px Consolas, monospace'; mx.textAlign = "center"; mx.textBaseline = "middle"; mx.fillText("!", s.x, s.y + 1);
+        mx.restore();
+      } else {
+        mx.fillStyle = s.tagged ? P.wool : P.warning; mx.fillRect(s.x - 15, s.y - 15, 30, 30);
+      }
+    }
+    if (incomingThreat) {
+      const { position, remaining: arrival } = incomingThreat;
+      const pulse = reducedMotion ? .85 : .55 + Math.sin(elapsed * 8) * .3;
+      mx.save(); mx.globalAlpha = .18; mx.fillStyle = P.danger; mx.beginPath(); mx.arc(position.x, position.y, 108, 0, TAU); mx.fill();
+      mx.globalAlpha = pulse; mx.strokeStyle = P.danger; mx.lineWidth = 16; mx.beginPath(); mx.arc(position.x, position.y, 70 + Math.sin(elapsed * 8) * 12, 0, TAU); mx.stroke();
+      mx.globalAlpha = 1; mx.fillStyle = P.night; mx.beginPath(); mx.arc(position.x, position.y, 30, 0, TAU); mx.fill();
+      mx.strokeStyle = P.danger; mx.lineWidth = 14; mx.stroke();
+      mx.fillStyle = P.wool; mx.font = 'bold 61px Consolas, monospace'; mx.textAlign = "center"; mx.textBaseline = "middle"; mx.fillText(String(Math.ceil(arrival)), position.x, position.y);
+      mx.restore();
+    }
+    mx.strokeStyle = P["border-strong"]; mx.lineWidth = 6; mx.strokeRect(camera.x, camera.y, viewW / zoom, viewH / zoom);
+    mx.fillStyle = P.accent; mx.beginPath(); mx.arc(player.x, player.y, 25, 0, TAU); mx.fill();
+    mx.strokeStyle = P.wool; mx.lineWidth = 6; mx.stroke();
+    const cx = pen.x + pen.w / 2;
+    mx.fillStyle = P.night; mx.fillRect(cx - 145, pen.y - 130, 290, 110);
+    mx.strokeStyle = P.success; mx.lineWidth = 10; mx.strokeRect(cx - 145, pen.y - 130, 290, 110);
+    mx.fillStyle = P.success; mx.font = 'bold 79px Consolas, monospace'; mx.textAlign = "center"; mx.textBaseline = "middle";
+    mx.fillText("HOME", cx, pen.y - 72);
+    mx.beginPath(); mx.moveTo(cx - 27, pen.y - 20); mx.lineTo(cx, pen.y + 10); mx.lineTo(cx + 27, pen.y - 20); mx.closePath(); mx.fill();
+  }
+  $("start").addEventListener("click", begin);
+  $("pause").addEventListener("click", pause);
+  $("collect").addEventListener("click", () => { collectSheep(); canvas.focus({ preventScroll: true }); });
+  $("deploy").addEventListener("click", () => { attackIncidents(); canvas.focus({ preventScroll: true }); });
+  function sameAssistTarget(a, b) { return a && b && a.entity === b.entity && a.kind === b.kind && a.type === b.type; }
+  $("incident-action").addEventListener("click", () => {
+    const target = chooseIncidentTarget();
+    if (mode === "playing" && sameAssistTarget(target, assistTarget) && target.visible) {
+      if (target.kind === "shadow") collectSheep();
+      else if (cooldown === 0) attackIncidents();
+      else updateIncidentGuide();
+    }
+    else updateIncidentGuide();
+    canvas.focus({ preventScroll: true });
+  });
+  $("touch-attack").addEventListener("click", attackIncidents);
+  $("sound").addEventListener("click", async () => {
+    try {
+      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+      if (audio.state === "suspended") await audio.resume();
+      soundOn = !soundOn;
+      $("sound").textContent = soundOn ? "Sound on" : "Sound off"; $("sound").setAttribute("aria-pressed", String(soundOn));
+      tone(600);
+    } catch (error) { radio(`Audio unavailable: ${error.message}. The game is still playable without sound.`, true); }
+  });
+  addEventListener("keydown", event => {
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    const key = event.key.toLowerCase();
+    const isControl = /^(arrowup|arrowdown|arrowleft|arrowright| |w|a|s|d|e|shift|m|p|escape)$/.test(key);
+    const target = event.target;
+    if (target instanceof HTMLElement && (target.closest("summary") || target.closest("a"))) return;
+    if (target instanceof HTMLElement && target.closest("button") && (key === " " || key === "enter")) return;
+    if (mode === "playing" && isControl) event.preventDefault();
+    if ((key === "p" || key === "escape") && !event.repeat) { pause(); return; }
+    if (mode !== "playing") return;
+    keys.add(key); keyboardKeys.add(key);
+    if (event.repeat) return;
+    if (key === " ") attackIncidents();
+    if (key === "e") collectSheep();
+    if (key === "m") $("map-box").classList.toggle("expanded");
+  });
+  addEventListener("keyup", event => {
+    const key = event.key.toLowerCase();
+    keyboardKeys.delete(key);
+    if (![...heldPointers.values()].includes(key)) keys.delete(key);
+  });
+  addEventListener("blur", () => { releaseKeys(); if (mode === "playing") pause(); });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { releaseKeys(); if (mode === "playing") pause(); } });
+  document.querySelectorAll("[data-hold]").forEach(button => {
+    button.addEventListener("pointerdown", event => {
+      event.preventDefault(); button.setPointerCapture(event.pointerId);
+      heldPointers.set(event.pointerId, button.dataset.hold); keys.add(button.dataset.hold);
+      if (button.dataset.hold === "e") collectSheep();
+    });
+    const release = event => {
+      const key = heldPointers.get(event.pointerId); heldPointers.delete(event.pointerId);
+      if (key && !keyboardKeys.has(key) && ![...heldPointers.values()].includes(key)) keys.delete(key);
+    };
+    button.addEventListener("pointerup", release); button.addEventListener("pointercancel", release); button.addEventListener("lostpointercapture", release);
+  });
+  canvas.addEventListener("pointerdown", () => canvas.focus({ preventScroll: true }));
+  setupMission(); mode = "intro"; $("pause").disabled = true;
+  radio('"Welcome to Amsterdam, shepherd. Mind the canal. And the suspiciously helpful hay bales."', true);
+  resize(); new ResizeObserver(resize).observe(canvas);
+  function frame(timestamp) {
+    const dt = lastFrame ? Math.min((timestamp - lastFrame) / 1000, .05) : 0;
+    lastFrame = timestamp; update(dt); render(timestamp / 1000);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

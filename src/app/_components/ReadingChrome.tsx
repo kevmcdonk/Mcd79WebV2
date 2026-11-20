@@ -1,7 +1,13 @@
 import Link from "next/link";
 import styles from "../reading.module.css";
 
-type ReadingSection = "thoughts" | "blog" | "about" | "framework" | "speaking";
+type ReadingSection =
+  | "thoughts"
+  | "blog"
+  | "about"
+  | "framework"
+  | "speaking"
+  | "sheep-herding";
 
 export function ReadingHeader({ current }: { current?: ReadingSection }) {
   return (
@@ -25,6 +31,12 @@ export function ReadingHeader({ current }: { current?: ReadingSection }) {
         </Link>
         <Link href="/speaking" aria-current={current === "speaking" ? "page" : undefined}>
           Speaking
+        </Link>
+        <Link
+          href="/sheep-herding"
+          aria-current={current === "sheep-herding" ? "page" : undefined}
+        >
+          Sheep herding
         </Link>
       </nav>
       <Link className={styles.homeLink} href="/">

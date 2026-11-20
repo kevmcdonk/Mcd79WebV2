@@ -1,0 +1,360 @@
+.page {
+  --ink: #121212;
+  --paper: #f6f1e5;
+  --blue: #8dd8f8;
+  --action-blue: #1769ff;
+  --yellow: #ffd51f;
+  --red: #f05540;
+  --green: #33a86b;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Mcd79 Sans", sans-serif;
+}
+
+.hero {
+  min-height: calc(100vh - 74px);
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  border-bottom: 2px solid var(--ink);
+  background: var(--yellow);
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+  border-right: 2px solid var(--ink);
+}
+
+.heroCopy h1 {
+  max-width: 10ch;
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(62px, 8vw, 96px);
+  font-weight: 900;
+  line-height: .88;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.heroCopy p,
+.introduction > p,
+.principles p,
+.engagementDetails > p,
+.games header p,
+.gameRows p {
+  max-width: 62ch;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.heroCopy p {
+  margin-top: 38px;
+}
+
+.heroField {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background: var(--green);
+}
+
+.heroField svg {
+  width: min(100%, 520px);
+  align-self: center;
+  padding: clamp(42px, 5vw, 78px);
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 5;
+}
+
+.fieldLine {
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: 5 7;
+}
+
+.sheepLine,
+.signalLine {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.signalLine {
+  stroke: var(--yellow);
+  stroke-width: 10;
+}
+
+.eye {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.heroField > div {
+  display: grid;
+  padding: clamp(30px, 5vw, 72px);
+  border-top: 2px solid var(--ink);
+}
+
+.heroField span,
+.introduction span,
+.principles article > span,
+.engagementTitle span,
+.gameRows > a > span,
+.engagementDetails dt {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.heroField span {
+  margin-bottom: 22px;
+}
+
+.heroField strong {
+  padding: 12px 0;
+  border-top: 1px solid var(--ink);
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(28px, 3vw, 46px);
+  line-height: .9;
+}
+
+.introduction,
+.games > header {
+  display: grid;
+  grid-template-columns: 1fr .8fr;
+  gap: 64px;
+  align-items: end;
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.introduction h2,
+.engagement h2,
+.games h2 {
+  max-width: 11ch;
+  margin-top: 28px;
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.principles article {
+  min-height: 430px;
+  padding: clamp(42px, 5vw, 76px);
+  border-right: 2px solid var(--ink);
+}
+
+.principles article:nth-child(1) {
+  background: var(--blue);
+}
+
+.principles article:nth-child(2) {
+  background: var(--yellow);
+}
+
+.principles article:nth-child(3) {
+  border-right: 0;
+  background: var(--red);
+}
+
+.principles h2,
+.gameRows h3 {
+  margin-top: 54px;
+  font-family: "Mcd79 Condensed", sans-serif;
+  font-size: clamp(32px, 4.6vw, 68px);
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.principles p {
+  margin-top: 24px;
+}
+
+.engagement {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+
+.engagementTitle,
+.engagementDetails {
+  padding: clamp(72px, 9vw, 138px) clamp(24px, 7vw, 108px);
+}
+
+.engagementTitle {
+  border-right: 2px solid var(--ink);
+  background: var(--ink);
+  color: white;
+}
+
+.engagementDetails {
+  background: var(--paper);
+}
+
+.engagementDetails dl {
+  border-top: 2px solid var(--ink);
+}
+
+.engagementDetails dl > div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.engagementDetails dd {
+  margin: 0;
+  font-weight: 800;
+}
+
+.engagementDetails > p {
+  margin-top: 42px;
+}
+
+.engagementDetails > a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 34px;
+  color: var(--action-blue);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.games {
+  border-bottom: 2px solid var(--ink);
+}
+
+.games > header {
+  background: var(--blue);
+}
+
+.gameRows > a {
+  min-height: 230px;
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) 130px;
+  gap: 42px;
+  align-items: start;
+  padding: 44px clamp(24px, 6vw, 96px);
+  border-bottom: 2px solid var(--ink);
+  transition: background-color 160ms ease-out, color 160ms ease-out;
+}
+
+.gameRows > a:last-child {
+  border-bottom: 0;
+}
+
+.gameRows h3 {
+  max-width: 18ch;
+  margin-top: 0;
+}
+
+.gameRows p {
+  margin-top: 18px;
+}
+
+.gameRows strong {
+  justify-self: end;
+  font-size: 13px;
+  text-align: right;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gameRows > a:hover {
+    background: var(--ink);
+    color: white;
+  }
+
+  .engagementDetails > a:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .introduction,
+  .engagement,
+  .games > header {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .heroCopy,
+  .engagementTitle {
+    border-right: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .heroField {
+    min-height: 620px;
+  }
+
+  .principles {
+    grid-template-columns: 1fr;
+  }
+
+  .principles article {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .principles article:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroCopy {
+    padding-block: 72px;
+  }
+
+  .heroField {
+    min-height: 500px;
+  }
+
+  .introduction,
+  .games > header {
+    gap: 34px;
+  }
+
+  .principles h2 {
+    margin-top: 34px;
+  }
+
+  .gameRows > a {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .gameRows strong {
+    justify-self: start;
+    text-align: left;
+  }
+}

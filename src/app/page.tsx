@@ -77,6 +77,7 @@ export default function Home() {
           <Link href="/thoughts">New writing</Link>
           <Link href="/blog">Legacy blog</Link>
           <Link href="/speaking">Speaking</Link>
+          <Link href="/sheep-herding">Sheep herding</Link>
           <Link href="#framework">Framework</Link>
           <Link href="/about">About</Link>
         </nav>

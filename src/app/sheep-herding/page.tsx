@@ -24,6 +24,11 @@ const principles = [
     title: "Watch for wolves.",
     copy: "Connect identity, data, device, and threat controls so unsafe instructions, excessive access, and data loss are detected before they scatter the flock.",
   },
+  {
+    label: "Business Value",
+    title: "Make the wool worth it.",
+    copy: "Ensure that the efforts to observe, govern, and secure agents translate into tangible business outcomes and value for the organization...aka more wool.",
+  }
 ];
 
 const games = [
@@ -117,16 +122,16 @@ export default function SheepHerdingPage() {
           <div className={styles.engagementDetails}>
             <dl>
               <div>
-                <dt>Event</dt>
-                <dd>Commsverse 2026</dd>
+                <dt>Next Event</dt>
+                <dd>ESPC</dd>
               </div>
               <div>
                 <dt>Date</dt>
-                <dd>25 June 2026</dd>
+                <dd>1-3 December 2026</dd>
               </div>
               <div>
                 <dt>Location</dt>
-                <dd>Weybridge, UK</dd>
+                <dd>Amsterdam, Netherlands</dd>
               </div>
             </dl>
             <p>
@@ -136,11 +141,42 @@ export default function SheepHerdingPage() {
               coherent operating story.
             </p>
             <a
-              href="https://events.justattend.com/events/conference-session/c96fe0e1/796de8f3"
+              href="https://espc.tech/conference/espc-2026/programme/sheep-herding-with-agent-365/"
               target="_blank"
               rel="noopener noreferrer"
             >
               View the published session ↗
+            </a>
+          </div>
+        </section>
+
+        <section className={`${styles.introduction} ${styles.mapIntroduction}`}>
+          <div>
+            <span>Interactive field guide</span>
+            <h2>Explore what Agent 365 can do.</h2>
+          </div>
+          <div className={styles.mapOverview}>
+            <p>
+              Walk the farm from agent discovery and identity through lifecycle
+              controls, tool access, compliance, and security. Each stop
+              explains the capability and links to its Microsoft Learn source.
+            </p>
+            <ul className={styles.mapBenefits}>
+              <li>
+                <strong>Discover</strong>
+                <span>Find agents, their identities, activity, and shadow AI.</span>
+              </li>
+              <li>
+                <strong>Govern</strong>
+                <span>Explore ownership, lifecycle policies, and tool access.</span>
+              </li>
+              <li>
+                <strong>Secure</strong>
+                <span>See how Entra, Purview, Defender, and Intune protect agents.</span>
+              </li>
+            </ul>
+            <a className={styles.mapLink} href="/games/agent-365-hill-farm-map.html">
+              Explore the Agent 365 map →
             </a>
           </div>
         </section>
